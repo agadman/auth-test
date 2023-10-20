@@ -14,14 +14,14 @@ const InsideStack = createNativeStackNavigator();
 function InsideLayout() {
   return (
     <InsideStack.Navigator>
-      <InsideStack.Screen title="My todos" component={List} />
-      <InsideStack.Screen title="details" component={Details} />
+      <InsideStack.Screen name="My todos" component={List} />
+      <InsideStack.Screen name="details" component={Details} />
     </InsideStack.Navigator>
   )
 }
 
 export default function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
