@@ -1,45 +1,35 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './app/screens/Login';
-import List from './app/screens/List';
-import Details from './app/screens/Details';
-import React, { useEffect, useState} from 'react';
+import Home from './app/screens/Home';
+import LandingPage from './app/screens/LandingPage';
+import Login from './app/screens/Login';  
+import Register from './app/screens/Register';
+import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 
 const Stack = createNativeStackNavigator();
 
-const InsideStack = createNativeStackNavigator();
-
-function InsideLayout() {
-  return (
-    <InsideStack.Navigator>
-      <InsideStack.Screen name="My todos" component={List} />
-      <InsideStack.Screen name="details" component={Details} />
-    </InsideStack.Navigator>
-  )
-}
-
 export default function App() {
   const [user, setUser] = useState(null);
-
+  
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
       console.log('user', user);
       setUser(user);
-    })
-  }, [])
-
+    });
+  }, []);
+  
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        {user ? (
-          <Stack.Screen name='Inside' component={InsideLayout} options={{ headerShown: false }}></Stack.Screen>
-        ) : (
-          <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}></Stack.Screen>
-        )}    
+      <Stack.Navigator initialRouteName={user ? 'Inside' : 'LandingPage'}>
+        <Stack.Screen name='LandingPage' component={LandingPage} options={{ headerShown: false }} />
+        {user ? ( 
+          <Stack.Screen name='Inside' component={Home} options={{ headerShown: false }} />
+        ) : null}
+        <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />  
+        <Stack.Screen name='Register' component={Register} options={{ headerShown: false }} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
+  }

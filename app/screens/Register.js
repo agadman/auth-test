@@ -1,22 +1,23 @@
 import { View, StyleSheet, Text, TextInput, ActivityIndicator, Pressable, KeyboardAvoidingView, TouchableOpacity  } from 'react-native';
 import React, { useState } from 'react';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Login = () => {
+const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const auth = FIREBASE_AUTH;
     const navigation = useNavigation();
 
-    const signIn = async () => {
+    const signUp = async () => {
         setLoading(true);
         try {
-            const response = await signInWithEmailAndPassword(auth, email, password);
+            const response = await createUserWithEmailAndPassword(auth, email, password);
             console.log(response);
+            alert('Check your emails!');
             navigation.navigate('Inside');
         } catch (error) {
             console.log(error);
@@ -35,7 +36,7 @@ const Login = () => {
             <TouchableOpacity style={styles.arrowContainer} onPress={() => navigation.goBack()}>
                 <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
-                <Text style={styles.header}>Logga in</Text>
+                <Text style={styles.header}>Skapa konto</Text>
             </View>
             <View style={styles.form}>
                 <KeyboardAvoidingView behavior="padding">
@@ -43,8 +44,8 @@ const Login = () => {
                     <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder="Password" autoCapitalize="none" onChangeText={(text) => setPassword(text)}></TextInput>
                     { loading ? <ActivityIndicator size="large" color="#0000ff" /> 
                     : <>
-                    <Pressable style={styles.loginBtn} onPress={signIn}>
-                        <Text style={styles.loginText}>Logga in</Text>
+                    <Pressable style={styles.createBtn} onPress={signUp}>
+                        <Text style={styles.createText}>Registrera mig</Text>
                     </Pressable>
                     </>} 
             </KeyboardAvoidingView>  
@@ -52,7 +53,7 @@ const Login = () => {
             </View>       
     )
 }
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
     container: {
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         flex: 2,
     },
-    loginBtn: {
+    createBtn: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#AB978A',
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
         padding: 20,
         marginBottom: 20
     },
-    loginText: {
+    createText: {
         color: 'white',
     }
 })
