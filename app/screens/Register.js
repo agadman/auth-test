@@ -1,11 +1,12 @@
 import { View, StyleSheet, Text, TextInput, ActivityIndicator, Pressable, KeyboardAvoidingView, TouchableOpacity  } from 'react-native';
 import React, { useState } from 'react';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Register = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -18,6 +19,12 @@ const Register = () => {
             const response = await createUserWithEmailAndPassword(auth, email, password);
             console.log(response);
             alert('Check your emails!');
+             // After creating the user, update the user's profile with the name
+        await updateProfile(response.user, {
+            displayName: name,
+        });
+
+         await signInWithEmailAndPassword(auth, email, password);
             navigation.navigate('Inside');
         } catch (error) {
             console.log(error);
@@ -40,6 +47,7 @@ const Register = () => {
             </View>
             <View style={styles.form}>
                 <KeyboardAvoidingView behavior="padding">
+                <TextInput value={name} style={styles.input} placeholder="Namn" autoCapitalize="none" onChangeText={(text) => setName(text)}></TextInput>
                     <TextInput value={email} style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={(text) => setEmail(text)}></TextInput>
                     <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder="Password" autoCapitalize="none" onChangeText={(text) => setPassword(text)}></TextInput>
                     { loading ? <ActivityIndicator size="large" color="#0000ff" /> 

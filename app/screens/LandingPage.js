@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Pressable, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useFonts } from '@expo-google-fonts/croissant-one';
 
 const LandingPage = () => {
     const navigation = useNavigation();
@@ -27,25 +28,18 @@ export default LandingPage;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between', 
     },
-    headerContainer: {
-       // justifyContent: 'center',   
-       paddingTop: 100,
+    headerContainer: { 
+        paddingTop: 150,
         alignItems: 'center',
         flex: 2,
-    },
-    input: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1,
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff'
+        justifyContent: 'flex-start',
     },
     header: {
         fontSize: 48,
-        color: 'white'
+        color: 'white',
+        fontFamily: 'CroissantOne_400Regular',
     },
     secondHeader: {
         fontSize: 20,
@@ -54,6 +48,16 @@ const styles = StyleSheet.create({
     form: {
         marginHorizontal: 20,
         flex: 2,
+        justifyContent: 'flex-end', 
+        paddingBottom: 150,
+    },
+    input: {
+        marginVertical: 4,
+        height: 50,
+        borderWidth: 1,
+        borderRadius: 4,
+        padding: 10,
+        backgroundColor: '#fff'
     },
     createBtn: {
         backgroundColor: '#AB978A',

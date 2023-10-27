@@ -47,6 +47,9 @@ const Login = () => {
                         <Text style={styles.loginText}>Logga in</Text>
                     </Pressable>
                     </>} 
+                    <Pressable style={styles.forgotPwd}>
+                        <Text style={styles.forgotPwdText}>Glömt ditt lösenord?</Text>
+                    </Pressable>
             </KeyboardAvoidingView>  
             </View>
             </View>       
@@ -61,36 +64,29 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5DED5'
     },
     headerContainer: {
-       // justifyContent: 'center',   
         flexDirection: 'row',
-        paddingTop: 100,
+        paddingTop: 50,
         alignItems: 'center',
-        flex: 2,
+        flex: 1, // Updated to 1  
     },
     arrowContainer: {
         marginLeft: 20,
     },
-    input: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 10,
-        backgroundColor: '#fff'
-    },
     header: {
-        flex: 1,
         fontSize: 48,
         color: 'black',
-        textAlign: 'center',
-    },
-    secondHeader: {
-        fontSize: 20,
-        color: 'white'
+        marginLeft: 70   
     },
     form: {
         marginHorizontal: 20,
-        flex: 2,
+        flex: 4, // Updated to 3
+    },
+    input: {
+        marginVertical: 8,
+        height: 50,
+        borderRadius: 10,
+        padding: 10,
+        backgroundColor: '#fff'
     },
     loginBtn: {
         justifyContent: 'center',
@@ -98,9 +94,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#AB978A',
         borderRadius: 50,
         padding: 20,
+        marginTop: 120,
         marginBottom: 20
     },
     loginText: {
         color: 'white',
+    },
+    forgotPwd: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    forgotPwdText: {
+        color: '#AB978A',
     }
-})
+ })
