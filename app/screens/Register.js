@@ -4,12 +4,14 @@ import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CheckBox } from 'react-native-elements';
 
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isChecked, setIsChecked] = useState(false); 
     const auth = FIREBASE_AUTH;
     const navigation = useNavigation();
 
@@ -50,6 +52,13 @@ const Register = () => {
                 <TextInput value={name} style={styles.input} placeholder="Namn" autoCapitalize="none" onChangeText={(text) => setName(text)}></TextInput>
                     <TextInput value={email} style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={(text) => setEmail(text)}></TextInput>
                     <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder="Password" autoCapitalize="none" onChangeText={(text) => setPassword(text)}></TextInput>
+                    <View style={styles.checkboxContainer}>
+                       <CheckBox
+                           checked={isChecked}
+                           onPress={() => setIsChecked(!isChecked)}
+                       />
+                       <Text>I agree to the terms and conditions</Text>
+                   </View>     
                     { loading ? <ActivityIndicator size="large" color="#0000ff" /> 
                     : <>
                     <Pressable style={styles.createBtn} onPress={signUp}>
@@ -70,36 +79,34 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5DED5'
     },
     headerContainer: {
-       // justifyContent: 'center',   
         flexDirection: 'row',
-        paddingTop: 100,
+        paddingTop: 50,
         alignItems: 'center',
-        flex: 2,
+        flex: 1, 
     },
     arrowContainer: {
         marginLeft: 20,
     },
+    header: {
+        fontSize: 48,
+        color: 'black',
+        marginLeft: 40   
+    },
+    form: {
+        marginHorizontal: 20,
+        flex: 4, 
+    },
     input: {
-        marginVertical: 4,
+        marginVertical: 8,
         height: 50,
-        borderWidth: 1,
         borderRadius: 10,
         padding: 10,
         backgroundColor: '#fff'
     },
-    header: {
-        flex: 1,
-        fontSize: 48,
-        color: 'black',
-        textAlign: 'center',
-    },
-    secondHeader: {
-        fontSize: 20,
-        color: 'white'
-    },
-    form: {
-        marginHorizontal: 20,
-        flex: 2,
+    checkboxContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10, 
     },
     createBtn: {
         justifyContent: 'center',
@@ -107,6 +114,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#AB978A',
         borderRadius: 50,
         padding: 20,
+        marginTop: 50,
         marginBottom: 20
     },
     createText: {
