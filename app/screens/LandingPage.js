@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Pressable, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useFonts } from '@expo-google-fonts/croissant-one';
 
 const LandingPage = () => {
     const navigation = useNavigation();
@@ -39,7 +38,6 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 48,
         color: 'white',
-        fontFamily: 'CroissantOne_400Regular',
     },
     secondHeader: {
         fontSize: 20,

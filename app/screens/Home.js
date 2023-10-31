@@ -2,7 +2,6 @@ import { StyleSheet, View, Button, Pressable, Text, ImageBackground, ScrollView,
 import React from 'react';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
-import BottomNavigator from './BottomTabsNavigator';
 
 const Home = () => {
     const navigation = useNavigation();
@@ -73,7 +72,6 @@ const Home = () => {
             <Button onPress={() => navigation.navigate('details')} title='Open details'></Button>
             <Button onPress={handleLogout} title='Logout'></Button>
         </View>
-        <BottomNavigator />
         </ScrollView>
     );
  };
