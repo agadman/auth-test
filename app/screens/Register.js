@@ -27,7 +27,7 @@ const Register = () => {
         });
 
          await signInWithEmailAndPassword(auth, email, password);
-            navigation.navigate('Inside');
+            navigation.navigate('Home');
         } catch (error) {
             console.log(error);
             alert('Sign in failed: ' + error.message)
@@ -35,10 +35,6 @@ const Register = () => {
             setLoading(false);
         }
     }
-    const goBackToLandingPage = () => {
-        navigation.navigate('LandingPage');
-    }
-
     return (
             <View style={styles.container}>
             <View style={styles.headerContainer}>

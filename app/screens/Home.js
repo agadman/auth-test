@@ -1,23 +1,7 @@
 import { StyleSheet, View, Button, Pressable, Text, ImageBackground, ScrollView, Image } from 'react-native';
 import React from 'react';
-import { FIREBASE_AUTH } from '../../FirebaseConfig';
-import { useNavigation } from '@react-navigation/native';
 
-const Home = () => {
-    const navigation = useNavigation();
- 
-    const handleLogout = async () => {
-        try {
-            await FIREBASE_AUTH.signOut();
-            // Add any additional cleanup or state management you may need here
-            // Navigate to the "LandingPage" after successful sign-out
-            navigation.navigate('LandingPage');
-        } catch (error) {
-            console.log('Sign out error:', error);
-            // Handle sign-out error here, if necessary
-        }
-    };
- 
+const Home = () => { 
     return (
         <ScrollView vertical>
         <View style={styles.container}>
@@ -69,8 +53,6 @@ const Home = () => {
                 <Text style={styles.aboutHeader}>Om Traditionell kinesisk medicin</Text>
                 <Text>Traditionell kinesisk medicin har använts i hundratals år och bygger på tron att kroppen har naturliga läkningsförmågor. Denna typ av medicin fokuserar på att hitta den underliggande orsaken till en sjukdom eller skada, istället för att bara behandla symptomen. Målet med traditionell kinesisk medicin är att återställa balans och harmoni i kroppen och sinnet. Några av de vanliga metoder som används inom denna typ av medicin inkluderar örtmedicin, akupunktur, koppning och terapeutiska övningar som tai chi och qi gong.</Text>
             </View>    
-            <Button onPress={() => navigation.navigate('details')} title='Open details'></Button>
-            <Button onPress={handleLogout} title='Logout'></Button>
         </View>
         </ScrollView>
     );
@@ -93,7 +75,7 @@ const Home = () => {
     },
     header: {
         fontSize: 30,
-        fontWeight: 'semi-bold',
+        fontWeight: 700,
         paddingBottom: 30
     },
     introductoryText: {
@@ -161,6 +143,11 @@ const Home = () => {
         fontSize: 16, // Adjust the text size as needed
         textAlign: 'center',
        },
+       aboutHeader: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10,
+       },
        about: {
         marginTop: 0,
         width: '90%',
@@ -171,10 +158,6 @@ const Home = () => {
         shadowOffset: {width: 0, height: 2},
         shadowOpacity: 0.4,
         elevation: 10,
+        marginBottom: 100,
        },
-       aboutHeader: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 10,
-       }
  })
