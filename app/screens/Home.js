@@ -1,13 +1,37 @@
 import { StyleSheet, View, Pressable, Text, ImageBackground, ScrollView, Image } from 'react-native';
 import React from 'react';
+import { useEffect, useState } from 'react';
+import { useRoute } from '@react-navigation/native';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-const Home = () => { 
+const Home = () => {
+    const route = useRoute();
+    const initialUserName = route.params?.userName || '';
+    const [userName, setUserName] = useState(initialUserName);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Initialize Firebase auth
+    const auth = getAuth();
+
+    useEffect(() => {
+        // Check if the user is logged in and retrieve their display name
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userDisplayName = user.displayName;
+                if (userDisplayName) {
+                    // User is logged in and has a display name
+                    setUserName(userDisplayName);
+                }
+            }
+            setIsLoading(false);
+        });
+    }, []);
     return (
         <ScrollView vertical>
         <View style={styles.container}>
             <View style={styles.introductoryBox}>
                 <Text style={styles.header}>Oomah</Text>
-                <Text style={styles.introductoryText}>Välkommen</Text>
+                <Text style={styles.introductoryText}>Välkommen {userName}</Text>
                 <Text style={styles.introductoryText}>Vi hjälper dig att få en helhetsbild av din hälsa och ger dig tips på hur du kan må bättre. </Text>
                 <Text style={styles.introductoryText}>Här får du tillgång till experter, tips och produkter inom kost, träning, hormonhälsa, stress, sömn, mage och kvinnohälsa. Vi vill hjälpa dig att hitta den underliggande orsaken till din hälsa, istället för att bara behandla symptomen. Målet är att återställa balans och ge dig verktyg för att må så bra som möjligt.</Text>
             </View>    

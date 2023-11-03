@@ -25,8 +25,8 @@ const Register = () => {
         await updateProfile(response.user, {
             displayName: name,
         });
-
          await signInWithEmailAndPassword(auth, email, password);
+            setName(name); // Store the user's name in the state variable
             navigation.navigate('Home');
         } catch (error) {
             console.log(error);
