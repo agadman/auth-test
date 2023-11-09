@@ -3,12 +3,14 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
     const route = useRoute();
     const initialUserName = route.params?.userName || '';
     const [userName, setUserName] = useState(initialUserName);
     const [isLoading, setIsLoading] = useState(true);
+    const navigation = useNavigation();
 
     // Initialize Firebase auth
     const auth = getAuth();
@@ -54,15 +56,15 @@ const Home = () => {
                     </View>
                     <View style={styles.box}>
                         <Image source={require('../../assets/box_two_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Hormoner</Text>
+                        <Text style={styles.boxText}>Sömn & Energi</Text>
                     </View>
                     <View style={styles.box}>
                         <Image source={require('../../assets/box_three_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Hud</Text>
+                        <Text style={styles.boxText}>Hud & Hår </Text>
                     </View>
                     <View style={styles.box}>
                         <Image source={require('../../assets/box_four_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Mental hälsa</Text>
+                        <Text style={styles.boxText}>Oro & Ångest</Text>
                     </View>
                     <View style={styles.box}>
                         <Image source={require('../../assets/box_five_home.jpg')} style={styles.boxImage} />
@@ -70,7 +72,17 @@ const Home = () => {
                     </View>
                     <View style={styles.box}>
                         <Image source={require('../../assets/box_six_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Generell hälsa</Text>
+                        <Text style={styles.boxText}>Stress</Text>
+                    </View>
+                    <View style={styles.box}>
+                        <Image source={require('../../assets/box_five_home.jpg')} style={styles.boxImage} />
+                        <Text style={styles.boxText}>Klimakterie</Text>
+                    </View>
+                    <View style={styles.box} onPress={() => navigation.navigate('Theme_PMS')}>
+                        <Pressable onPress={() => navigation.navigate('Theme_PMS')}>
+                            <Image source={require('../../assets/box_six_home.jpg')} style={styles.boxImage} />
+                            <Text style={styles.boxText}>PMS</Text>
+                        </Pressable>
                     </View>
                 </View>
             </View>

@@ -6,6 +6,7 @@ import MyAccount from './app/screens/MyAccount';
 import LandingPage from './app/screens/LandingPage';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';
+import Theme_PMS from './app/screens/Theme_PMS';
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
@@ -46,6 +47,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="Theme_PMS" component={Theme_PMS} options={{ headerShown: false }} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

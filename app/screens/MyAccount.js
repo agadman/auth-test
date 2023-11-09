@@ -2,6 +2,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import React from 'react';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
 
 const MyAccount = () => {
     const navigation = useNavigation();
@@ -9,9 +10,12 @@ const MyAccount = () => {
     const handleLogout = async () => {
         try {
             await FIREBASE_AUTH.signOut();
-            // Add any additional cleanup or state management you may need here
-            // Navigate to the "LandingPage" after successful sign-out
-            navigation.navigate('LandingPage');
+            // Navigate to 'LandingPage' and reset the stack
+            navigation.dispatch(
+                CommonActions.navigate({
+                    name: 'LandingPage',
+                })
+            );
         } catch (error) {
             console.log('Sign out error:', error);
             // Handle sign-out error here, if necessary

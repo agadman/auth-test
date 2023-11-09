@@ -157,13 +157,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
   modalBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#AB978A',
     borderRadius: 50,
     padding: 20,
     marginTop: 20,
+    width: "50%",
   },
   modalBtnText: {
     color: 'white',
