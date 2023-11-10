@@ -45,14 +45,13 @@ export default function App() {
           <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Tab.Screen name="Upptäck" component={Explore} options={{ headerShown: false }} />
           <Tab.Screen name="My account" component={MyAccount} options={{ headerShown: false }} />
+          <Tab.Screen name="Theme_PMS" component={Theme_PMS} options={{ headerShown: false }} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator initialRouteName="LandingPage">
           <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-          <Stack.Screen name="Theme_PMS" component={Theme_PMS} options={{ headerShown: false }} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

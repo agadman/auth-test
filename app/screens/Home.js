@@ -78,12 +78,10 @@ const Home = () => {
                         <Image source={require('../../assets/box_five_home.jpg')} style={styles.boxImage} />
                         <Text style={styles.boxText}>Klimakterie</Text>
                     </View>
-                    <View style={styles.box} onPress={() => navigation.navigate('Theme_PMS')}>
-                        <Pressable onPress={() => navigation.navigate('Theme_PMS')}>
-                            <Image source={require('../../assets/box_six_home.jpg')} style={styles.boxImage} />
-                            <Text style={styles.boxText}>PMS</Text>
-                        </Pressable>
-                    </View>
+                    <Pressable onPress={() => navigation.navigate('Theme_PMS')} style={styles.box}>
+                        <Image source={require('../../assets/box_six_home.jpg')} style={styles.boxImage} />
+                        <Text style={styles.boxText}>PMS</Text>
+                    </Pressable>
                 </View>
             </View>
             <View style={styles.about}>
