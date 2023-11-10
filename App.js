@@ -6,6 +6,7 @@ import MyAccount from './app/screens/MyAccount';
 import LandingPage from './app/screens/LandingPage';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';
+import Explore from './app/screens/Explore';
 import Theme_PMS from './app/screens/Theme_PMS';
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -33,12 +34,16 @@ export default function App() {
             if (route.name === 'Home') {
               return <FontAwesome name="home" size={size} color={color} />;
             }
+            if (route.name === 'Upptäck') {
+              return <FontAwesome name="search" size={size} color={color} />;
+            }
             if (route.name === 'My account') {
               return <FontAwesome name="user" size={size} color={color} />;
             }
           },
         })}>
           <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Tab.Screen name="Upptäck" component={Explore} options={{ headerShown: false }} />
           <Tab.Screen name="My account" component={MyAccount} options={{ headerShown: false }} />
         </Tab.Navigator>
       ) : (
