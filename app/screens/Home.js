@@ -32,9 +32,8 @@ const Home = () => {
         <ScrollView vertical>
         <View style={styles.container}>
             <View style={styles.introductoryBox}>
-                <Text style={styles.header}>Oomah</Text>
-                <Text style={styles.introductoryText}>Välkommen {userName}</Text>
-                <Text style={styles.introductoryText}>Vi hjälper dig att få en helhetsbild av din hälsa och ger dig tips på hur du kan må bättre. </Text>
+                <Text style={styles.header}>Hej {userName}</Text>
+                <Text style={styles.introductoryText}>Välkommen till Oomah. Vi hjälper dig att få en helhetsbild av din hälsa och ger dig tips på hur du kan må bättre. </Text>
                 <Text style={styles.introductoryText}>Här får du tillgång till experter, tips och produkter inom kost, träning, hormonhälsa, stress, sömn, mage och kvinnohälsa. Vi vill hjälpa dig att hitta den underliggande orsaken till din hälsa, istället för att bara behandla symptomen. Målet är att återställa balans och ge dig verktyg för att må så bra som möjligt.</Text>
             </View>    
             <View style={styles.firstBox}>
@@ -75,11 +74,11 @@ const Home = () => {
                         <Text style={styles.boxText}>Stress</Text>
                     </View>
                     <View style={styles.box}>
-                        <Image source={require('../../assets/box_five_home.jpg')} style={styles.boxImage} />
+                        <Image source={require('../../assets/box_seven_home.jpg')} style={styles.boxImage} />
                         <Text style={styles.boxText}>Klimakterie</Text>
                     </View>
                     <Pressable onPress={() => navigation.navigate('Theme_PMS')} style={styles.box}>
-                        <Image source={require('../../assets/box_six_home.jpg')} style={styles.boxImage} />
+                        <Image source={require('../../assets/box_eight_home.jpg')} style={styles.boxImage} />
                         <Text style={styles.boxText}>PMS</Text>
                     </Pressable>
                 </View>

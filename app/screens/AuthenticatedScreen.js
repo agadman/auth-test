@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Home';
 import Explore from './Explore';
 import MyAccount from './MyAccount';
-import Theme_PMS from './Theme_PMS'; // Import your Theme_PMS component
+import Theme_PMS from './Theme_PMS'; 
 import { FontAwesome } from 'react-native-vector-icons';
 
 const Tab = createBottomTabNavigator();
