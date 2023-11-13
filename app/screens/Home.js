@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import BoxContainer from '../components/BoxContainer';
 
 const Home = () => {
     const route = useRoute();
@@ -46,43 +47,7 @@ const Home = () => {
                     </Pressable>
                </ImageBackground>
            </View> 
-           <View style={styles.boxContainer}>
-                <Text style={styles.boxHeader}>Läs om tema...</Text>
-                <View style={styles.boxRow}>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_one_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Mage & tarm</Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_two_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Sömn & Energi</Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_three_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Hud & Hår </Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_four_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Oro & Ångest</Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_five_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Fertilitet</Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_six_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Stress</Text>
-                    </View>
-                    <View style={styles.box}>
-                        <Image source={require('../../assets/box_seven_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>Klimakterie</Text>
-                    </View>
-                    <Pressable onPress={() => navigation.navigate('Theme_PMS')} style={styles.box}>
-                        <Image source={require('../../assets/box_eight_home.jpg')} style={styles.boxImage} />
-                        <Text style={styles.boxText}>PMS</Text>
-                    </Pressable>
-                </View>
-            </View>
+           <BoxContainer />
             <View style={styles.about}>
                 <Text style={styles.aboutHeader}>Om Traditionell kinesisk medicin</Text>
                 <Text>Traditionell kinesisk medicin har använts i hundratals år och bygger på tron att kroppen har naturliga läkningsförmågor. Denna typ av medicin fokuserar på att hitta den underliggande orsaken till en sjukdom eller skada, istället för att bara behandla symptomen. Målet med traditionell kinesisk medicin är att återställa balans och harmoni i kroppen och sinnet. Några av de vanliga metoder som används inom denna typ av medicin inkluderar örtmedicin, akupunktur, koppning och terapeutiska övningar som tai chi och qi gong.</Text>
@@ -144,39 +109,6 @@ const Home = () => {
     quizBtnText: {
         color: 'white',
     },
-    boxContainer: {
-        marginTop: 50,
-        width: '90%',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-      },
-      boxHeader: {
-        fontSize: 24,
-        marginBottom: 10,
-      },
-      boxRow: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        width: '100%', // Ensure the row takes the full width
-     },
-      box: {
-        width: '48%', // Adjust the width as needed
-        aspectRatio: 1,
-        alignItems: 'center',
-        marginBottom: 10,
-       },
-       boxImage: {
-        width: '100%', // Adjust the image width as needed
-        height: '80%', // Adjust the image height as needed
-        resizeMode: 'cover', // You can use 'contain' or other options
-        borderRadius: 10,
-       },
-       boxText: {
-        marginTop: 5,
-        fontSize: 16, // Adjust the text size as needed
-        textAlign: 'center',
-       },
        aboutHeader: {
         fontSize: 16,
         fontWeight: 'bold',
