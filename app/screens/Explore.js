@@ -33,7 +33,7 @@ const Explore = () => {
           </ImageBackground>
         </View>
         <View>
-          <Text>Berätta om din hälsa</Text>
+          <Text style={styles.yourHealthHeaderText}>Berätta om din hälsa</Text>
           <Text>Gör ett quiz för att få en personlig helhetsbild och rekommendationer för att må bra</Text>
         </View>
         <BoxContainer />
@@ -107,6 +107,11 @@ const styles = StyleSheet.create({
   quizBtnText: {
     color: 'white',
   },
+  yourHealthHeaderText: {
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  }
 });
 
 export default Explore;
