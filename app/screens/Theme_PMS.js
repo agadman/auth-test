@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import React from 'react';
+import { COLORS } from '../components/Colors';
 
 const Theme_PMS = () => {
  
@@ -16,6 +17,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E5DED5'
+        backgroundColor: COLORS.background,
     },
  })

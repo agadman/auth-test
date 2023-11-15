@@ -3,6 +3,7 @@ import React from 'react';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native';
+import { COLORS } from '../components/Colors';
 
 const MyAccount = () => {
     const navigation = useNavigation();
@@ -36,6 +37,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E5DED5'
+        backgroundColor: COLORS.background,
     },
  })

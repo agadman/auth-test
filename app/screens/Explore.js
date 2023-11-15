@@ -3,6 +3,7 @@ import { ScrollView, View, StyleSheet, Text, TextInput, Pressable, ImageBackgrou
 import BoxContainer from '../components/BoxContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { COLORS } from '../components/Colors';
 
 const Explore = () => {
   const navigation = useNavigation();
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 100,
-    backgroundColor: '#E5DED5',
+    backgroundColor: COLORS.background,
   },
   introductoryBox: {
     alignItems: 'center',
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
   searchIconContainer: {
     padding: 10,
-    backgroundColor: '#AB978A',
+    backgroundColor: COLORS.primary,
     borderRadius: 20,
   },
   firstBox: {
@@ -91,21 +92,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   findQuizText: {
-    color: 'white',
+    color: COLORS.white,
     fontSize: 30,
     textAlign: 'center',
   },
   quizBtn: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#AB978A',
+    backgroundColor: COLORS.primary,
     borderRadius: 50,
     padding: 20,
     width: '75%',
     marginTop: 20,
   },
   quizBtnText: {
-    color: 'white',
+    color: COLORS.white,
   },
   yourHealthHeaderText: {
     marginTop: 10,

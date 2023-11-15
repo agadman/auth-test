@@ -4,6 +4,7 @@ import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { COLORS } from '../components/Colors';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -107,51 +108,51 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#E5DED5'
+        backgroundColor: COLORS.background,
     },
     headerContainer: {
         flexDirection: 'row',
         paddingTop: 50,
         alignItems: 'center',
-        flex: 1, // Updated to 1  
+        flex: 1, 
     },
     arrowContainer: {
         marginLeft: 20,
     },
     header: {
         fontSize: 48,
-        color: 'black',
+        color: COLORS.text,
         marginLeft: 70   
     },
     form: {
         marginHorizontal: 20,
-        flex: 4, // Updated to 3
+        flex: 4, 
     },
     input: {
         marginVertical: 8,
         height: 50,
         borderRadius: 10,
         padding: 10,
-        backgroundColor: '#fff'
+        backgroundColor: COLORS.white,
     },
     loginBtn: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#AB978A',
+        backgroundColor: COLORS.primary,
         borderRadius: 50,
         padding: 20,
         marginTop: 120,
         marginBottom: 20
     },
     loginText: {
-        color: 'white',
+        color: COLORS.white,
     },
     forgotPwd: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     forgotPwdText: {
-        color: '#AB978A',
+        color: COLORS.primary,
     },
   modalContainer: {
     flex: 1,
@@ -162,14 +163,14 @@ const styles = StyleSheet.create({
   modalBtn: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#AB978A',
+    backgroundColor: COLORS.primary,
     borderRadius: 50,
     padding: 20,
     marginTop: 20,
     width: "50%",
   },
   modalBtnText: {
-    color: 'white',
+    color: COLORS.primary,
   },
   modalCancelBtn: {
     marginTop: 10,

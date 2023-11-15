@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Pressable, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { COLORS } from '../components/Colors';
 
 const LandingPage = () => {
     const navigation = useNavigation();
@@ -37,11 +38,11 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 48,
-        color: 'white',
+        color: COLORS.white
     },
     secondHeader: {
         fontSize: 20,
-        color: 'white'
+        color: COLORS.white,
     },
     form: {
         marginHorizontal: 20,
@@ -55,10 +56,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff'
+        backgroundColor: COLORS.white,
     },
     createBtn: {
-        backgroundColor: '#AB978A',
+        backgroundColor: COLORS.primary,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
@@ -66,13 +67,13 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     createText: {
-        color: 'white'
+        color: COLORS.white,
     },
     loginLink: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     loginText: {
-        color: 'white',
+        color: COLORS.white,
     }
 })

@@ -5,6 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import BoxContainer from '../components/BoxContainer';
+import { COLORS } from '../components/Colors';
 
 const Home = () => {
     const route = useRoute();
@@ -65,7 +66,7 @@ const Home = () => {
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingTop: 100,
-        backgroundColor: '#E5DED5',
+        backgroundColor: COLORS.background,
     },
     introductoryBox: {
         alignItems: 'center',
@@ -100,14 +101,14 @@ const Home = () => {
     quizBtn: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#AB978A',
+        backgroundColor: COLORS.primary,
         borderRadius: 50,
         padding: 20,
         width: '75%',
         marginTop: 20,
     },
     quizBtnText: {
-        color: 'white',
+        color: COLORS.white,
     },
        aboutHeader: {
         fontSize: 16,
@@ -118,9 +119,9 @@ const Home = () => {
         marginTop: 0,
         width: '90%',
         padding: 25,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         borderRadius: 10,
-        shadowColor: 'black',
+        shadowColor: COLORS.text,
         shadowOffset: {width: 0, height: 2},
         shadowOpacity: 0.4,
         elevation: 10,

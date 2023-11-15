@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CheckBox } from 'react-native-elements';
+import { COLORS } from '../components/Colors';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#E5DED5'
+        backgroundColor: COLORS.background,
     },
     headerContainer: {
         flexDirection: 'row',
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 48,
-        color: 'black',
+        color: COLORS.text,
         marginLeft: 40   
     },
     form: {
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 10,
         padding: 10,
-        backgroundColor: '#fff'
+        backgroundColor: COLORS.white,
     },
     checkboxContainer: {
         flexDirection: 'row',
@@ -107,13 +108,13 @@ const styles = StyleSheet.create({
     createBtn: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#AB978A',
+        backgroundColor: COLORS.primary,
         borderRadius: 50,
         padding: 20,
         marginTop: 50,
         marginBottom: 20
     },
     createText: {
-        color: 'white',
+        color: COLORS.white,
     }
 })
