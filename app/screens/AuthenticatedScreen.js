@@ -30,6 +30,9 @@ const TabNavigator = () => {
           if (route.name === 'Upptäck') {
             return <FontAwesome name="search" size={size} color={color} />;
           }
+          if (route.name === 'Vänner') {
+            return <FontAwesome name="wechat" size={size} color={color} />;
+          }
           if (route.name === 'My account') {
             return <FontAwesome name="user" size={size} color={color} />;
           }
@@ -38,6 +41,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
       <Tab.Screen name="Upptäck" component={Explore} options={{ headerShown: false }} />
+      <Tab.Screen name="Vänner" component={Explore} options={{ headerShown: false }} />
       <Tab.Screen name="My account" component={MyAccount} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
