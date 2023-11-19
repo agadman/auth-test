@@ -28,6 +28,7 @@ const Recommendation_boxes = () => {
                 </View>
               )}
               <Text style={styles.boxText}>{item.title}</Text>
+              <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
             </View>
           </Pressable>
         ))}
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
   box: {
     marginBottom: 20,
     alignItems: 'center',
-    padding: 15,
-    borderRadius: 15,
+    padding: 20,
+    borderRadius: 20,
     flexDirection: 'row', // Align icon and text in a row
   },
   boxText: {
@@ -70,8 +71,8 @@ const styles = StyleSheet.create({
     padding: 15, // Adjust the padding as needed
     marginRight: 10, // Add some space between the icon and text
   },
-  icon: {
-    // No need for margin here, as it's now handled by the iconContainer
+  arrowIcon: {
+    marginLeft: 'auto', // Push the arrow to the right side
   },
 });
 
