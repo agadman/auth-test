@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from 'react-native-vector-icons';
+import Recommendation_Modal from './Recommendation_Modal';
 
 const Recommendation_boxes = () => {
   const navigation = useNavigation();
+
+  const [isModalVisible, setModalVisible] = useState(false); // State to manage modal visibility
 
   const boxData = [
     { title: 'Kost & recept', route: 'MageTarm', color: '#D1E0D5', icon: 'apple' },   // Light green
@@ -15,12 +18,26 @@ const Recommendation_boxes = () => {
 
   const iconContainerColors = ['#709078', '#D09082', '#AB978A', '#577D9F'];
 
+  // Function to toggle modal visibility
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
     <View style={styles.boxContainer}>
       <Text style={styles.boxHeader}>Rekommendationer</Text>
       <View style={styles.boxRow}>
         {boxData.map((item, index) => (
-          <Pressable key={index} onPress={() => navigation.navigate(item.route)}>
+          <Pressable
+            key={index}
+            onPress={() => {
+              if (item.title === 'Kosttillskott') {
+                toggleModal(); // Open the modal when 'Kosttillskott' is pressed
+              } else {
+                navigation.navigate(item.route);
+              }
+            }}
+          >
             <View style={{ ...styles.box, backgroundColor: item.color }}>
               {item.icon && (
                 <View style={{ ...styles.iconContainer, backgroundColor: iconContainerColors[index] }}>
@@ -33,6 +50,8 @@ const Recommendation_boxes = () => {
           </Pressable>
         ))}
       </View>
+
+      <Recommendation_Modal isVisible={isModalVisible} onClose={toggleModal} />
     </View>
   );
 };
@@ -73,6 +92,17 @@ const styles = StyleSheet.create({
   },
   arrowIcon: {
     marginLeft: 'auto', // Push the arrow to the right side
+  },
+  // Modal Styles
+  modalContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 15,
   },
 });
 
