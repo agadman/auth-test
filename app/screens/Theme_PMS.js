@@ -1,12 +1,15 @@
-import React from 'react';
-import { ScrollView, View, StyleSheet, Text, TextInput, Pressable, ImageBackground } from 'react-native';
-import Recommendation_boxes from '../components/Recommendation_boxes';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { ScrollView, View, StyleSheet, Text, ImageBackground } from 'react-native';
+import Recommendation_boxes from '../components/recommendationsModals/Recommendation_boxes';
 import { COLORS } from '../components/Colors';
 
 const Theme_PMS = () => {
-  const navigation = useNavigation();
+  const [boxData, setBoxData] = useState([
+    { title: 'Kost & recept', color: '#D1E0D5', icon: 'apple' },
+    { title: 'Kosttillskott', color: '#EDDAD5', icon: 'capsules' },
+    { title: 'Mental hälsa', color: '#E1D8CE', icon: 'leaf' },
+    { title: 'Fysisk hälsa', color: '#DFE5EB', icon: 'dumbbell' },
+  ]);
 
   return (
     <ScrollView vertical>
@@ -22,7 +25,7 @@ const Theme_PMS = () => {
             <Text style={styles.text}>Kvinnor kan uppleva premenstruellt syndrom (PMS) under dagarna före sin mens. Det är en kombination av fysiska och känslomässiga symptom som kan variera i intensitet och varaktighet för varje individ. PMS-symptom kan inkludera uppblåsthet, ömhet i brösten, humörsvängningar, irritabilitet, ångest, trötthet och matbegär. Den exakta orsaken till PMS är okänd, men hormonförändringar under menstruationscykeln anses vara en bidragande faktor.</Text>
             <Text style={styles.text}>För att lindra PMS-symptom finns det flera strategier du kan prova. Här hittar du detaljerade rekommendationer och produkter inom kost, tillskott samt mental & fysisk hälsa.</Text>
         </View>
-        <Recommendation_boxes />
+        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} />
       </View>
     </ScrollView>
   );
