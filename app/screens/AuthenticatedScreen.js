@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Home';
 import Explore from './Explore';
 import MyAccount from './MyAccount';
+import Theme_StomachBowel from './Theme_StomachBowel'; 
 import Theme_PMS from './Theme_PMS'; 
 import { FontAwesome } from 'react-native-vector-icons';
 
@@ -14,6 +15,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_StomachBowel" component={Theme_StomachBowel} options={{ headerShown: false }} />
       <Stack.Screen name="Theme_PMS" component={Theme_PMS} options={{ headerShown: false }} />
     </Stack.Navigator>
   );

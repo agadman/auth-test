@@ -12,7 +12,6 @@ const Recommendation_boxes = ({ boxData }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeModalIndex, setActiveModalIndex] = useState(0); // Initial value can be adjusted based on your logic
 
-
   const iconContainerColors = ['#709078', '#D09082', '#AB978A', '#577D9F'];
 
   const toggleModal = (boxTitle) => {

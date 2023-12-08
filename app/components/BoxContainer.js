@@ -6,7 +6,7 @@ const BoxContainer = () => {
   const navigation = useNavigation();
 
   const boxData = [
-    { title: 'Mage & tarm', image: require('../../assets/box_one_theme.jpg'), route: 'MageTarm' },
+    { title: 'Mage & tarm', image: require('../../assets/box_one_theme.jpg'), route: 'Theme_StomachBowel' },
     { title: 'Sömn & energi', image: require('../../assets/box_two_theme.jpg'), route: 'MageTarm' },
     { title: 'Hud & hår', image: require('../../assets/box_three_theme.jpg'), route: 'MageTarm' },
     { title: 'Oro & ångest', image: require('../../assets/box_four_theme.jpg'), route: 'MageTarm' },
