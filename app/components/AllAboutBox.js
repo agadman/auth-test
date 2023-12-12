@@ -1,17 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome5 } from 'react-native-vector-icons';
-import SVG from '../../assets/icons/logo.svg'
 
 const AllAboutBox = ({ text, onPress }) => {
-  
+    const imageSource = require('../../assets/icons/logo.png');
 
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.boxContainer}>
         <View style={styles.boxContent}>
-          {/* Use SvgXml to render the SVG image */}
-          <Image source={SVG} style={styles.logoImage} />
+        <Image source={imageSource} style={styles.logoImage} />
           <Text style={styles.boxText}>{text}</Text>
         </View>
         <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
@@ -57,9 +55,10 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
   logoImage: {
-    width: 50,
-    height: 50,
-    marginTop: 20,
+    width: 100,
+    height: 100,
+    marginRight: 30,
+
   },
 });
 
