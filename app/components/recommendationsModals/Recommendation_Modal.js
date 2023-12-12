@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 
-const Recommendation_Modal = ({ isVisible, onClose, onNext, nextModalTitle, modalContent, totalComponents, activeModalIndex }) => {
+const Recommendation_Modal = ({ isVisible, onClose, onNext, nextModalTitle, modalContent, totalComponents, activeModalIndex, backgroundColor }) => {
   useEffect(() => {
     console.log('Next Modal title:', nextModalTitle);
   }, [nextModalTitle]);
@@ -20,32 +20,32 @@ const Recommendation_Modal = ({ isVisible, onClose, onNext, nextModalTitle, moda
     ));
     return <View style={styles.progressBar}>{lines}</View>;
   };
-  
+
   const shouldBoldLine = (index) => {
     const boxIndex = Math.floor(index / 2); // Each box represents 2 lines
     return boxIndex <= activeModalIndex;
   };
-  
+
   return (
     <Modal isVisible={isVisible} animationIn="slideInUp" animationOut="slideOutDown" backdropOpacity={0.7} style={{ margin: 0 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
-          <View style={styles.stickyTop}>
+          <View style={[styles.stickyTop, { backgroundColor }]}>
             {renderProgressBar()}
             <TouchableOpacity onPress={onClose}>
               <Text>X</Text>
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={{ flex: 1, backgroundColor: 'white' }} stickyHeaderIndices={[0]}>
+          <ScrollView style={{ flex: 1 }} stickyHeaderIndices={[0]}>
             {/* Adding an empty View as a placeholder for sticky header */}
-            <View style={{ height: 20, backgroundColor: 'white' }} />
+            <View style={{ height: 20, backgroundColor }} />
 
             {/* Your scrollable content goes here */}
             {modalContent}
           </ScrollView>
 
-          <View style={styles.stickyBottom}>
+          <View style={[styles.stickyBottom, { backgroundColor }]}>
             <TouchableOpacity onPress={switchToNextModal}>
               {nextModalTitle ? (
                 <Text style={styles.nextModalTitle}>Nästa: {nextModalTitle}</Text>
@@ -60,16 +60,16 @@ const Recommendation_Modal = ({ isVisible, onClose, onNext, nextModalTitle, moda
 
 const styles = StyleSheet.create({
   stickyTop: {
-    backgroundColor: 'white',
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   stickyBottom: {
-    backgroundColor: 'white',
     padding: 30,
     alignItems: 'center',
+    borderTopWidth: 2,  // Add a border at the bottom
+    borderTopColor: '#BDBDBD',  // Set the border color
   },
   nextModalTitle: {
     textTransform: 'uppercase',

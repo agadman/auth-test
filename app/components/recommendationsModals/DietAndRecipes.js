@@ -17,9 +17,11 @@ export default DietAndRecipes;
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#DDE5DF',
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   header: {
     fontSize: 24,
+    marginBottom: 20,
   },
 });
