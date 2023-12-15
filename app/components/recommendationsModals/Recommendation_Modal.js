@@ -2,28 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 
-const Recommendation_Modal = ({ isVisible, onClose, onNext, nextModalTitle, modalContent, totalComponents, activeModalIndex, backgroundColor }) => {
-  useEffect(() => {
-    console.log('Next Modal title:', nextModalTitle);
-  }, [nextModalTitle]);
-
+const Recommendation_Modal = ({
+  isVisible,
+  onClose,
+  onNext,
+  modalContent,
+  totalComponents,
+  activeModalIndex,
+  backgroundColor,
+  boxData,
+  progressBarData,
+}) => {
   const switchToNextModal = () => {
     onClose(); // Close the current modal
     onNext(); // Switch to the next modal
   };
 
   const renderProgressBar = () => {
-    const lines = Array.from({ length: totalComponents * 2 }, (_, index) => (
-      <Text key={index} style={[styles.progressBarLine, shouldBoldLine(index) ? styles.boldLine : null]}>
-        _
-      </Text>
-    ));
-    return <View style={styles.progressBar}>{lines}</View>;
-  };
-
-  const shouldBoldLine = (index) => {
-    const boxIndex = Math.floor(index / 2); // Each box represents 2 lines
-    return boxIndex <= activeModalIndex;
+    return (
+      <View style={styles.progressBar}>
+        {progressBarData.map((boxTitle, index) => (
+          <Text
+            key={index}
+            style={[
+              styles.progressBarLine,
+              boxTitle === boxData[activeModalIndex]?.title ? styles.boldLine : null,
+            ]}
+          >
+            {boxTitle}
+          </Text>
+        ))}
+      </View>
+    );
   };
 
   return (
@@ -47,9 +57,7 @@ const Recommendation_Modal = ({ isVisible, onClose, onNext, nextModalTitle, moda
 
           <View style={[styles.stickyBottom, { backgroundColor }]}>
             <TouchableOpacity onPress={switchToNextModal}>
-              {nextModalTitle ? (
-                <Text style={styles.nextModalTitle}>Nästa: {nextModalTitle}</Text>
-              ) : null}
+              <Text style={styles.nextModalTitle}>Nästa: {boxData[activeModalIndex + 1]?.title}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -68,15 +76,14 @@ const styles = StyleSheet.create({
   stickyBottom: {
     padding: 30,
     alignItems: 'center',
-    borderTopWidth: 2,  // Add a border at the bottom
-    borderTopColor: '#BDBDBD',  // Set the border color
+    borderTopWidth: 2, // Add a border at the bottom
+    borderTopColor: '#BDBDBD', // Set the border color
   },
   nextModalTitle: {
     textTransform: 'uppercase',
     marginBottom: 10,
   },
   progressBar: {
-    width: '90%',
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -89,7 +96,6 @@ const styles = StyleSheet.create({
   },
   boldLine: {
     backgroundColor: '#666666', // Change this to your desired color for bold lines
-    height: 2, // Adjust the height as needed
   },
 });
 

@@ -44,14 +44,6 @@ const Recommendation_boxes = ({ boxData }) => {
   const getNextModalTitle = () => {
     const currentIndex = updatedBoxData.findIndex((box) => box.title === activeBox);
     const nextIndex = (currentIndex + 1) % updatedBoxData.length;
-  
-    // Check if the current box is "Fysisk hälsa" (PhysicalHealth)
-    if (activeBox === 'Fysisk hälsa') {
-      // Return "Allt du behöver veta" as the next title
-      return 'Allt du behöver veta';
-    }
-  
-    // Return the default next title
     return updatedBoxData[nextIndex].title;
   };
 
@@ -111,7 +103,6 @@ const Recommendation_boxes = ({ boxData }) => {
 
   return (
     <View style={styles.boxContainer}>
-      {/* Row for "Allt du behöver veta" box */}
       <Pressable onPress={() => toggleModal('Allt du behöver veta')}>
         <View style={styles.AllAboutBoxContainer}>
           <View style={styles.AllAboutBoxContent}>
@@ -121,19 +112,16 @@ const Recommendation_boxes = ({ boxData }) => {
           <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
         </View>
       </Pressable>
-      
-      {/* Row for "Tips & recept" text */}
       <Text style={styles.boxHeader}>Tips & recept</Text>
-
-      {/* Row for the rest of the boxes */}
       <View style={styles.boxRow}>
-        {updatedBoxData.slice(1).map((item, index) => (
+        {updatedBoxData.map((item, index) => (
           <Pressable key={index} onPress={() => toggleModal(item.title)}>
             <View
               style={{
                 ...styles.box,
                 backgroundColor: item.color,
-                width: boxWidth,
+                width: item.title === 'Allt du behöver veta' ? '100%' : boxWidth,
+                ...(item.title === 'Allt du behöver veta' ? styles.allAboutBox : null),
               }}
             >
               <Image source={IconImage} style={styles.icon} />
@@ -142,7 +130,6 @@ const Recommendation_boxes = ({ boxData }) => {
           </Pressable>
         ))}
       </View>
-
       <Recommendation_Modal
         isVisible={isModalVisible}
         onClose={() => setModalVisible(false)}
@@ -156,6 +143,7 @@ const Recommendation_boxes = ({ boxData }) => {
         boxData={updatedBoxData}
         progressBarData={progressBarData}
       />
+      {renderProgressBar()}
     </View>
   );
 };
@@ -180,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20, // Adjusted margin
+    marginBottom: 50,
     padding: 15,
   },
   AllAboutBoxContent: {
@@ -207,7 +195,7 @@ const styles = StyleSheet.create({
   },
   boxHeader: {
     fontSize: 24,
-    marginBottom: 10, // Adjusted margin
+    marginBottom: 30,
     width: '100%',
     textAlign: 'left',
   },
@@ -225,7 +213,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginBottom: 10,
-    resizeMode: 'contain',
+    resizeMode: 'contain', // Ensure the image is fully contained within the specified dimensions
   },
   boxText: {
     fontSize: 16,
@@ -239,6 +227,23 @@ const styles = StyleSheet.create({
   progressBarLine: {
     flex: 1,
     textAlign: 'center',
+  },
+  allAboutBox: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 50,
+    padding: 15,
+    width: '100%'
   },
 });
 

@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome5 } from 'react-native-vector-icons';
 
 const AllAboutBox = ({ text, onPress }) => {
-    const imageSource = require('../../assets/icons/logo.png');
+    const imageSource = require('../../../assets/icons/logo.png');
 
   return (
     <TouchableOpacity onPress={onPress}>
