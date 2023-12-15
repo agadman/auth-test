@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 
@@ -7,11 +7,11 @@ const Recommendation_Modal = ({
   onClose,
   onNext,
   modalContent,
-  totalComponents,
   activeModalIndex,
   backgroundColor,
   boxData,
   progressBarData,
+  getNextModalTitle,
 }) => {
   const switchToNextModal = () => {
     onClose(); // Close the current modal
@@ -47,17 +47,15 @@ const Recommendation_Modal = ({
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={{ flex: 1 }} stickyHeaderIndices={[0]}>
-            {/* Adding an empty View as a placeholder for sticky header */}
-            <View style={{ height: 20, backgroundColor }} />
-
+          <ScrollView style={{ flex: 1, backgroundColor }}>
+            {/* Remove the placeholder View */}
             {/* Your scrollable content goes here */}
             {modalContent}
           </ScrollView>
 
           <View style={[styles.stickyBottom, { backgroundColor }]}>
             <TouchableOpacity onPress={switchToNextModal}>
-              <Text style={styles.nextModalTitle}>Nästa: {boxData[activeModalIndex + 1]?.title}</Text>
+              <Text style={styles.nextModalTitle}>Nästa: {getNextModalTitle()}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -76,8 +74,8 @@ const styles = StyleSheet.create({
   stickyBottom: {
     padding: 30,
     alignItems: 'center',
-    borderTopWidth: 2, // Add a border at the bottom
-    borderTopColor: '#BDBDBD', // Set the border color
+    borderTopWidth: 2,
+    borderTopColor: '#BDBDBD',
   },
   nextModalTitle: {
     textTransform: 'uppercase',
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   boldLine: {
-    backgroundColor: '#666666', // Change this to your desired color for bold lines
+    backgroundColor: '#666666',
   },
 });
 

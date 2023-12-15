@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Home';
 import Explore from './Explore';
+import Friends from './Friends';
 import MyAccount from './MyAccount';
 import Theme_StomachBowel from './Theme_StomachBowel'; 
 import Theme_PMS from './Theme_PMS'; 
@@ -43,7 +44,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
       <Tab.Screen name="Upptäck" component={Explore} options={{ headerShown: false }} />
-      <Tab.Screen name="Vänner" component={Explore} options={{ headerShown: false }} />
+      <Tab.Screen name="Vänner" component={Friends} options={{ headerShown: false }} />
       <Tab.Screen name="My account" component={MyAccount} options={{ headerShown: false }} />
     </Tab.Navigator>
   );

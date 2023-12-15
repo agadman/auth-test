@@ -144,18 +144,19 @@ const Recommendation_boxes = ({ boxData }) => {
       </View>
 
       <Recommendation_Modal
-        isVisible={isModalVisible}
-        onClose={() => setModalVisible(false)}
-        boxType={activeBox}
-        onNext={nextModal}
-        nextModalTitle={getNextModalTitle()}
-        modalContent={getModalContent()}
-        totalComponents={updatedBoxData.length}
-        activeModalIndex={activeModalIndex}
-        backgroundColor={getBackgroundColor(activeBox)}
-        boxData={updatedBoxData}
-        progressBarData={progressBarData}
-      />
+  isVisible={isModalVisible}
+  onClose={() => setModalVisible(false)}
+  boxType={activeBox}
+  onNext={nextModal}
+  getNextModalTitle={getNextModalTitle}  // Pass the function as a prop
+  modalContent={getModalContent()}
+  totalComponents={updatedBoxData.length}
+  activeModalIndex={activeModalIndex}
+  backgroundColor={getBackgroundColor(activeBox)}
+  boxData={updatedBoxData}
+  progressBarData={progressBarData}
+/>
+
     </View>
   );
 };
