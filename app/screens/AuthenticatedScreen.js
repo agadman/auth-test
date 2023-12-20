@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Home';
@@ -23,10 +23,10 @@ const HomeStack = () => {
 };
 
 const tabIcons = {
-  Home: 'home',
+  Översikt: 'home',
   Upptäck: 'search',
   Vänner: 'wechat',
-  'My account': 'user',
+  'Min hälsa': 'user',
 };
 
 const TabNavigator = () => {
@@ -47,9 +47,9 @@ const TabNavigator = () => {
 
           return <FontAwesome name={iconName} size={size} color={iconColor} />;
         },
-        tabBarLabelStyle: {
-          color: '#AB978A', // Set the default color for the label
-        },
+        tabBarLabelStyle: ({ focused }) => ({
+          color: focused ? '#D09082' : '#AB978A', // Set the color based on whether the tab is focused
+        }),
       })}
       tabBarOptions={{
         activeTintColor: '#D09082', // Color for the active tab (used for both icon and label)
@@ -60,11 +60,11 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Översikt"
         component={HomeStack}
         options={{ headerShown: false }}
         listeners={{
-          tabPress: () => handleTabPress('Home'),
+          tabPress: () => handleTabPress('Översikt'),
         }}
       />
       <Tab.Screen
@@ -84,11 +84,11 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="My account"
+        name="Min hälsa"
         component={MyAccount}
         options={{ headerShown: false }}
         listeners={{
-          tabPress: () => handleTabPress('My account'),
+          tabPress: () => handleTabPress('Min hälsa'),
         }}
       />
     </Tab.Navigator>
