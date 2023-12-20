@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { RadioButton } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const DietAndRecipes = () => {
@@ -8,7 +10,10 @@ const DietAndRecipes = () => {
     box2: false,
     box3: false,
     box4: false,
+    box5: false,
   });
+
+  const [box5Text, setBox5Text] = useState('');
 
   const toggleBox = (box) => {
     setExpandedBoxes((prevState) => ({
@@ -17,20 +22,101 @@ const DietAndRecipes = () => {
     }));
   };
 
+  const [box5Options, setBox5Options] = useState({
+    option1: false,
+    option2: false,
+    option3: false,
+    option4: false,
+    option5: false,
+  });
+
+
+  const handleOptionPress = (option) => {
+    setBox5Options((prevOptions) => ({
+      ...prevOptions,
+      [option]: !prevOptions[option],
+    }));
+  };
+
   const renderContent = (box, fullText) => {
+    if (!fullText) {
+      return null;
+    }
+  
     const firstSentenceEnd = fullText.search(/[.:]/);
     const firstSentence = firstSentenceEnd !== -1 ? fullText.slice(0, firstSentenceEnd + 1) : fullText.trim();
     const restOfText = firstSentenceEnd !== -1 ? fullText.slice(firstSentenceEnd + 1).trim() : '';
-
+  
     return (
       <View>
-        <Text style={styles.text}>
-          {firstSentence}
-        </Text>
-        {expandedBoxes[box] && restOfText && (
-          <Text style={styles.listItem}>
-            {restOfText.endsWith(".") || restOfText.endsWith(":") ? restOfText : restOfText + "."}
-          </Text>
+        {expandedBoxes[box] && (
+          <View>
+            {restOfText && (
+              <Text style={styles.listItem}>
+                {restOfText.endsWith(".") || restOfText.endsWith(":") ? restOfText : restOfText + "."}
+              </Text>
+            )}
+            {box === 'box5' && (
+              <View style={{ backgroundColor: 'white', padding: 10 }}>
+                <RadioButton.Group
+                onValueChange={(newValue) => {
+                  // Handle the radio button value change here if needed
+                }}
+              >
+              <Button style={styles.radioBtn}
+                    icon={
+                      box5Options.option1
+                        ? 'radiobox-marked'
+                        : 'radiobox-blank'
+                    }
+                    onPress={() => handleOptionPress('option1')}
+                  >
+                      <Text style={{ color: 'black' }}>Drick vatten innan frukost</Text>
+                  </Button>
+                  <Button style={styles.radioBtn}
+                    icon={
+                      box5Options.option2
+                        ? 'radiobox-marked'
+                        : 'radiobox-blank'
+                    }
+                    onPress={() => handleOptionPress('option2')}
+                  >
+                    Ät inte efter 18.30
+                  </Button>
+                  <Button style={styles.radioBtn}
+                    icon={
+                      box5Options.option3
+                        ? 'radiobox-marked'
+                        : 'radiobox-blank'
+                    }
+                    onPress={() => handleOptionPress('option3')}
+                  >
+                    Skriv matdagbok
+                  </Button>
+                  <Button style={styles.radioBtn}
+                    icon={
+                      box5Options.option4
+                        ? 'radiobox-marked'
+                        : 'radiobox-blank'
+                    }
+                    onPress={() => handleOptionPress('option4')}
+                  >
+                    Är 1-2 matskedar frön varje dag
+                  </Button>
+                  <Button style={styles.radioBtn}
+                    icon={
+                      box5Options.option5
+                        ? 'radiobox-marked'
+                        : 'radiobox-blank'
+                    }
+                    onPress={() => handleOptionPress('option5')}
+                  >
+                    Inkludera grönsaker i alla måltider
+                  </Button>
+              </RadioButton.Group> 
+              </ View>     
+            )}
+          </View>
         )}
       </View>
     );
@@ -99,6 +185,16 @@ const DietAndRecipes = () => {
           'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre: vitt socker\nmjölkprodukter\nalkohol\nkoffein\ngluten\nsoja'
         )}
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => toggleBox('box5')}>
+        <View style={styles.whiteBox}>
+          <Text style={styles.secondHeader}>
+            Lägg till i min rutin
+          </Text>
+          {renderArrowIcon('box5')}
+        </View>
+        {renderContent('box5', 'Dummytext')}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -132,12 +228,23 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
- 
+  },
+  whiteBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
   },
   arrowIcon: {
     marginLeft: 5, // Adjust the margin as needed
     fontSize: 24,
   },
+  radioButtonContainer: {
+    marginTop: 10,
+  },
+  radioBtn: {
+    alignSelf: 'flex-start',
+  }
+  
 });
 
 export default DietAndRecipes;

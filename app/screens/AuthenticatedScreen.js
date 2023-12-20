@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Home';
@@ -22,30 +22,75 @@ const HomeStack = () => {
   );
 };
 
+const tabIcons = {
+  Home: 'home',
+  Upptäck: 'search',
+  Vänner: 'wechat',
+  'My account': 'user',
+};
+
 const TabNavigator = () => {
+  const [selectedTab, setSelectedTab] = useState('Home');
+
+  const handleTabPress = (tabName) => {
+    setSelectedTab(tabName);
+  };
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          if (route.name === 'Home') {
-            return <FontAwesome name="home" size={size} color={color} />;
-          }
-          if (route.name === 'Upptäck') {
-            return <FontAwesome name="search" size={size} color={color} />;
-          }
-          if (route.name === 'Vänner') {
-            return <FontAwesome name="wechat" size={size} color={color} />;
-          }
-          if (route.name === 'My account') {
-            return <FontAwesome name="user" size={size} color={color} />;
-          }
+        tabBarIcon: ({ size, color }) => {
+          const defaultColor = '#AB978A';
+          const activeColor = '#D09082';
+          const iconColor = selectedTab === route.name ? activeColor : defaultColor;
+          const iconName = tabIcons[route.name] || 'home';
+
+          return <FontAwesome name={iconName} size={size} color={iconColor} />;
+        },
+        tabBarLabelStyle: {
+          color: '#AB978A', // Set the default color for the label
         },
       })}
+      tabBarOptions={{
+        activeTintColor: '#D09082', // Color for the active tab (used for both icon and label)
+        inactiveTintColor: '#AB978A', // Color for inactive tabs
+        style: { backgroundColor: '#FFFFFF' }, // Background color of the tab bar
+        tabBarStyle: { borderTopWidth: 0 }, // Remove top border
+        tabBarItemStyle: { marginVertical: 5 }, // Adjust vertical margin for each tab
+      }}
     >
-      <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
-      <Tab.Screen name="Upptäck" component={Explore} options={{ headerShown: false }} />
-      <Tab.Screen name="Vänner" component={Friends} options={{ headerShown: false }} />
-      <Tab.Screen name="My account" component={MyAccount} options={{ headerShown: false }} />
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{ headerShown: false }}
+        listeners={{
+          tabPress: () => handleTabPress('Home'),
+        }}
+      />
+      <Tab.Screen
+        name="Upptäck"
+        component={Explore}
+        options={{ headerShown: false }}
+        listeners={{
+          tabPress: () => handleTabPress('Upptäck'),
+        }}
+      />
+      <Tab.Screen
+        name="Vänner"
+        component={Friends}
+        options={{ headerShown: false }}
+        listeners={{
+          tabPress: () => handleTabPress('Vänner'),
+        }}
+      />
+      <Tab.Screen
+        name="My account"
+        component={MyAccount}
+        options={{ headerShown: false }}
+        listeners={{
+          tabPress: () => handleTabPress('My account'),
+        }}
+      />
     </Tab.Navigator>
   );
 };
