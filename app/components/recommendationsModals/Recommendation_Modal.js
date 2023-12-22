@@ -43,7 +43,7 @@ const Recommendation_Modal = ({
           <View style={[styles.stickyTop, { backgroundColor }]}>
             {renderProgressBar()}
             <TouchableOpacity onPress={onClose}>
-              <Text>X</Text>
+              <Text style={styles.closeX}>X</Text>
             </TouchableOpacity>
           </View>
 
@@ -81,9 +81,14 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 10,
   },
+  closeX: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
   progressBar: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginRight: 20,
   },
   progressBarLine: {
     flex: 1,

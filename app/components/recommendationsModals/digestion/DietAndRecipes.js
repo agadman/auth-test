@@ -47,10 +47,15 @@ const DietAndRecipes = () => {
     const firstSentence = firstSentenceEnd !== -1 ? fullText.slice(0, firstSentenceEnd + 1) : fullText.trim();
     const restOfText = firstSentenceEnd !== -1 ? fullText.slice(firstSentenceEnd + 1).trim() : '';
   
+    const shouldApplyPadding = box !== 'box5'; // Exclude padding for box5
+
+    // Display a limited number of words when the box is not expanded
+  const displayText = expandedBoxes[box] ? restOfText : restOfText.split(' ').slice(0, 28).join(' ');
+
     return (
       <View>
         {expandedBoxes[box] && (
-          <View>
+          <View style={{ paddingLeft: shouldApplyPadding ? 20 : 0, paddingRight: shouldApplyPadding ? 20 : 0 }}>
             {restOfText && (
               <Text style={styles.listItem}>
                 {restOfText.endsWith(".") || restOfText.endsWith(":") ? restOfText : restOfText + "."}
@@ -81,7 +86,7 @@ const DietAndRecipes = () => {
                     }
                     onPress={() => handleOptionPress('option2')}
                   >
-                    Ät inte efter 18.30
+                     <Text style={{ color: 'black' }}>Ät inte efter 18.30</Text>
                   </Button>
                   <Button style={styles.radioBtn}
                     icon={
@@ -91,7 +96,7 @@ const DietAndRecipes = () => {
                     }
                     onPress={() => handleOptionPress('option3')}
                   >
-                    Skriv matdagbok
+                    <Text style={{ color: 'black' }}>Skriv matdagbok</Text>
                   </Button>
                   <Button style={styles.radioBtn}
                     icon={
@@ -101,7 +106,7 @@ const DietAndRecipes = () => {
                     }
                     onPress={() => handleOptionPress('option4')}
                   >
-                    Är 1-2 matskedar frön varje dag
+                     <Text style={{ color: 'black' }}>Ät 1-2 matskedar frön varje dag</Text>
                   </Button>
                   <Button style={styles.radioBtn}
                     icon={
@@ -111,7 +116,7 @@ const DietAndRecipes = () => {
                     }
                     onPress={() => handleOptionPress('option5')}
                   >
-                    Inkludera grönsaker i alla måltider
+                    <Text style={{ color: 'black' }}>Inkludera grönsaker i alla måltider</Text>
                   </Button>
               </RadioButton.Group> 
               </ View>     
@@ -156,7 +161,7 @@ const DietAndRecipes = () => {
         </View>
         {renderContent(
           'box2',
-          'Det är inte bara VAD du äter som är viktigt. Även HUR du äter påverkar din hälsa. Ta dig tid att äta, sitt i en lugn miljö utan skärmar, och tugga mycket, så mycket att maten nästan blir flytande i munnen. Om du märker att magen påverkas olika beroende på vad du stoppar i dig så kan du skriva ned en matdagbok och hur du känner dig efter att du har ätit. Gör du detta under en månad kan du få ut mer information än du tror.'
+          'Det är inte bara VAD du äter som är viktigt. Även HUR du äter påverkar din hälsa. Ta dig tid att äta, sitt i en lugn miljö utan skärmar, och tugga mycket, så mycket att maten nästan blir flytande i munnen.\n\nOm du märker att magen påverkas olika beroende på vad du stoppar i dig så kan du skriva ned en matdagbok och hur du känner dig efter att du har ätit. Gör du detta under en månad kan du få ut mer information än du tror.'
         )}
       </TouchableOpacity>
 
@@ -169,7 +174,7 @@ const DietAndRecipes = () => {
         </View>
         {renderContent(
           'box3',
-          'En stor påverkan på magen är ju såklart vad du stoppar i dig. En aspekt är att få i sig tillräckligt med fiber. Den enklaste vägen är att äta 1-2 matskedar frön som linfrö, pumpakärnor och svarta sesamfrön, varje dag. Det bästa är att äta fröna malda. Även mörka bladgrönsaker innehåller mycket fibrer. Koka dom väl och krydda. Bönor och linser ger också fibertillskott men kan också orsaka matsmältningsbesvär så börja med små mängder och öka långsamt, blötlägg dom och byt vatten i minst 3 timmar innan du tillagar dom. Se till att du äter olika färger och typer av frukt och grönsaker. Prova små mängder som är välkokta först, undvik råa grönsaker helt. Sötpotatis, pumpa och squash är laddade med mineraler och utmärkta för tarmmikrobiomet. Ingefära, mangold, kokt'
+          'En stor påverkan på magen är ju såklart vad du stoppar i dig. En aspekt är att få i sig tillräckligt med fiber. Den enklaste vägen är att äta 1-2 matskedar frön som linfrö, pumpakärnor och svarta sesamfrön, varje dag. Det bästa är att äta fröna malda. Även mörka bladgrönsaker innehåller mycket fibrer. Koka dom väl och krydda. Bönor och linser ger också fibertillskott men kan också orsaka matsmältningsbesvär så börja med små mängder och öka långsamt, blötlägg dom och byt vatten i minst 3 timmar innan du tillagar dom.\n\nSe till att du äter olika färger och typer av frukt och grönsaker. Prova små mängder som är välkokta först, undvik råa grönsaker helt. Sötpotatis, pumpa och squash är laddade med mineraler och utmärkta för tarmmikrobiomet. Ingefära, mangold, kokt grönkål och rödbetor är också bra livsmedel att ta med i din kost och gärna med ett glutenfritt spannmål till som ris.\n\nDet är även bra att inkludera surkål eller fermenterade grönsaker som innehåller pro- och prebiotika i din kost.'
         )}
       </TouchableOpacity>
 
@@ -193,7 +198,7 @@ const DietAndRecipes = () => {
           </Text>
           {renderArrowIcon('box5')}
         </View>
-        {renderContent('box5', 'Dummytext')}
+        {renderContent('box5', 'Dummytext', 'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre:')}
       </TouchableOpacity>
     </View>
   );
@@ -201,23 +206,21 @@ const DietAndRecipes = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
-    backgroundColor: '#DDE5DF',
-    paddingLeft: 20,
-    paddingRight: 20,
+    flex: 1,  
     paddingTop: 20,
     paddingBottom: 200,
   },
   header: {
     fontSize: 24,
     marginBottom: 20,
+    paddingLeft: 20,
   },
   secondHeader: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 10,
-    flexDirection: 'row', // Add this line
+    flexDirection: 'row', 
   },
   text: {
     marginBottom: 10,
@@ -228,14 +231,25 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   whiteBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'white',
+    width: '100%', 
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+
   },
   arrowIcon: {
-    marginLeft: 5, // Adjust the margin as needed
+    marginLeft: 5, 
     fontSize: 24,
   },
   radioButtonContainer: {

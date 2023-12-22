@@ -6,6 +6,7 @@ import { COLORS } from '../components/Colors';
 const Theme_StomachBowel = () => {
   const [boxData, setBoxData] = useState([
     { title: 'Kost & recept', color: '#D1E0D5', icon: 'apple' },
+    { title: 'Recept' },
     { title: 'Kosttillskott', color: '#EDDAD5', icon: 'capsules' },
     { title: 'Mental hälsa', color: '#E1D8CE', icon: 'leaf' },
     { title: 'Fysisk hälsa', color: '#DFE5EB', icon: 'dumbbell' },

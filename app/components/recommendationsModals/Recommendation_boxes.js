@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable, Image, Dimensions } from 'react-nati
 import Recommendation_Modal from './Recommendation_Modal';
 import DietarySupplements from './digestion/DietarySupplements';
 import DietAndRecipes from './digestion/DietAndRecipes';
+import DietAndRecipesTwo from './digestion/DietAndRecipesTwo';
 import MentalHealth from './digestion/MentalHealth';
 import PhysicalHealth from './digestion/PhysicalHealth';
 import StomachHealth from './digestion/StomachHealth';
@@ -12,6 +13,8 @@ import IconImage from '../../../assets/icons/rosemarygreen50.png';
 const imageSource = require('../../../assets/icons/logo.png');
 
 const Recommendation_boxes = ({ boxData }) => {
+  const filteredBoxData = boxData.filter((box) => box.title !== 'Recept');
+
   const updatedBoxData = [
     { title: 'Allt du behöver veta', color: '#F1ECEA' },
     ...boxData,
@@ -61,6 +64,8 @@ const Recommendation_boxes = ({ boxData }) => {
         return <StomachHealth />;
       case 'Kost & recept':
         return <DietAndRecipes />;
+      case 'Recept': // Add the case for the new component
+        return <DietAndRecipesTwo />;
       case 'Kosttillskott':
         return <DietarySupplements />;
       case 'Mental hälsa':
@@ -78,6 +83,8 @@ const Recommendation_boxes = ({ boxData }) => {
         return '#F1ECEA';
       case 'Kost & recept':
         return '#DDE5DF';
+      case 'Recept':
+        return '#DDE5DF';
       case 'Kosttillskott':
         return '#EDDAD5';
       case 'Mental hälsa':
@@ -89,7 +96,7 @@ const Recommendation_boxes = ({ boxData }) => {
     }
   };
 
-  const progressBarData = ['Allt du behöver veta', 'Kost & recept', 'Kosttillskott', 'Mental hälsa', 'Fysisk hälsa'];
+  const progressBarData = ['Allt du behöver veta', 'Kost & recept', 'Recept', 'Kosttillskott', 'Mental hälsa', 'Fysisk hälsa'];
 
   const renderProgressBar = () => {
     return (
@@ -125,9 +132,9 @@ const Recommendation_boxes = ({ boxData }) => {
       {/* Row for "Tips & recept" text */}
       <Text style={styles.boxHeader}>Tips & recept</Text>
 
-      {/* Row for the rest of the boxes */}
-      <View style={styles.boxRow}>
-        {updatedBoxData.slice(1).map((item, index) => (
+       {/* Row for the rest of the boxes, including "Kost & Recept" */}
+       <View style={styles.boxRow}>
+        {filteredBoxData.map((item, index) => (
           <Pressable key={index} onPress={() => toggleModal(item.title)}>
             <View
               style={{
