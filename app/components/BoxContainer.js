@@ -7,12 +7,12 @@ const BoxContainer = () => {
 
   const boxData = [
     { title: 'Mage & tarm', image: require('../../assets/box_one_theme.jpg'), route: 'Theme_StomachBowel' },
-    { title: 'Sömn & energi', image: require('../../assets/box_two_theme.jpg'), route: 'MageTarm' },
-    { title: 'Hud & hår', image: require('../../assets/box_three_theme.jpg'), route: 'MageTarm' },
-    { title: 'Oro & ångest', image: require('../../assets/box_four_theme.jpg'), route: 'MageTarm' },
-    { title: 'Fertilitet', image: require('../../assets/box_five_theme.jpg'), route: 'MageTarm' },
-    { title: 'Stress', image: require('../../assets/box_six_theme.jpg'), route: 'MageTarm' },
-    { title: 'Klimakterie', image: require('../../assets/box_seven_theme.jpg'), route: 'MageTarm' },
+    { title: 'Sömn & energi', image: require('../../assets/box_two_theme.jpg'), route: 'Theme_Sleep' },
+    { title: 'Hud & hår', image: require('../../assets/box_three_theme.jpg'), route: 'Theme_SkinHair' },
+    { title: 'Oro & ångest', image: require('../../assets/box_four_theme.jpg'), route: 'Theme_Anxiety' },
+    { title: 'Fertilitet', image: require('../../assets/box_five_theme.jpg'), route: 'Theme_Fertility' },
+    { title: 'Stress', image: require('../../assets/box_six_theme.jpg'), route: 'Theme_Stress' },
+    { title: 'Klimakterie', image: require('../../assets/box_seven_theme.jpg'), route: 'Theme_Menopause' },
     { title: 'PMS', image: require('../../assets/box_eight_theme.jpg'), route: 'Theme_PMS' },
   ];
 

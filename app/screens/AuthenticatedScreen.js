@@ -6,6 +6,12 @@ import Explore from './Explore';
 import Friends from './Friends';
 import MyAccount from './MyAccount';
 import Theme_StomachBowel from './Theme_StomachBowel'; 
+import Theme_Sleep from './Theme_sleep';
+import Theme_SkinHair from './Theme_SkinHair';
+import Theme_Anxiety from './Theme_Anxiety';
+import Theme_Fertility from './Theme_Fertility';
+import Theme_Stress from './Theme_Stress';
+import Theme_Menopause from './Theme_Menopause';
 import Theme_PMS from './Theme_PMS'; 
 import { FontAwesome } from 'react-native-vector-icons';
 
@@ -17,6 +23,12 @@ const HomeStack = () => {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Stack.Screen name="Theme_StomachBowel" component={Theme_StomachBowel} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_Sleep" component={Theme_Sleep} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_SkinHair" component={Theme_SkinHair} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_Fertility" component={Theme_Fertility} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_Anxiety" component={Theme_Anxiety} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_Stress" component={Theme_Stress} options={{ headerShown: false }} />
+      <Stack.Screen name="Theme_Menopause" component={Theme_Menopause} options={{ headerShown: false }} />
       <Stack.Screen name="Theme_PMS" component={Theme_PMS} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
