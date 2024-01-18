@@ -11,6 +11,8 @@ const Theme_Stress = () => {
     { title: 'Fysisk hälsa', color: '#DFE5EB', icon: 'dumbbell' },
   ]);
 
+  const selectedBox = 'Theme_Stress';
+
   return (
     <ScrollView vertical>
       <View style={styles.container}>
@@ -25,7 +27,7 @@ const Theme_Stress = () => {
             <Text style={styles.text}>Text kommer...</Text>
             <Text style={styles.text}>Text kommer...</Text>
         </View>
-        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} />
+        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} selectedBox={selectedBox} />
       </View>
     </ScrollView>
   );

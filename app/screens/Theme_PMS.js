@@ -11,6 +11,8 @@ const Theme_PMS = () => {
     { title: 'Fysisk hälsa', color: '#DFE5EB', icon: 'dumbbell' },
   ]);
 
+  const selectedBox = 'Theme_PMS';
+
   return (
     <ScrollView vertical>
       <View style={styles.container}>
@@ -25,7 +27,7 @@ const Theme_PMS = () => {
             <Text style={styles.text}>Kvinnor kan uppleva premenstruellt syndrom (PMS) under dagarna före sin mens. Det är en kombination av fysiska och känslomässiga symptom som kan variera i intensitet och varaktighet för varje individ. PMS-symptom kan inkludera uppblåsthet, ömhet i brösten, humörsvängningar, irritabilitet, ångest, trötthet och matbegär. Den exakta orsaken till PMS är okänd, men hormonförändringar under menstruationscykeln anses vara en bidragande faktor.</Text>
             <Text style={styles.text}>För att lindra PMS-symptom finns det flera strategier du kan prova. Här hittar du detaljerade rekommendationer och produkter inom kost, tillskott samt mental & fysisk hälsa.</Text>
         </View>
-        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} />
+        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} selectedBox={selectedBox} />
       </View>
     </ScrollView>
   );

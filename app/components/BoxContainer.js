@@ -24,7 +24,9 @@ const BoxContainer = () => {
       <Text style={styles.boxHeader}>Läs om tema...</Text>
       <View style={styles.boxRow}>
         {boxData.map((item, index) => (
-          <Pressable key={index} onPress={() => navigation.navigate(item.route)}>
+          <Pressable key={index} onPress={() => {
+            navigation.navigate(item.route);
+          }}>
             <View style={{ ...styles.box, width: boxWidth }}>
               <Image source={item.image} style={styles.boxImage} />
               <Text style={styles.boxText}>{item.title}</Text>

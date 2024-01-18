@@ -6,7 +6,7 @@ import Explore from './Explore';
 import Friends from './Friends';
 import MyAccount from './MyAccount';
 import Theme_StomachBowel from './Theme_StomachBowel'; 
-import Theme_Sleep from './Theme_sleep';
+import Theme_Sleep from './Theme_Sleep';
 import Theme_SkinHair from './Theme_SkinHair';
 import Theme_Anxiety from './Theme_Anxiety';
 import Theme_Fertility from './Theme_Fertility';

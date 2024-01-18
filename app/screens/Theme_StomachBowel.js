@@ -12,6 +12,8 @@ const Theme_StomachBowel = () => {
     { title: 'Fysisk hälsa', color: '#DFE5EB', icon: 'dumbbell' },
   ]);
 
+  const selectedBox = 'Theme_StomachBowel';
+
   return (
     <ScrollView vertical>
       <View style={styles.container}>
@@ -26,7 +28,7 @@ const Theme_StomachBowel = () => {
             <Text style={styles.text}>Maghälsa är en viktig del av Oomahs helhetssyn på hälsa. Allt fler upplever problem med magen och vi vill hjälpa fler till en balanserad och glad mage. Magen kan uppvisa flera olika symptom som kan orsaka stort obehag men också påverka både vår fysiska och psykiska hälsa.</Text>
             <Text style={styles.text}>En frisk och balanserad mage spelar en avgörande roll för det övergripande välbefinnandet. Därför erbjuder Oomah specialanpassade kostrekommendationer och recept som främjar en hälsosam och fungerande mage. Följ med!</Text>
         </View>
-        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} />
+        <Recommendation_boxes boxData={boxData} setBoxData={setBoxData} selectedBox={selectedBox} />
       </View>
     </ScrollView>
   );

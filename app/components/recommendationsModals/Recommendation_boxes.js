@@ -12,7 +12,7 @@ import { FontAwesome5 } from 'react-native-vector-icons';
 import IconImage from '../../../assets/icons/rosemarygreen50.png';
 const imageSource = require('../../../assets/icons/logo.png');
 
-const Recommendation_boxes = ({ boxData }) => {
+const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
   const filteredBoxData = boxData.filter((box) => box.title !== 'Recept');
 
   const updatedBoxData = [
@@ -61,7 +61,7 @@ const Recommendation_boxes = ({ boxData }) => {
   const getModalContent = () => {
     switch (activeBox) {
       case 'Allt du behöver veta':
-        return <StomachHealth />;
+        return <StomachHealth selectedTheme={selectedBox} />;
       case 'Kost & recept':
         return <DietAndRecipes />;
       case 'Recept': // Add the case for the new component
@@ -151,19 +151,19 @@ const Recommendation_boxes = ({ boxData }) => {
       </View>
 
       <Recommendation_Modal
-  isVisible={isModalVisible}
-  onClose={() => setModalVisible(false)}
-  boxType={activeBox}
-  onNext={nextModal}
-  getNextModalTitle={getNextModalTitle}  // Pass the function as a prop
-  modalContent={getModalContent()}
-  totalComponents={updatedBoxData.length}
-  activeModalIndex={activeModalIndex}
-  backgroundColor={getBackgroundColor(activeBox)}
-  boxData={updatedBoxData}
-  progressBarData={progressBarData}
-/>
-
+        isVisible={isModalVisible}
+        onClose={() => setModalVisible(false)}
+        boxType={activeBox}
+        onNext={nextModal}
+        getNextModalTitle={getNextModalTitle}  // Pass the function as a prop
+        modalContent={getModalContent()}
+        totalComponents={updatedBoxData.length}
+        activeModalIndex={activeModalIndex}
+        backgroundColor={getBackgroundColor(activeBox)}
+        boxData={updatedBoxData}
+        progressBarData={progressBarData}
+        onSelectBox={onSelectBox}
+      />
     </View>
   );
 };
