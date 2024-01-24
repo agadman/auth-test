@@ -63,15 +63,15 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
       case 'Allt du behöver veta':
         return <StomachHealth selectedTheme={selectedBox} />;
       case 'Kost & recept':
-        return <DietAndRecipes />;
-      case 'Recept': // Add the case for the new component
+        return <DietAndRecipes selectedTheme={selectedBox} />;
+      case 'Recept': 
         return <DietAndRecipesTwo />;
       case 'Kosttillskott':
-        return <DietarySupplements />;
+        return <DietarySupplements selectedTheme={selectedBox} />;
       case 'Mental hälsa':
         return <MentalHealth />;
       case 'Fysisk hälsa':
-        return <PhysicalHealth />;
+        return <PhysicalHealth selectedTheme={selectedBox} />;
       default:
         return null;
     }

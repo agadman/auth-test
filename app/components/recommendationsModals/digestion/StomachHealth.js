@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
+    marginTop: 20,
     marginBottom: 20,
   },
   text: {
