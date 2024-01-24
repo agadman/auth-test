@@ -6,29 +6,29 @@ const MentalHealth = ({ selectedTheme }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
-      text: 'Content specific to Anxiety...',
+      box1: 'Content specific to Anxiety...',
     },
     Theme_Fertility: {
-      text: 'Content specific to Fertility...',
+      box1: 'Content specific to Fertility...',
     },
     Theme_Menopause: {
-      text: 'Content specific to Menopause...',
+      box1: 'Content specific to Menopause...',
     },
     Theme_PMS: {
-      text: 'Content specific to PMS...',
+      box1: 'Content specific to PMS...',
     },
     Theme_SkinHair: {
-      text: 'Content specific to Skin & Hair...',
+      box1: 'Content specific to Skin & Hair...',
     },
     Theme_Sleep: {
-      text: 'Content specific to Sleep...',
+      box1: 'Content specific to Sleep...',
     },
     Theme_StomachBowel: {
       box1: 'Att återansluta, vila och lugna systemet är nyckeln till läkning, särskilt för matsmältningen.\n\n Försök att göra följande andningsövning minst 2 gånger om dagen i 5 minuter varje gång. Det är bra att öva innan du går och lägger dig och när du vaknar. Om möjligt, försök öka antalet gånger du gör detta dagligen.\n\n Hitta en bekväm sittande eller liggande position på en lugn plats. Andas in djupt genom näsan och ner i magen medan du räknar till 4. Håll andan och räkna till 6. Andas ut långsamt genom munnen med puckereda läppar (som genom ett sugrör) och räkna till 8.\n\n Det kan verka lite svårt i början, men att öva några andetag om dagen kommer att ge dig ett lugn samt positiv effekt på nervus vagus (kranial nerv X). När vi tonifierar denna nerv kan vi förbättra och reglera matsmältningen.',
       box2: 'Lägg dig ner på en varm och bekvämt plats för att utföra massageövningen.  Den här övningen förbättrar blodcirkulationen till matsmältningsorganen och tarmarna och förbättrar leverns funktion.\n\n Gör så här: \n\n\u2022 Gnugga ricinolja över hela magen\n\n\u2022 Täck magen med en ren trasa eller använd ett medicinsk varmbandage\n\n\u2022 Vira en ren handduk runt din mage för att ytterligare isolera det\n\n\u2022 Placera en varmvattenflaska eller en värmedyna på handduken och håll den på magen i 45 minuter\n ',   
     },
     Theme_Stress: {
-      text: 'Content specific to Stress...',
+      box1: 'Content specific to Stress...',
     },
     // Add more themes as needed
   };

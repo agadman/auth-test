@@ -8,22 +8,22 @@ const DietAndRecipes = ({ selectedTheme }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
-      text: 'Content specific to Anxiety...',
+      box1: 'Content specific to Anxiety...',
     },
     Theme_Fertility: {
-      text: 'Content specific to Fertility...',
+      box1: 'Content specific to Fertility...',
     },
     Theme_Menopause: {
-      text: 'Content specific to Menopause...',
+      box1: 'Content specific to Menopause...',
     },
     Theme_PMS: {
-      text: 'Content specific to PMS...',
+      box1: 'Content specific to PMS...',
     },
     Theme_SkinHair: {
-      text: 'Content specific to Skin & Hair...',
+      box1: 'Content specific to Skin & Hair...',
     },
     Theme_Sleep: {
-      text: 'Content specific to Sleep...',
+      box1: 'Content specific to Sleep...',
     },
     Theme_StomachBowel: {
       addFirstRoutine: 'Drick vatten innan frukost',
@@ -38,14 +38,14 @@ const DietAndRecipes = ({ selectedTheme }) => {
       box5: 'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre:',
     },
     Theme_Stress: {
-      text: 'Content specific to Stress...',
+      box1: 'Content specific to Stress...',
     },
     // Add more themes as needed
   };
 
   // Get content based on the selectedTheme
   const content = contentByTheme[selectedTheme] || {};
-  
+
   const [expandedBoxes, setExpandedBoxes] = useState({
     box1: false,
     box2: false,

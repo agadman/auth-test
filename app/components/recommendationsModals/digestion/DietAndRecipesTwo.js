@@ -6,22 +6,22 @@ const DietAndRecipesTwo = ({ selectedTheme }) => {
     // Define content based on the selectedTheme
     const contentByTheme = {
       Theme_Anxiety: {
-        text: 'Content specific to Anxiety...',
+        box1: 'Content specific to Anxiety...',
       },
       Theme_Fertility: {
-        text: 'Content specific to Fertility...',
+        box1: 'Content specific to Fertility...',
       },
       Theme_Menopause: {
-        text: 'Content specific to Menopause...',
+        box1: 'Content specific to Menopause...',
       },
       Theme_PMS: {
-        text: 'Content specific to PMS...',
+        box1: 'Content specific to PMS...',
       },
       Theme_SkinHair: {
-        text: 'Content specific to Skin & Hair...',
+        box1: 'Content specific to Skin & Hair...',
       },
       Theme_Sleep: {
-        text: 'Content specific to Sleep...',
+        box1: 'Content specific to Sleep...',
       },
       Theme_StomachBowel: {
         box1: 'Överväg att göra congee (gröt) en gång i veckan. Detta är en risgröt som är uppvärmande och lugnande för tarmarna. Detta är ett recept. Du kan hitta hundratals online.\n\n',
@@ -29,7 +29,7 @@ const DietAndRecipesTwo = ({ selectedTheme }) => {
         box3: 'En stor påverkan på magen är ju såklart vad du stoppar i dig. En aspekt är att få i sig tillräckligt med fiber. Den enklaste vägen är att äta 1-2 matskedar frön som linfrö, pumpakärnor och svarta sesamfrön, varje dag. Det bästa är att äta fröna malda. Även mörka bladgrönsaker innehåller mycket fibrer. Koka dom väl och krydda. Bönor och linser ger också fibertillskott men kan också orsaka matsmältningsbesvär så börja med små mängder och öka långsamt, blötlägg dom och byt vatten i minst 3 timmar innan du tillagar dom.\n\nSe till att du äter olika färger och typer av frukt och grönsaker. Prova små mängder som är välkokta först, undvik råa grönsaker helt. Sötpotatis, pumpa och squash är laddade med mineraler och utmärkta för tarmmikrobiomet. Ingefära, mangold, kokt grönkål och rödbetor är också bra livsmedel att ta med i din kost och gärna med ett glutenfritt spannmål till som ris.\n\nDet är även bra att inkludera surkål eller fermenterade grönsaker som innehåller pro- och prebiotika i din kost.', 
       },
       Theme_Stress: {
-        text: 'Content specific to Stress...',
+        box1: 'Content specific to Stress...',
       },
       // Add more themes as needed
     };
