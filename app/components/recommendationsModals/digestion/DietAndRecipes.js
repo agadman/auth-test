@@ -45,6 +45,7 @@ const DietAndRecipes = ({ selectedTheme }) => {
 
   // Get content based on the selectedTheme
   const content = contentByTheme[selectedTheme] || {};
+  
   const [expandedBoxes, setExpandedBoxes] = useState({
     box1: false,
     box2: false,
