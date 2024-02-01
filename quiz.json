@@ -1,0 +1,130 @@
+{
+    "questions": [
+      {
+        "question": "Hur gammal är du? (Ålder är bara en siffra)",
+        "answers": [
+          "Under 25",
+          "26 - 35",
+          "36 - 45",
+          "46 - 55",
+          "56 +"
+        ]
+      },
+      {
+        "question": "Är du…",
+        "answers": [
+          "Kvinna",
+          "Man",
+          "Annat"
+        ]
+      },
+      {
+        "question": "Hur sover du egentligen? (Välj alla som stämmer in på dig)",
+        "answers": [
+          "Jag har svårt att somna.",
+          "Jag vaknar ofta men somnar om direkt igen.",
+          "Jag är ofta trött när jag vaknar på morgonen.",
+          "Jag sover som en stock och är pigg som en mört när jag vaknar!"
+        ]
+      },
+      {
+        "question": "Har du ont någonstans? (Välj de alternativ som stämmer på dig)",
+        "answers": [
+          "Jag har ont i ryggen ibland.",
+          "Jag har ont i lederna ibland.",
+          "Jag har nästan aldrig ont. Lucky me!"
+        ]
+      },
+      {
+        "question": "Välmåendet börjar med magen. Vilka alternativ stämmer in på dig?",
+        "answers": [
+          "Jag känner mig ofta uppblåst och gasig.",
+          "Jag har ont i magen då och då.",
+          "Ibland har jag sur mage och uppstötningar.",
+          "Jag är lös i magen då och då.",
+          "Ibland är jag förstoppad eller hård i magen.",
+          "Mina tarmar kurrar och gurglar",
+          "Jag mår illa ibland",
+          "Min mage klarar allt. Inget av alternativen ovan stämmer på mig.",
+          "Jag känner mig ofta trött efter måltider"
+        ]
+      },
+      {
+        "question": "Välj de alternativ som stämmer överens med din törst och hur du dricker.",
+        "answers": [
+          "Jag är ofta törstig på dagen.",
+          "Jag är ofta törstig på natten.",
+          "Jag blir nästan aldrig törstig.",
+          "Jag har svårt att få i mig vatten.",
+          "Jag svettas ofta spontant på dagarna.",
+          "Jag svettas mycket på nätterna.",
+          "Inget av ovan stämmer in på mig."
+        ]
+      },
+      {
+        "question": "Laddade batterier? Beskriv din energinivå senaste veckorna på en skala 1-10.",
+        "answers": [
+          "1 Ingen energi",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10 Full av energi"
+        ]
+      },
+      {
+        "question": "Det är viktigt att prata om känslor. Välj de alternativ som beskriver dina.",
+        "answers": [
+          "Jag blir ofta frustrerad eller arg",
+          "Jag känner ofta oro.",
+          "Jag känner mig tillfreds och i balans.",
+          "Jag känner mig ofta nedstämd"
+        ]
+      },
+      {
+        "question": "Nu blir vi lite mer intima. Vi vill bara ställa några frågor om mens och sånt. OK?",
+        "answers": [
+          "Jag har oregelbunden mens",
+          "Ibland har jag långa uppehåll (flera månader) där jag inte får mens.",
+          "Jag har PMS ibland (tex humörsvängningar, oro, irritation, uppsvälld mage, huvudvärk)",
+          "Jag har kort menscykel och den tenderar att bli kortare över tid.",
+          "Jag har svårt att bli gravid eller har andra fertilitetsproblem.",
+          "Jag får ofta svampinfektioner.",
+          "Jag har ingen ägglossning",
+          "Jag har ofta urinvägsinfektion",
+          "Jag är i förklimakteriet eller har gått igenom klimakteriet",
+          "Nepp. Inget av ovan stämmer in på mig."
+        ]
+      },
+      {
+        "question": "Host host. Snörvel snörvel. Hur är det med din allmänna hälsa? Välj de alternativ som stämmer in på dig.",
+        "answers": [
+          "Jag känner mig ofta tom i huvudet.",
+          "Jag får huvudvärk eller migrän då och då.",
+          "Jag har yrsel ibland.",
+          "Jag har dåligt minne.",
+          "Jag har tinnitus i en eller båda öronen.",
+          "Jag blir ofta förkyld",
+          "Jag får influensa nästan varje säsong.",
+          "När jag blir sjuk. sätter det sig ofta i lungorna och jag hostar en tid",
+          "När jag blir sjuk. sätter det sig ofta i lungorna och jag hostar en tid",
+          "Jag får infektioner i bröst eller bihålor då och då",
+          "Jag får problem med luftrören eller luftrörskatarr då och då.",
+          "Jag har astma.",
+          "Jag har torr hy, hår och naglar som ofta går sönder.",
+          "Jag har problem med hyn, tex psoriasis eller eksem.",
+          "Jag tappar hår.",
+          "Jag har en autoimmun sjukdom",
+          "Inget av ovan stämmer in på mig.",
+          "Jag får huvudvärk som känns som om jag har en blöt handduk virad runt huvudet",
+          "Jag hostar ofta på morgonen eller kvällen",
+          "Det är svårt för mig att gå ned i vikt"
+        ]
+      }
+    ]
+  }
+  
