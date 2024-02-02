@@ -22,10 +22,12 @@
         "question": "Hur sover du egentligen? (Välj alla som stämmer in på dig)",
         "answers": [
           "Jag har svårt att somna.",
+          "Jag vaknar ofta om nätterna men somnar om direkt igen.",
           "Jag vaknar ofta men somnar om direkt igen.",
           "Jag är ofta trött när jag vaknar på morgonen.",
           "Jag sover som en stock och är pigg som en mört när jag vaknar!"
-        ]
+        ],
+        "allowMultipleAnswers": true
       },
       {
         "question": "Har du ont någonstans? (Välj de alternativ som stämmer på dig)",
@@ -33,7 +35,8 @@
           "Jag har ont i ryggen ibland.",
           "Jag har ont i lederna ibland.",
           "Jag har nästan aldrig ont. Lucky me!"
-        ]
+        ],
+        "allowMultipleAnswers": true
       },
       {
         "question": "Välmåendet börjar med magen. Vilka alternativ stämmer in på dig?",
@@ -47,7 +50,8 @@
           "Jag mår illa ibland",
           "Min mage klarar allt. Inget av alternativen ovan stämmer på mig.",
           "Jag känner mig ofta trött efter måltider"
-        ]
+        ],
+        "allowMultipleAnswers": true
       },
       {
         "question": "Välj de alternativ som stämmer överens med din törst och hur du dricker.",
@@ -59,7 +63,8 @@
           "Jag svettas ofta spontant på dagarna.",
           "Jag svettas mycket på nätterna.",
           "Inget av ovan stämmer in på mig."
-        ]
+        ],
+        "allowMultipleAnswers": true
       },
       {
         "question": "Laddade batterier? Beskriv din energinivå senaste veckorna på en skala 1-10.",
@@ -83,7 +88,8 @@
           "Jag känner ofta oro.",
           "Jag känner mig tillfreds och i balans.",
           "Jag känner mig ofta nedstämd"
-        ]
+        ],
+        "allowMultipleAnswers": true
       },
       {
         "question": "Nu blir vi lite mer intima. Vi vill bara ställa några frågor om mens och sånt. OK?",
@@ -123,7 +129,8 @@
           "Jag får huvudvärk som känns som om jag har en blöt handduk virad runt huvudet",
           "Jag hostar ofta på morgonen eller kvällen",
           "Det är svårt för mig att gå ned i vikt"
-        ]
+        ],
+        "allowMultipleAnswers": true
       }
     ]
   }

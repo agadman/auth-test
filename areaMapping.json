@@ -1,0 +1,39 @@
+{
+    "Mjälte": [
+      "Jag har svårt att somna.",
+      "Jag vaknar ofta men somnar om direkt igen.",
+      "Jag känner mig ofta uppblåst och gasig."
+    ],
+    "Njure": [
+      "Jag vaknar ofta om nätterna men somnar om direkt igen.",
+      "Jag har ont i ryggen ibland."
+    ],
+    "Qi": [
+      "Jag är ofta trött när jag vaknar på morgonen.",
+      "Jag blir ofta frustrerad/arg",
+      "Jag känner ofta oro."
+    ],
+    "Lever": [
+      "Jag har ont i magen då och då.",
+      "Ibland har jag sur mage och uppstötningar.",
+      "Jag har problem med hyn, tex psoriasis eller eksem."
+    ],
+    "Fuktig": [
+      "Jag har ont i lederna ibland.",
+      "Jag får huvudvärk som känns som om jag har en blöt handduk virad runt huvudet.",
+      "Ibland är jag förstoppad eller hård i magen."
+    ],
+    "Inget": [
+      "Jag sover som en stock och är pigg som en mört när jag vaknar!",
+      "Jag har nästan aldrig ont. Lucky me!",
+      "Inget av ovan stämmer in på mig."
+    ],
+    "Blodbrist": [
+      "Jag får huvudvärk eller migrän då och då.",
+      "Jag får influensa nästan varje säsong.",
+      "Jag tappar hår.",
+      "Jag har huvudvärk som känns som om jag har en blöt handduk virad runt huvudet.",
+      "När jag blir sjuk, sätter det sig ofta i lungorna och jag hostar en tid."
+    ]
+  }
+  
