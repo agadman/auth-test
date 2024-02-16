@@ -4,6 +4,7 @@ import BoxContainer from '../components/BoxContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../components/Colors';
+import Experts from '../components/Experts';
 
 const Explore = () => {
   const navigation = useNavigation();
@@ -38,6 +39,7 @@ const Explore = () => {
           <Text>Gör ett quiz för att få en personlig helhetsbild och rekommendationer för att må bra</Text>
         </View>
         <BoxContainer />
+        <Experts />
       </View>
     </ScrollView>
   );

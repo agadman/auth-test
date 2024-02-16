@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Modal } from 'rea
 import { COLORS } from '../components/Colors';
 import areaMapping from '../../areaMapping.json';
 
-const QuizModal = ({ isVisible, onClose, questions = [] }) => {
+const QuizModal = ({ isVisible, onClose, questions = [], saveMaxAreaToFirestore }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizStarted, setQuizStarted] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]); // Use an array for multiple answers
@@ -88,6 +88,8 @@ const QuizModal = ({ isVisible, onClose, questions = [] }) => {
   };
 
   const handleEndQuiz = () => {
+    const maxArea = getMaxArea();
+    saveMaxAreaToFirestore(maxArea);
     onClose(); 
   };
 
@@ -106,14 +108,16 @@ const QuizModal = ({ isVisible, onClose, questions = [] }) => {
         <Text style={styles.closeX} onPress={onClose}>
           X
         </Text>
+        <Text style={styles.headerStyle}>Min hälsa</Text>
 
         <ScrollView style={styles.content}>
           {/* Display the initial message and Start Quiz button */}
           {!quizStarted && !quizCompleted && (
             <View>
               <Text style={styles.initialMessage}>Ok, nu kör vi...</Text>
-              <TouchableOpacity onPress={handleStartQuiz}>
-                <Text style={styles.startQuizButton}>Start Quiz</Text>
+              <Text>Få grepp om din hälsa. Ibland kan enkla saker få dig att må så mycket bättre. Gör testet och få en personlig rekommendation på de saker som kan ge din hälsa en skjuts i rätt riktning.</Text>
+              <TouchableOpacity onPress={handleStartQuiz} style={styles.startQuizButton}>
+                <Text style={styles.startQuizButtonText}>Starta testet</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -187,6 +191,11 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
   },
+  headerStyle: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    backgroundColor: 'white',
+  },
   content: {
     backgroundColor: 'white',
     backgroundColor: 'white',
@@ -199,12 +208,15 @@ const styles = StyleSheet.create({
   },
   startQuizButton: {
     backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    padding: 20,
+    width: '75%',
+    marginTop: 20,
+  },
+  startQuizButtonText: {
     color: COLORS.white,
-    borderRadius: 5,
-    padding: 10,
-    textAlign: 'center',
-    fontSize: 16,
-    marginTop: 10,
   },
   questionText: {
     marginBottom: 10,
