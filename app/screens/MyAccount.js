@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Button, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from '../../FirebaseConfig';
 import { COLORS } from '../components/Colors';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+const imageSource = require('../../assets/icons/logo.png');
+import { FontAwesome5 } from 'react-native-vector-icons';
 
 const MyAccount = () => {
     const navigation = useNavigation();
@@ -89,14 +92,58 @@ const MyAccount = () => {
                         <Text style={styles.secondaryHeader}>Mina favoriter</Text>
                     </View>
                     <View>
-                        <Text style={styles.secondaryHeader}>Mitt hälsopaket</Text>
-                        {maxArea && <Text>Paket: {maxArea}</Text>}
+                        {maxArea && <Text style={styles.secondaryHeader}>Mitt hälsopaket - {maxArea}</Text>}
+
+                            <View style={styles.AllAboutBoxContainer}>
+                            <View style={styles.AllAboutBoxContent}>
+                                <Image source={imageSource} style={styles.logoImage} />
+                                <Text style={styles.AllAboutBoxText}>Allt du behöver veta</Text>
+                            </View>
+                            <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+                            </View>
+
                     </View>
                     <View>
                         <Text style={styles.secondaryHeader}>Mina uppgifter</Text>
+                        <View style={styles.box}>
+                            <View style={styles.row}>
+                                <Text style={styles.icon}>
+                                    <FontAwesome5 name="calendar" style={styles.heartIcon} />
+                                </Text>
+                                <Text>Bokningar</Text>
+                                <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+                            </View>
+                        </View>
+                        <View style={styles.box}>
+                            <View style={styles.row}>
+                                <Text style={styles.icon}>
+                                    <FontAwesome5 name="comment" style={styles.heartIcon} />
+                                </Text>
+                                <Text >Notiser och Påminnelser</Text>
+                                <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+                            </View>
+                        </View>
+                        <View style={styles.box}>
+                            <View style={styles.row}>
+                                <Text style={styles.icon}>
+                                    <FontAwesome5 name="heartbeat" style={styles.heartIcon} />
+                                </Text>
+                                <Text>Mitt hälsopaket</Text>
+                                <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+                            </View>
+                        </View>
+                        <View style={styles.box}>
+                            <View style={styles.row}>
+                                <Text style={styles.icon}>
+                                    <FontAwesome5 name="grin" style={styles.heartIcon} />
+                                </Text>
+                                <Text>Mina uppgifter</Text>
+                                <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+                            </View>
+                        </View>
                     </View>
                 </View>  
-                <Button onPress={handleLogout} title='Logout'></Button>
+                <Button onPress={handleLogout} title='Logga ut'></Button>
             </View>
         </ScrollView>       
     );
@@ -119,7 +166,7 @@ const styles = StyleSheet.create({
     },
     secondaryHeader: {
         textTransform: 'uppercase',
-        margin: 10,
+        marginBottom: 20,
     },
     firstBox: {
         width: '90%',
@@ -128,12 +175,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: COLORS.white,
         padding: 20,
+        marginBottom: 30,
     },
     daysContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         flex: 1,
-      
       },
       dayText: {
         fontSize: 14,
@@ -148,4 +195,70 @@ const styles = StyleSheet.create({
         margin: 5,
         backgroundColor: '#F1ECEA',
     },
+
+      box: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        marginBottom: 10,
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
+      },
+      icon: {
+        marginRight: 20,
+      },
+      heartIcon: {
+        fontSize: 24,
+        color: '#D09082',
+      },
+
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      arrowIcon: {
+        marginLeft: 5,
+        fontSize: 24,
+      },
+
+      AllAboutBoxContainer: {
+        backgroundColor: '#D09082',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 30,
+        padding: 15,
+      },
+      AllAboutBoxContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      boxImage: {
+        width: 100,
+        height: 100,
+        borderRadius: 25,
+        marginRight: 15,
+      },
+      AllAboutBoxText: {
+        fontSize: 16,
+        color: '#333',
+      },
+      arrowIcon: {
+        marginLeft: 'auto',
+      },
+      logoImage: {
+        width: 100,
+        height: 100,
+        marginRight: 30,
+      },
 });
