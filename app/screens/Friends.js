@@ -21,6 +21,7 @@ const Friends = () => {
         </View>
         <View style={styles.secondaryHeaderContainer}>
           <Text style={styles.secondaryHeader}>Inlägg från användare</Text>
+          <Text style={styles.seAll}>Se alla</Text>
         </View>
         <View style={styles.blogContainer}>
           <BlogBox title="Kost vid förkylningstider" name="Jenny" date="16 Januari 2024" text="Varje år får jag i genomsnitt 2-3 kraftiga förkylningar. Nu har jag äntligen börjat förbereda mig i tid genom att göra små ändringar i min kost. Förkylningarna kommer ju alltid på hösten så på då börjar jag addera rätt kryddor i maten för att försöka hålla mig frisk!  Ingefära är rena universalmedicinen som är en fantastisk smaksättare och en traditionell huskur vid förkylning..." />
@@ -29,17 +30,19 @@ const Friends = () => {
 
         <View style={styles.secondaryHeaderContainer}>
           <Text style={styles.secondaryHeader}>Artiklar</Text>
+          <Text style={styles.seAll}>Se alla</Text>
         </View> 
          {/* Layout for the two article boxes */}
          <View style={styles.boxRow}>
-          <ArticleBox title="Artikel 1" backgroundColor="#A7C1AE" boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
-          <ArticleBox title="Artikel 2" backgroundColor="#CDBCAA" boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
+          <ArticleBox title="Spring & Rising Yang" backgroundImage={require('../../assets/box_five_theme.jpg')} boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
+          <ArticleBox title="Kinesiska örttinkturer" backgroundImage={require('../../assets/box_five_theme.jpg')} boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
           {/* Add more ArticleBox components as needed */}
         </View>
         {/* End of layout for the two article boxes */}
 
         <View style={styles.secondaryHeaderContainer}>
           <Text style={styles.secondaryHeader}>Grupper</Text>
+          <Text style={styles.seAll}>Se alla</Text>
         </View>    
          {/* Layout for the four boxes from Recommendation_boxes */}
          <View style={styles.boxRow}>
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
   },
   introductoryBox: {
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 30,
   },
   blogContainer: {
     width: '95%',
@@ -95,17 +98,18 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingBottom: 20,
   },
-  yourHealthHeaderText: {
-    marginTop: 10,
-    marginBottom: 10,
-    fontWeight: 'bold',
-  },
   secondaryHeaderContainer: {
+    flexDirection: 'row',
     width: '90%',
+    justifyContent: 'space-between',  // Add this line
   },
   secondaryHeader: {
     textTransform: 'uppercase',
-
+    marginLeft: 10,
+},
+seAll: {
+  marginRight: 20,
+  fontSize: 10,
 },
   boxRow: {
     flexDirection: 'row',
@@ -120,11 +124,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 25,
     borderRadius: 8,
-    height: 120,
+    height: 120,  
   },
   boxText: {
     color: COLORS.white,
     textAlign: 'center',
+    fontWeight: 'bold',
   }
 });
 
