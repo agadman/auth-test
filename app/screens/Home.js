@@ -89,10 +89,6 @@ const Home = () => {
         {/* Pass the questions prop to the QuizModal component */}
         <QuizModal isVisible={isModalVisible} onClose={closeModal} questions={quizQuestions.questions} saveMaxAreaToFirestore={saveMaxAreaToFirestore} />
         <BoxContainer />
-        <View style={styles.about}>
-          <Text style={styles.aboutHeader}>Om Traditionell kinesisk medicin</Text>
-          <Text>Traditionell kinesisk medicin har använts i hundratals år och bygger på tron att kroppen har naturliga läkningsförmågor. Denna typ av medicin fokuserar på att hitta den underliggande orsaken till en sjukdom eller skada, istället för att bara behandla symptomen. Målet med traditionell kinesisk medicin är att återställa balans och harmoni i kroppen och sinnet. Några av de vanliga metoderna som används inom denna typ av medicin inkluderar örtmedicin, akupunktur, koppning och terapeutiska övningar som tai chi och qi gong.</Text>
-        </View>
         <Experts />
       </View>
     </ScrollView>
@@ -151,23 +147,6 @@ export default Home;
     quizBtnText: {
         color: COLORS.white,
     },
-       aboutHeader: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 10,
-       },
-       about: {
-        marginTop: 0,
-        width: '90%',
-        padding: 25,
-        backgroundColor: COLORS.white,
-        borderRadius: 10,
-        shadowColor: COLORS.text,
-        shadowOffset: {width: 0, height: 2},
-        shadowOpacity: 0.4,
-        elevation: 10,
-        marginBottom: 20,
-       },
        userId: {
         fontSize: 18,
         marginBottom: 10,

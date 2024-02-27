@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import Recommendation_Modal from './Recommendation_Modal';
 import DietarySupplements from './digestion/DietarySupplements';
@@ -8,6 +8,8 @@ import MentalHealth from './digestion/MentalHealth';
 import PhysicalHealth from './digestion/PhysicalHealth';
 import StomachHealth from './digestion/StomachHealth';
 import { FontAwesome5 } from 'react-native-vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import IconImage from '../../../assets/icons/rosemarygreen50.png';
 const imageSource = require('../../../assets/icons/logo.png');
@@ -23,6 +25,27 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
   const [activeBox, setActiveBox] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeModalIndex, setActiveModalIndex] = useState(0);
+  const [userId, setUserId] = useState('');
+
+  const navigation = useNavigation();
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userDisplayName = user.displayName;
+        const userId = user.uid;
+
+        if (userDisplayName) {
+          // User is logged in and has a display name
+          setUserId(userId); // Set the user ID in the state
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const windowWidth = Dimensions.get('window').width;
   const boxWidth = (windowWidth - 60) / 2;
@@ -69,7 +92,7 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
       case 'Kosttillskott':
         return <DietarySupplements selectedTheme={selectedBox} />;
       case 'Mental hälsa':
-        return <MentalHealth selectedTheme={selectedBox} />;
+        return <MentalHealth selectedTheme={selectedBox} userId={userId} />;
       case 'Fysisk hälsa':
         return <PhysicalHealth selectedTheme={selectedBox} />;
       default:

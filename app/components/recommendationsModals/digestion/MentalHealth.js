@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 
-const MentalHealth = ({ selectedTheme }) => {
+const MentalHealth = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
@@ -24,7 +25,9 @@ const MentalHealth = ({ selectedTheme }) => {
       box1: 'Content specific to Sleep...',
     },
     Theme_StomachBowel: {
+      box1Header: 'Andningsövning',
       box1: 'Att återansluta, vila och lugna systemet är nyckeln till läkning, särskilt för matsmältningen.\n\n Försök att göra följande andningsövning minst 2 gånger om dagen i 5 minuter varje gång. Det är bra att öva innan du går och lägger dig och när du vaknar. Om möjligt, försök öka antalet gånger du gör detta dagligen.\n\n Hitta en bekväm sittande eller liggande position på en lugn plats. Andas in djupt genom näsan och ner i magen medan du räknar till 4. Håll andan och räkna till 6. Andas ut långsamt genom munnen med puckereda läppar (som genom ett sugrör) och räkna till 8.\n\n Det kan verka lite svårt i början, men att öva några andetag om dagen kommer att ge dig ett lugn samt positiv effekt på nervus vagus (kranial nerv X). När vi tonifierar denna nerv kan vi förbättra och reglera matsmältningen.',
+      box2Header: 'Massage',
       box2: 'Lägg dig ner på en varm och bekvämt plats för att utföra massageövningen.  Den här övningen förbättrar blodcirkulationen till matsmältningsorganen och tarmarna och förbättrar leverns funktion.\n\n Gör så här: \n\n\u2022 Gnugga ricinolja över hela magen\n\n\u2022 Täck magen med en ren trasa eller använd ett medicinsk varmbandage\n\n\u2022 Vira en ren handduk runt din mage för att ytterligare isolera det\n\n\u2022 Placera en varmvattenflaska eller en värmedyna på handduken och håll den på magen i 45 minuter\n ',   
     },
     Theme_Stress: {
@@ -40,21 +43,54 @@ const MentalHealth = ({ selectedTheme }) => {
     box2: false,
   });
 
-  const toggleBox = (box) => {
-    setExpandedBoxes((prevState) => ({
-      ...prevState,
-      [box]: !prevState[box],
-    }));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userDocRef = doc(getFirestore(), 'users', userId);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          setExpandedBoxes(userData.expandedBoxes || {});
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  const toggleBox = async (box, isHeartIcon) => {
+    const headerKey = `${box}Header`;
+  
+    if (isHeartIcon) {
+      try {
+        const userDocRef = doc(getFirestore(), 'users', userId);
+        await updateDoc(userDocRef, {
+          [box]: contentByTheme[selectedTheme][box], // Save the content
+          [headerKey]: contentByTheme[selectedTheme][headerKey], // Save the header
+        });
+  
+        console.log(`Content and header for ${box} saved to Firestore`);
+      } catch (error) {
+        console.error('Error updating content and header:', error);
+      }
+    } else {
+      setExpandedBoxes((prevState) => ({
+        ...prevState,
+        [box]: !prevState[box],
+      }));
+    }
   };
+  
+  
+  
 
   const renderContent = (box, fullText) => {
     return (
       <View style={styles.content}>
-        {expandedBoxes[box] && (
-          <Text style={styles.text}>
-            {fullText}
-          </Text>
-        )}
+        {expandedBoxes[box] && <Text style={styles.text}>{fullText}</Text>}
       </View>
     );
   };
@@ -71,39 +107,37 @@ const MentalHealth = ({ selectedTheme }) => {
     <View style={styles.wrapper}>
       <View style={styles.introText}>
         <Text style={styles.header}>Mental hälsa</Text>
-        <Text>
-          Ingress
-        </Text>
+        <Text>Ingress</Text>
       </View>
 
-      <TouchableOpacity onPress={() => toggleBox('box1')} style={styles.box}>
-        <View style={styles.row}>
-          <Text style={styles.icon}>
-            <Icon name="favorite" style={styles.heartIcon} />
-          </Text>
-          <Text style={styles.secondHeader}>
-            Andningsövning
-          </Text>
-          {renderArrowIcon('box1')}
-        </View>
-        {renderContent('box1', contentByTheme[selectedTheme]?.box1)} 
-      </TouchableOpacity>
+     {['box1', 'box2'].map((box) => (
+  <View key={box} style={styles.box}>
+    <TouchableOpacity onPress={() => toggleBox(box, true)}>
+      <View style={styles.row}>
+        <Text style={styles.icon}>
+          <Icon name="favorite" style={styles.heartIcon} />
+        </Text>
+        <Text style={styles.secondHeader}>
+          {contentByTheme[selectedTheme]?.[`${box}Header`] || ''}
+        </Text>
+      </View>
+    </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => toggleBox('box2')} style={styles.box}>
-        <View style={styles.row}>
-          <Text style={styles.icon}>
-            <Icon name="favorite" style={styles.heartIcon} />
-          </Text>
-          <Text style={styles.secondHeader}>
-            Massage
-          </Text>
-          {renderArrowIcon('box2')}
-        </View>
-        {renderContent('box2', contentByTheme[selectedTheme]?.box2)} 
-      </TouchableOpacity>
+    <TouchableOpacity onPress={() => toggleBox(box, false)}>
+      <View style={styles.row}>
+        {renderArrowIcon(box)}
+      </View>
+    </TouchableOpacity>
+
+    {renderContent(box, contentByTheme[selectedTheme]?.[box])}
+  </View>
+))}
+
+
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   wrapper: {

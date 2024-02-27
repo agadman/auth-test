@@ -15,7 +15,7 @@ const Experts = () => {
   const expertItemWidth = 120; // Adjust as needed
 
   return (
-    <View>
+    <View style={styles.wrapper}>
         <Text style={styles.header}>Våra Experter</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={[styles.expertsContainer, { width: initialVisibleExperts * expertItemWidth + (initialVisibleExperts - 1) * 20 }]}>
@@ -33,6 +33,11 @@ const Experts = () => {
 };
 
 const styles = StyleSheet.create({
+    wrapper: {
+        marginTop: 40,
+        marginBottom: 60,
+
+    },
     header: {
         fontSize: 24,
         marginBottom: 20,
