@@ -1,18 +1,19 @@
 import React from 'react';
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { COLORS } from './Colors';  // Adjust the path accordingly
 
-const BlogBox = ({ title, name, date, text }) => {
+const BlogBox = ({ title, name, date, text, imageSource }) => {
+  const handleComingSoonPress = () => {
+    // Display an alert when the add-circle-outline icon is pressed
+    Alert.alert('Den här funktionen kommer snart!');
+  };
   return (
-    <Pressable onPress={() => {/* Handle press if needed */}}>
+    <Pressable onPress={() => handleComingSoonPress()}>
       <View style={{ ...styles.blogBox, backgroundColor: COLORS.white }}>
         {/* Image in the top-left corner */}
         <View style={styles.imageContainer}>
-          <Image
-            source={require('../../assets/patricia.jpeg')}  // Adjust the image path accordingly
-            style={styles.image}
-          />
+          <Image source={imageSource} style={styles.image} />
         </View>
         {/* Title, name, and date */}
         <View style={styles.contentContainer}>
