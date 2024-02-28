@@ -13,6 +13,7 @@ import Theme_Fertility from './Theme_Fertility';
 import Theme_Stress from './Theme_Stress';
 import Theme_Menopause from './Theme_Menopause';
 import Theme_PMS from './Theme_PMS'; 
+import ExpertDetails from './ExpertDetails';
 import { FontAwesome } from 'react-native-vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,7 @@ const HomeStack = () => {
       <Stack.Screen name="Theme_Stress" component={Theme_Stress} options={{ headerShown: false }} />
       <Stack.Screen name="Theme_Menopause" component={Theme_Menopause} options={{ headerShown: false }} />
       <Stack.Screen name="Theme_PMS" component={Theme_PMS} options={{ headerShown: false }} />
+      <Stack.Screen name="ExpertDetails" component={ExpertDetails} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

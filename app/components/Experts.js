@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { COLORS } from '../components/Colors';
+import { View, Text, Image, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Experts = () => {
   const expertsData = [
@@ -10,26 +10,33 @@ const Experts = () => {
     // Add more experts as needed
   ];
 
+  const navigation = useNavigation();
+
+  const handleExpertPress = (expertId) => {
+    navigation.navigate('ExpertDetails', { expertId });
+  };
+
   // Adjust the number of experts to be initially visible
   const initialVisibleExperts = 2.5;
   const expertItemWidth = 120; // Adjust as needed
 
   return (
     <View style={styles.wrapper}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={[styles.expertsContainer, { width: initialVisibleExperts * expertItemWidth + (initialVisibleExperts - 1) * 20 }]}>
-            {expertsData.map((expert) => (
-            <View key={expert.id} style={styles.expertItem}>
-                <Image source={expert.image} style={styles.expertImage} />
-                <Text style={styles.expertName}>{expert.name}</Text>
-                <Text style={styles.title}>{expert.title}</Text>
-            </View>
-            ))}
+          {expertsData.map((expert) => (
+            <Pressable key={expert.id} style={styles.expertItem} onPress={() => handleExpertPress(expert.id)}>
+              <Image source={expert.image} style={styles.expertImage} />
+              <Text style={styles.expertName}>{expert.name}</Text>
+              <Text style={styles.title}>{expert.title}</Text>
+            </Pressable>
+          ))}
         </View>
-        </ScrollView>
+      </ScrollView>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
     wrapper: {
