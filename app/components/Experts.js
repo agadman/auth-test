@@ -16,7 +16,6 @@ const Experts = () => {
 
   return (
     <View style={styles.wrapper}>
-        <Text style={styles.header}>Våra Experter</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={[styles.expertsContainer, { width: initialVisibleExperts * expertItemWidth + (initialVisibleExperts - 1) * 20 }]}>
             {expertsData.map((expert) => (
@@ -34,16 +33,8 @@ const Experts = () => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        marginTop: 40,
         marginBottom: 60,
-
-    },
-    header: {
-        fontSize: 24,
-        marginBottom: 20,
-        width: '100%',
-        
-      },
+    }, 
     expertsContainer: {
         flexDirection: 'row',
         maxWidth: 120,

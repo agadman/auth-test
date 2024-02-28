@@ -89,6 +89,7 @@ const Home = () => {
         {/* Pass the questions prop to the QuizModal component */}
         <QuizModal isVisible={isModalVisible} onClose={closeModal} questions={quizQuestions.questions} saveMaxAreaToFirestore={saveMaxAreaToFirestore} />
         <BoxContainer />
+        <Text style={styles.expertsHeader}>Våra Experter</Text>
         <Experts />
       </View>
     </ScrollView>
@@ -146,6 +147,12 @@ export default Home;
     },
     quizBtnText: {
         color: COLORS.white,
+    },
+    expertsHeader: {
+      fontSize: 24,
+      marginBottom: 20,
+      width: '100%',
+      
     },
        userId: {
         fontSize: 18,

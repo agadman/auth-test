@@ -17,7 +17,10 @@ const Friends = () => {
     <ScrollView vertical>
       <View style={styles.container}>
         <View style={styles.introductoryBox}>
-          <Text style={styles.header}>Community</Text>
+        <Text style={styles.header}>Community</Text>
+        <View style={styles.iconContainer}>
+          <Icon name="add-circle-outline" size={40} color='#709078' />
+        </View>
         </View>
         <View style={styles.secondaryHeaderContainer}>
           <Text style={styles.secondaryHeader}>Inlägg från användare</Text>
@@ -70,7 +73,9 @@ const Friends = () => {
          </View>
        
         {/* End of layout for the four boxes from Recommendation_boxes */}
-    
+        <View style={styles.secondaryHeaderContainer}>
+          <Text style={styles.secondaryHeader}>Följ experterna</Text>
+        </View>    
         <Experts />
       </View>
     </ScrollView>
@@ -86,9 +91,15 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   introductoryBox: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 30,
+    paddingLeft: 20,
   },
+  iconContainer: {
+    paddingLeft: 20,
+  },  
   blogContainer: {
     width: '95%',
     marginBottom: 50,
@@ -96,12 +107,13 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     fontWeight: '700',
-    paddingBottom: 20,
+
   },
   secondaryHeaderContainer: {
     flexDirection: 'row',
     width: '90%',
     justifyContent: 'space-between',  // Add this line
+    marginBottom: 10,
   },
   secondaryHeader: {
     textTransform: 'uppercase',
