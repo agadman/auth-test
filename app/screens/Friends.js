@@ -13,7 +13,8 @@ const Friends = () => {
   const boxWidth = (windowWidth - 60) / 2; // Define boxWidth locally
 
   const [showAllBlogs, setShowAllBlogs] = useState(false);
-  const [showAllArticles, setShowAllArticles] = useState(false); 
+  const [showAllArticles, setShowAllArticles] = useState(false);
+  const [showAllGroups, setShowAllGroups] = useState(false); 
 
   const handleToggleBlogs = () => {
     // Toggle the state to show/hide all blogs
@@ -23,6 +24,11 @@ const Friends = () => {
   const handleToggleArticles = () => {
     // Toggle the state to show/hide all articles
     setShowAllArticles(!showAllArticles);
+  };
+
+  const handleToggleGroups = () => {
+    // Toggle the state to show/hide all groups
+    setShowAllGroups(!showAllGroups);
   };
 
   const handleComingSoonPress = () => {
@@ -71,8 +77,8 @@ const Friends = () => {
           // Render additional ArticleBox components if showAllArticles is true
           // You can add more ArticleBox components as needed
           <>
-            <ArticleBox title="Article 3" backgroundImage={require('../../assets/tree_flower.jpg')} boxWidth={boxWidth} onPress={handleComingSoonPress} />
-            <ArticleBox title="Article 4" backgroundImage={require('../../assets/tree_flower.jpg')} boxWidth={boxWidth} onPress={handleComingSoonPress} />
+            <ArticleBox title="Article 3" backgroundImage={require('../../assets/box_six_theme.jpg')} boxWidth={boxWidth} onPress={handleComingSoonPress} />
+            <ArticleBox title="Article 4" backgroundImage={require('../../assets/box_two_theme.jpg')} boxWidth={boxWidth} onPress={handleComingSoonPress} />
           </>
         )}
         </View>
@@ -80,7 +86,9 @@ const Friends = () => {
 
         <View style={styles.secondaryHeaderContainer}>
           <Text style={styles.secondaryHeader}>Grupper</Text>
-          <Text style={styles.seAll}>Se alla</Text>
+          <Pressable onPress={handleToggleGroups}>
+            <Text style={styles.seAll}>{showAllGroups ? 'Dölj' : 'Se alla'}</Text>
+          </Pressable>
         </View>    
          {/* Layout for the four boxes from Recommendation_boxes */}
          <View style={styles.boxRow}>
@@ -104,6 +112,22 @@ const Friends = () => {
             <Text style={styles.boxText}>Detox</Text>
           </View>
         </Pressable>
+        {showAllGroups && (
+          // Render additional Group components if showAllGroups is true
+          // You can add more Group components as needed
+          <>
+            <Pressable onPress={() => handleComingSoonPress()}>
+              <View style={{ ...styles.box, backgroundColor: '#A7C1AE', width: boxWidth }}>
+                <Text style={styles.boxText}>Grupp 5</Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={() => handleComingSoonPress()}>
+              <View style={{ ...styles.box, backgroundColor: '#CDBCAA', width: boxWidth }}>
+                <Text style={styles.boxText}>Grupp 6</Text>
+              </View>
+            </Pressable>
+          </>
+        )}
 
          </View>
        
