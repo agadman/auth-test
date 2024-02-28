@@ -179,8 +179,9 @@ const MyAccount = () => {
                     <Text style={styles.seeAll}>Se alla och ändra</Text>
                     </View>
                      
-                    <View>
+                    <View style={styles.favorites}>
                         <Text style={styles.secondaryHeader}>Mina favoriter</Text>
+                        <Text style={styles.seeAll}>Se alla och ändra</Text>
                     </View>
                     <View>
                         {maxArea && <Text style={styles.secondaryHeader}>Mitt hälsopaket - {maxArea}</Text>}
@@ -247,7 +248,7 @@ export default MyAccount;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingTop: 100,
         backgroundColor: COLORS.background,
@@ -376,9 +377,6 @@ const styles = StyleSheet.create({
         height: 100,
         marginRight: 30,
       },
-      text: {
-        
-      },
       buttonContainer: {
         marginTop: 20,
         marginBottom: 20,
@@ -386,5 +384,9 @@ const styles = StyleSheet.create({
       seeAll: {
         textAlign: 'right',
         fontSize: 10,
+      },
+      favorites: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
       },
 });

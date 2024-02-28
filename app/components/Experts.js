@@ -5,7 +5,7 @@ import { COLORS } from '../components/Colors';
 const Experts = () => {
   const expertsData = [
     { id: 1, name: 'Patricia Ramirez Berglund', image: require('../../assets/patricia.jpeg'), title: 'Dr Akupunktur & Orientalisk medicin' },
-    { id: 2, name: 'Fia Hobbs', image: require('../../assets/patricia.jpeg'), title: 'Dr Akupunktur & Orientalisk medicin' },
+    { id: 2, name: 'Fia Hobbs', image: require('../../assets/fia_hobbs.jpeg'), title: 'Dr Akupunktur & Orientalisk medicin' },
     { id: 3, name: 'Expert 3', image: require('../../assets/patricia.jpeg'), title: 'Dr Akupunktur & Orientalisk medicin' },
     // Add more experts as needed
   ];

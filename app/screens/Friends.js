@@ -37,8 +37,8 @@ const Friends = () => {
         </View> 
          {/* Layout for the two article boxes */}
          <View style={styles.boxRow}>
-          <ArticleBox title="Spring & Rising Yang" backgroundImage={require('../../assets/box_five_theme.jpg')} boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
-          <ArticleBox title="Kinesiska örttinkturer" backgroundImage={require('../../assets/box_five_theme.jpg')} boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
+          <ArticleBox title="Spring & Rising Yang" backgroundImage={require('../../assets/tree_flower.jpg')} boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
+          <ArticleBox title="Kinesiska örttinkturer" backgroundImage={require('../../assets/herbs.jpg')} boxWidth={boxWidth} onPress={() => {/* Handle press if needed */}} />
           {/* Add more ArticleBox components as needed */}
         </View>
         {/* End of layout for the two article boxes */}
