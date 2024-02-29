@@ -52,6 +52,7 @@ const Friends = () => {
             <Text style={styles.seAll}>{showAllBlogs ? 'Dölj' : 'Se alla'}</Text>
           </Pressable>
         </View>
+        
         <View style={styles.blogContainer}>
           <BlogBox title="Kost vid förkylningstider" imageSource={require('../../assets/jenny.jpeg')} name="Jenny" date="16 Januari 2024" text="Varje år får jag i genomsnitt 2-3 kraftiga förkylningar. Nu har jag äntligen börjat förbereda mig i tid genom att göra små ändringar i min kost. Förkylningarna kommer ju alltid på hösten så på då börjar jag addera rätt kryddor i maten för att försöka hålla mig frisk!  Ingefära är rena universalmedicinen som är en fantastisk smaksättare och en traditionell huskur vid förkylning..." />
           <BlogBox title="Örterna som alla borde äta" imageSource={require('../../assets/patricia.png')} name="Patricia" date=" 5 Januari 2024" text="Att blåbär och grönkål är nyttigt är det ingen som tvivlar på. Många vet till och med att de är nyttiga för att de innehåller mycket antioxidanter, ämnen som bekämpar skadliga fria radikaler (en biprodukt som bildas när vi andas). Fria radikaler kan starta en oxidativ stress i kroppen, vilket i sin tur påskyndar åldrande och leder till sjukdom. Örter innehåller större mängd antioxidanter..." />
