@@ -23,10 +23,24 @@ const ExpertDetails = () => {
         image: require('../../assets/patricia.png'), 
         text1: 'Patricia har en doktorsexamen i akupunktur och orientalisk medicin. Hon är licensierad i Commonwealth of Massachusetts och delstaten New York i USA. Hon bedriver för närvarande privatpraktik i Stockholm.',
         text2: 'Som örtläkare är Patricia specialiserad på behandling av hudåkommor och autoimmuna sjukdomar. Efter att ha arbetat för Initiative for Women (IWD) vid NYU Hospital for Joint Diseases i New York City (2010), blev hon särskilt intresserad av kvinnors hälsofrågor. Patricias övertygelse är att genom utbildning av patienter inom livsstilsförändringar, funktionell näring och användningen av örter som medicin samt Yang Sheng (närande liv) praxis, kan människor påverka sin resa mot välbefinnande. Hennes passion är att stärka människors hälsa och välbefinnande genom behandling och integration av sinne/kropp/ande.' ,
-        expertomraden: ['Örtmedicin', 'Klimakteriet', 'TCM', 'Hud'],
+        expertareas: ['Örtmedicin', 'Klimakteriet', 'TCM', 'Hud'],
     },
-    { id: 2, name: 'Fia Hobbs', image: require('../../assets/fia_hobbs.jpeg'), title: 'Dr Akupunktur & Orientalisk medicin', text: 'test2' },
-    { id: 3, name: 'Expert 3', image: require('../../assets/patricia.jpeg'), title: 'Dr Akupunktur & Orientalisk medicin', text: 'test3' },
+    { 
+        id: 2, 
+        name: 'Fia Hobbs', 
+        image: require('../../assets/fia_hobbs.jpeg'), 
+        text1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        text2: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.',
+        expertareas: ['Område 1', 'Område 2', 'Område 3'],
+     },
+    { 
+        id: 3, 
+        name: 'Expert 3', 
+        image: require('../../assets/patricia.jpeg'), 
+        text1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        text2: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.',
+        expertareas: ['Område 1', 'Område 2', 'Område 3'],
+    }
     // Add more experts as needed
   ];
 
@@ -76,10 +90,10 @@ const ExpertDetails = () => {
          <View style={styles.secondaryHeaderContainer}>
           <Text style={styles.secondaryHeader}>Expertområden</Text>
         </View>
-        <View style={styles.expertomradenContainer}>
-          {selectedExpert?.expertomraden.map((expertomrade, index) => (
-            <View key={index} style={styles.expertomradeBox}>
-              <Text style={styles.expertomradeText}>{expertomrade}</Text>
+        <View style={styles.expertareaContainer}>
+          {selectedExpert?.expertareas.map((expertarea, index) => (
+            <View key={index} style={styles.expertareaBox}>
+              <Text style={styles.expertareaText}>{expertarea}</Text>
             </View>
           ))}
         </View>
@@ -208,7 +222,7 @@ boxRow: {
     alignItems: 'center',
     marginBottom: 50,
   },
-  expertomradenContainer: {
+  expertareaContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
@@ -216,7 +230,7 @@ boxRow: {
     width: '90%',
     marginBottom: 50,
   },
-  expertomradeBox: {
+  expertareaBox: {
     backgroundColor: '#A7C1AE',
     borderRadius: 15,
     paddingVertical: 5,
@@ -224,7 +238,7 @@ boxRow: {
     margin: 5,
     width: '30%',
   },
-  expertomradeText: {
+  expertareaText: {
     color: COLORS.white,
     textAlign: 'center',
   },
