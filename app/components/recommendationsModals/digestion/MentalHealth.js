@@ -1,28 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 
 const MentalHealth = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
+      box1Header: 'Test',
       box1: 'Content specific to Anxiety...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     Theme_Fertility: {
+      box1Header: 'Test',
       box1: 'Content specific to Fertility...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     Theme_Menopause: {
+      box1Header: 'Test',
       box1: 'Content specific to Menopause...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     Theme_PMS: {
+      box1Header: 'Test',
       box1: 'Content specific to PMS...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     Theme_SkinHair: {
+      box1Header: 'Test',
       box1: 'Content specific to Skin & Hair...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     Theme_Sleep: {
+      box1Header: 'Test',
       box1: 'Content specific to Sleep...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     Theme_StomachBowel: {
       box1Header: 'Andningsövning',
@@ -31,7 +49,10 @@ const MentalHealth = ({ selectedTheme, userId }) => {
       box2: 'Lägg dig ner på en varm och bekvämt plats för att utföra massageövningen.  Den här övningen förbättrar blodcirkulationen till matsmältningsorganen och tarmarna och förbättrar leverns funktion.\n\n Gör så här: \n\n\u2022 Gnugga ricinolja över hela magen\n\n\u2022 Täck magen med en ren trasa eller använd ett medicinsk varmbandage\n\n\u2022 Vira en ren handduk runt din mage för att ytterligare isolera det\n\n\u2022 Placera en varmvattenflaska eller en värmedyna på handduken och håll den på magen i 45 minuter\n ',   
     },
     Theme_Stress: {
+      box1Header: 'Test',
       box1: 'Content specific to Stress...',
+      box2Header: 'Test2',
+      box2: 'Content specific...',
     },
     // Add more themes as needed
   };
@@ -66,15 +87,19 @@ const MentalHealth = ({ selectedTheme, userId }) => {
   
     if (isHeartIcon) {
       try {
-        const userDocRef = doc(getFirestore(), 'users', userId);
-        await updateDoc(userDocRef, {
-          [box]: contentByTheme[selectedTheme][box], // Save the content
-          [headerKey]: contentByTheme[selectedTheme][headerKey], // Save the header
-        });
+        const userDocRef = doc(getFirestore(), 'users', userId, 'themes', selectedTheme);
+        await setDoc(
+          userDocRef,
+          {
+            [box]: contentByTheme[selectedTheme][box], // Save the content
+            [headerKey]: contentByTheme[selectedTheme][headerKey], // Save the header
+          },
+          { merge: true } // Add the merge option to update specific fields without overwriting the entire document
+        );
   
         console.log(`Content and header for ${box} saved to Firestore`);
       } catch (error) {
-        console.error('Error updating content and header:', error);
+        console.error('Error setting content and header:', error);
       }
     } else {
       setExpandedBoxes((prevState) => ({
@@ -85,8 +110,6 @@ const MentalHealth = ({ selectedTheme, userId }) => {
   };
   
   
-  
-
   const renderContent = (box, fullText) => {
     return (
       <View style={styles.content}>
