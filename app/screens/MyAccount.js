@@ -17,7 +17,7 @@ const MyAccount = () => {
   const [maxArea, setMaxArea] = useState(null);
   const [currentDay, setCurrentDay] = useState('');
   const [userId, setUserId] = useState('');
-  const [boxesData, setBoxesData] = useState({});
+  const [boxesData, setBoxesData] = useState([]);
   const [expandedBoxes, setExpandedBoxes] = useState({
     box1: false,
     box2: false,
