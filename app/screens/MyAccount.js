@@ -26,6 +26,7 @@ const MyAccount = () => {
     box1: false,
     box2: false,
   });
+  const [showAllBoxes, setShowAllBoxes] = useState(false);
 
   const auth = getAuth();
 
@@ -141,6 +142,10 @@ const MyAccount = () => {
     }));
   };
 
+  const handleToggleBoxes = () => {
+    setShowAllBoxes(!showAllBoxes);
+  };
+
   const handleLogout = async () => {
     try {
       await FIREBASE_AUTH.signOut();
@@ -203,16 +208,21 @@ const MyAccount = () => {
             </View>
             {/* Centered content */}
             <View style={styles.centerContent}>
-              <Text style={styles.secondaryHeader}>Idag</Text>
-              {/* Render checkboxes for each theme */}
-      {boxesData.map((theme, index) => (
-        <React.Fragment key={index}>
-          {renderCheckBox(`box${index + 1}`, styles.box1HeaderStyle, styles.content, theme.box1Header, theme.box1)}
-          {theme.box2 && renderCheckBox(`box${index + 1}`, styles.box1HeaderStyle, styles.content, theme.box2Header, theme.box2)}
-        </React.Fragment>
-      ))}
-            </View>
-            <Text style={styles.seeAll}>Se alla och ändra</Text>
+            <Text style={styles.secondaryHeader}>Idag</Text>
+            {/* Render only two checkboxes in total */}
+            {boxesData.map((theme, index) => (
+              index < 2 && (showAllBoxes || (
+                <React.Fragment key={index}>
+                  {renderCheckBox(`box${index + 1}_1`, styles.box1HeaderStyle, styles.content, theme.box1Header, theme.box1)}
+                  {theme.box2 && renderCheckBox(`box${index + 1}_2`, styles.box1HeaderStyle, styles.content, theme.box2Header, theme.box2)}
+                </React.Fragment>
+              ))
+            ))}
+          </View>
+
+          <Text style={styles.seeAll} onPress={handleToggleBoxes}>
+            {showAllBoxes ? 'Se alla och ändra' : 'Dölj'}
+          </Text>
           </View>
 
           <View style={styles.favorites}>
