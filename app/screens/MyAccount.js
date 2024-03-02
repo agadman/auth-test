@@ -9,6 +9,7 @@ import { COLORS } from '../components/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { CheckBox } from 'react-native-elements';
+import MyPackage from './MyPackage';
 
 const imageSource = require('../../assets/icons/logo_white.png');
 
@@ -233,13 +234,15 @@ const MyAccount = () => {
           <View>
             {maxArea && <Text style={styles.secondaryHeader}>Mitt hälsopaket - {maxArea}</Text>}
 
-            <View style={styles.AllAboutBoxContainer}>
-              <View style={styles.AllAboutBoxContent}>
-                <Image source={imageSource} style={styles.logoImage} />
-                <Text style={styles.AllAboutBoxText}>Allt du behöver veta</Text>
-              </View>
-              <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+            <TouchableOpacity onPress={() => navigation.navigate('MyPackage')}>
+          <View style={styles.AllAboutBoxContainer}>
+            <View style={styles.AllAboutBoxContent}>
+              <Image source={imageSource} style={styles.logoImage} />
+              <Text style={styles.AllAboutBoxText}>Allt du behöver veta</Text>
             </View>
+            <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIcon} />
+          </View>
+        </TouchableOpacity>
           </View>
 
           <View>
@@ -263,13 +266,13 @@ const MyAccount = () => {
               </View>
             </View>
             <View style={styles.box}>
-              <View style={styles.row}>
+              <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('MyPackage')}>
                 <Text style={styles.icon}>
-                  <FontAwesome5 name="heartbeat" style={styles.boxIcon} />
+                    <FontAwesome5 name="heartbeat" style={styles.boxIcon} />
                 </Text>
                 <Text style={styles.text}>Mitt hälsopaket</Text>
                 <FontAwesome5 name="angle-right" size={18} color="#333" style={styles.arrowIconWhiteBackground} />
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.box}>
               <View style={styles.row}>
