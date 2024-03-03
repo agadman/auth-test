@@ -234,7 +234,7 @@ const MyAccount = () => {
           <View>
             {maxArea && <Text style={styles.secondaryHeader}>Mitt hälsopaket - {maxArea}</Text>}
 
-            <TouchableOpacity onPress={() => navigation.navigate('MyPackage')}>
+            <TouchableOpacity onPress={() => navigation.navigate('MyPackage', { maxArea })}>
           <View style={styles.AllAboutBoxContainer}>
             <View style={styles.AllAboutBoxContent}>
               <Image source={imageSource} style={styles.logoImage} />

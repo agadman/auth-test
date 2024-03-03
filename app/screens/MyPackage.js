@@ -14,7 +14,13 @@ const MyPackage = () => {
     { title: 'Fysisk hälsa', color: '#DFE5EB', icon: 'dumbbell' },
   ]);
 
-  const selectedBox = 'Theme_StomachBowel';
+  const routeParams = useRoute().params || {};
+  const { maxArea } = routeParams;
+
+  // Directly set selectedBox based on maxArea
+  const selectedBox = maxArea ? `Theme_${maxArea}` : 'Default_Theme';
+  console.log('Tema mitt paket:' + selectedBox);
+
   const route = useRoute();
   const initialUserName = route.params?.userName || '';
   const [userName, setUserName] = useState(initialUserName);

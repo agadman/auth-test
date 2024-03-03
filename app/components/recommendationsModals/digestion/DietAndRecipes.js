@@ -40,6 +40,10 @@ const DietAndRecipes = ({ selectedTheme }) => {
     Theme_Stress: {
       box1: 'Content specific to Stress...',
     },
+    Theme_Mjälte: {
+      progressbarTitle: 'Mitt hälsopaket',
+      text: 'För att öka energin i mjälten är det viktigt att se över både när, hur och vad du äter.',
+    },
     // Add more themes as needed
   };
 
@@ -171,7 +175,9 @@ const DietAndRecipes = ({ selectedTheme }) => {
 
   return (
     <View style={styles.wrapper}>
+       {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <Text style={styles.header}>Kost och Recept</Text>
+      {content.text && <Text>{content.text}</Text>}
 
       <TouchableOpacity onPress={() => toggleBox('box1')}>
         <View style={styles.row}>

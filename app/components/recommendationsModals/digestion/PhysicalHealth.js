@@ -29,6 +29,9 @@ const PhysicalHealth = ({ selectedTheme }) => {
     Theme_Stress: {
       text: 'Content specific to Stress...',
     },
+    Theme_Mjälte: {
+      progressbarTitle: 'Mitt hälsopaket',
+    },
     // Add more themes as needed
   };
 
@@ -37,6 +40,7 @@ const PhysicalHealth = ({ selectedTheme }) => {
 
   return (
       <View style={styles.wrapper}>
+        {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <Text style={styles.header}>Fysisk hälsa</Text>
       {content.text && <Text style={styles.text}>{content.text}</Text>}
       {content.secondText && <Text style={styles.text}>{content.secondText}</Text>}

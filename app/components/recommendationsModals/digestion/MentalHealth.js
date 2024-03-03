@@ -54,6 +54,9 @@ const MentalHealth = ({ selectedTheme, userId }) => {
       box2Header: 'Test2',
       box2: 'Content specific...',
     },
+    Theme_Mjälte: {
+      progressbarTitle: 'Mitt hälsopaket',
+    },
     // Add more themes as needed
   };
 
@@ -128,6 +131,7 @@ const MentalHealth = ({ selectedTheme, userId }) => {
 
   return (
     <View style={styles.wrapper}>
+      {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <View style={styles.introText}>
         <Text style={styles.header}>Mental hälsa</Text>
         <Text>Ingress</Text>

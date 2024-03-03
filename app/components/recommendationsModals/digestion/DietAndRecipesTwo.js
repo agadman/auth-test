@@ -31,6 +31,9 @@ const DietAndRecipesTwo = ({ selectedTheme }) => {
       Theme_Stress: {
         box1: 'Content specific to Stress...',
       },
+      Theme_Mjälte: {
+        progressbarTitle: 'Mitt hälsopaket',
+      },
       // Add more themes as needed
     };
 
@@ -70,6 +73,7 @@ const DietAndRecipesTwo = ({ selectedTheme }) => {
 
   return (
     <View style={styles.wrapper}>
+       {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <View style={styles.introText}>
         <Text style={styles.header}>Recept</Text>
         <Text>
