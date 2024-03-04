@@ -78,6 +78,5 @@ const styles = StyleSheet.create({
   },
   secondaryHeader: {
     textTransform: 'uppercase',
-    marginLeft: 10,
 },
 });
