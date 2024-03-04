@@ -23,6 +23,7 @@ const DietarySupplements = ({ selectedTheme }) => {
       text: 'Content specific to Sleep...',
     },
     Theme_StomachBowel: {
+      progressbarTitle: 'Mage & tarm',
       text: 'Text om Kosttillskott....',
       secondText: 'Mera text...',
     },
@@ -31,6 +32,7 @@ const DietarySupplements = ({ selectedTheme }) => {
     },
     Theme_Mjälte: {
       progressbarTitle: 'Mitt hälsopaket',
+      text: 'Här får du tips på olika kosttillskott som är bra för att stärka mjältens energi.\n\nDet finns många olika tillskott att testa och därför har vi delat upp dom i tre steg utifrån det som ger störst effekt på din hälsa.',
     },
     // Add more themes as needed
   };

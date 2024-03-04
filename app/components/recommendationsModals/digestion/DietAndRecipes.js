@@ -26,6 +26,7 @@ const DietAndRecipes = ({ selectedTheme }) => {
       box1: 'Content specific to Sleep...',
     },
     Theme_StomachBowel: {
+      progressbarTitle: 'Mage & tarm',
       addFirstRoutine: 'Drick vatten innan frukost',
       addSecondRoutine: 'Ät inte efter 18.30',
       addThirdRoutine: 'Skriv matdagbok',
@@ -43,6 +44,12 @@ const DietAndRecipes = ({ selectedTheme }) => {
     Theme_Mjälte: {
       progressbarTitle: 'Mitt hälsopaket',
       text: 'För att öka energin i mjälten är det viktigt att se över både när, hur och vad du äter.',
+      secondaryHeader1: 'När ska jag äta?',
+      text1: 'Försök äta vid ungefär samma tid varje dag, kroppen behöver rutin och ät helst alla tre måltider under en 10-timmarsperiod under dagen innan 18.30',
+      secondaryHeader2: 'Hur ska jag äta?',
+      text2: 'Stäng av datorn och telefonen, försök att hitta en lugn miljö att äta i. När du sätter dig ner för att äta, titta på maten, känn på maten och ta dig tid att äta. Tugga också maten ordentligt, tills den är nästan flytande i munnen. Ät alltid ditt protein före kolhydraterna på tallriken.',
+      secondaryHeader3: 'Vad ska jag äta?',
+      text3: 'Mjälten gillar INTE "fuktiga" eller "kalla" livsmedel. Att minska dessa och hålla dom till ett minimum är en bra grundregel för att lindra en trött mjälte.\nTa också en matsked rå, ofiltrerad äppelcidervinäger i ett glas rumstempererat vatten innan din måltid. Detta kan hjälpa till att reglera upptaget av glukos, särskilt när du äter kolhydrater.\nOm du känner att vad du äter påverkar dig mycket så håll gärna en matdagbok för att kunna förstå mer hur olika livsmedel påverkar din matsmältning och hur du mår överlag. Att göra detta under endast 1 månad kommer troligen ge dig mer insikter än du tror.\nHär får du tips på kost och livsmedel som är bra och som du ska undvika för att stärka mjältens energi. Tipsen står i prioordning.',
     },
     // Add more themes as needed
   };
@@ -178,6 +185,12 @@ const DietAndRecipes = ({ selectedTheme }) => {
        {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <Text style={styles.header}>Kost och Recept</Text>
       {content.text && <Text>{content.text}</Text>}
+      {content.secondaryHeader1 && <Text>{content.secondaryHeader1}</Text>}
+      {content.text1 && <Text>{content.text1}</Text>}
+      {content.secondaryHeader2 && <Text>{content.secondaryHeader2}</Text>}
+      {content.text2 && <Text>{content.text2}</Text>}
+      {content.secondaryHeader3 && <Text>{content.secondaryHeader3}</Text>}
+      {content.text3 && <Text>{content.text3}</Text>}
 
       <TouchableOpacity onPress={() => toggleBox('box1')}>
         <View style={styles.row}>
@@ -236,14 +249,14 @@ const DietAndRecipes = ({ selectedTheme }) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,  
-    paddingTop: 20,
-    paddingBottom: 200,
+    paddingRight: 20,
+    paddingLeft: 20,
+    borderRadius: 10,
   },
   header: {
     fontSize: 24,
+    marginTop: 20,
     marginBottom: 20,
-    paddingLeft: 20,
   },
   secondHeader: {
     fontSize: 16,
