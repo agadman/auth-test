@@ -107,7 +107,7 @@ const StomachHealth = ({ selectedTheme }) => {
       <TouchableOpacity onPress={() => toggleBox('box1')}>
         <View style={styles.row}>
           <Text style={styles.secondHeader}>
-            Bra rutiner 
+            {content.box1Header}
           </Text>
           {renderArrowIcon('box1')}
         </View>
@@ -117,7 +117,7 @@ const StomachHealth = ({ selectedTheme }) => {
       <TouchableOpacity onPress={() => toggleBox('box2')}>
         <View style={styles.row}>
           <Text style={styles.secondHeader}>
-            Matdagbok 
+            {content.box2Header}
           </Text>
           {renderArrowIcon('box2')}
         </View>
@@ -127,7 +127,7 @@ const StomachHealth = ({ selectedTheme }) => {
       <TouchableOpacity onPress={() => toggleBox('box3')}>
         <View style={styles.row}>
           <Text style={styles.secondHeader}>
-            Fibrer och grönsaker 
+            {content.box3Header}
           </Text>
           {renderArrowIcon('box3')}
         </View>
@@ -137,7 +137,7 @@ const StomachHealth = ({ selectedTheme }) => {
       <TouchableOpacity onPress={() => toggleBox('box4')}>
         <View style={styles.row}>
           <Text style={styles.secondHeader}>
-            Mat att utesluta 
+            {content.box4Header} 
           </Text>
           {renderArrowIcon('box4')}
         </View>
@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
   },
   secondHeader: {
     fontSize: 16,
-    fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 10,
   },
