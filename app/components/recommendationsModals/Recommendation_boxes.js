@@ -88,7 +88,7 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
       case 'Kost & recept':
         return <DietAndRecipes selectedTheme={selectedBox} />;
       case 'Recept': 
-        return <DietAndRecipesTwo selectedTheme={selectedBox} />;
+        return <DietAndRecipesTwo selectedTheme={selectedBox} userId={userId} />;
       case 'Kosttillskott':
         return <DietarySupplements selectedTheme={selectedBox} />;
       case 'Mental hälsa':

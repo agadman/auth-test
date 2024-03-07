@@ -53,6 +53,7 @@ const MyAccount = () => {
             });
 
             setBoxesData(allThemesData);
+            console.log(allThemesData);
           } catch (error) {
             console.error('Error fetching data:', error);
           }
@@ -87,6 +88,7 @@ const MyAccount = () => {
       <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
     );
   };
+  
 
   const CheckBoxComponent = ({ box, onCheckboxPress }) => (
     <CheckBox
@@ -102,33 +104,76 @@ const MyAccount = () => {
     />
   );
 
-  const HeaderAndArrowComponent = ({ header, headerStyle, onPress }) => (
-    <TouchableOpacity onPress={onPress}>
+  const HeaderAndArrowComponent = ({ header, headerStyle, onPress, box }) => (
+    <TouchableOpacity onPress={() => onPress(box)}>
       <View style={styles.row}>
         <Text style={[styles.box1HeaderStyle, headerStyle]}>{header}</Text>
-        {renderArrowIcon()}
+        {renderArrowIcon(box)}
       </View>
     </TouchableOpacity>
   );
+  
 
-  const renderCheckBox = (box, headerStyle, contentStyle, header, content) => {
+  const renderBoxThemes = (theme) => {
+    const boxThemes = Object.keys(theme)
+      .filter((box) => box.endsWith('Header') && box.startsWith('box'))
+      .map((box) => {
+        const fullText = theme[box.substring(0, box.length - 6)];
+        return (
+          <View style={styles.boxFirst} key={box}>
+            <View style={styles.row}>
+              <CheckBoxComponent
+                box={box}
+                onCheckboxPress={() => toggleCheckbox(box)}
+              />
+              <HeaderAndArrowComponent
+                header={theme[box]}
+                headerStyle={styles.box1HeaderStyle}
+                onPress={() => toggleBox(box)}
+              />
+            </View>
+            {renderContent(box, styles.box1HeaderStyle, fullText)}
+          </View>
+        );
+      });
+  
     return (
-      <View style={styles.boxFirst}>
-        <View style={styles.row}>
-          <CheckBoxComponent
-            box={box}
-            onCheckboxPress={() => toggleCheckbox(box)}
-          />
-          <HeaderAndArrowComponent
-            header={header}
-            headerStyle={headerStyle}
-            onPress={() => toggleBox(box)}
-          />
-        </View>
-        {renderContent(box, contentStyle, content)}
-      </View>
+      <React.Fragment>
+        {boxThemes}
+      </React.Fragment>
     );
   };
+  
+  const renderFavThemes = (theme) => {
+    const favThemes = Object.keys(theme)
+      .filter((box) => box.endsWith('Header') && box.startsWith('fav'))
+      .map((box) => {
+        const fullText = theme[box.substring(0, box.length - 6)];
+        return (
+          <View style={styles.boxFirst} key={box}>
+            <View style={styles.row}>
+              <CheckBoxComponent
+                box={box}
+                onCheckboxPress={() => toggleCheckbox(box)}
+              />
+              <HeaderAndArrowComponent
+                header={theme[box]}
+                headerStyle={styles.box1HeaderStyle}
+                onPress={() => toggleBox(box)}
+              />
+            </View>
+            {renderContent(box, styles.box1HeaderStyle, fullText)}
+          </View>
+        );
+      });
+  
+    return (
+      <React.Fragment>
+        {favThemes}
+      </React.Fragment>
+    );
+  };
+  
   const toggleBox = async (box) => {
     setExpandedBoxes((prevState) => ({
       ...prevState,
@@ -210,15 +255,11 @@ const MyAccount = () => {
             {/* Centered content */}
             <View style={styles.centerContent}>
             <Text style={styles.secondaryHeader}>Idag</Text>
-            {/* Render only two checkboxes in total */}
             {boxesData.map((theme, index) => (
-              index < 2 && (showAllBoxes || (
-                <React.Fragment key={index}>
-                  {renderCheckBox(`box${index + 1}_1`, styles.box1HeaderStyle, styles.content, theme.box1Header, theme.box1)}
-                  {theme.box2 && renderCheckBox(`box${index + 1}_2`, styles.box1HeaderStyle, styles.content, theme.box2Header, theme.box2)}
-                </React.Fragment>
-              ))
-            ))}
+          <React.Fragment key={index}>
+            {renderBoxThemes(theme)}
+          </React.Fragment>
+        ))}
           </View>
 
           <Text style={styles.seeAll} onPress={handleToggleBoxes}>
@@ -228,7 +269,13 @@ const MyAccount = () => {
 
           <View style={styles.favorites}>
             <Text style={styles.secondaryHeader}>Mina favoriter</Text>
+            {boxesData.map((theme, index) => (
+          <React.Fragment key={index}>
+            {renderFavThemes(theme)}
+          </React.Fragment>
+        ))}
             <Text style={styles.seeAll}>Se alla och ändra</Text>
+            
           </View>
 
           <View>
@@ -448,7 +495,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
       },
       favorites: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
       },
       // Add styles for CheckBox
