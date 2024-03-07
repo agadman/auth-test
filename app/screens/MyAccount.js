@@ -192,6 +192,16 @@ const MyAccount = () => {
     setShowAllBoxes(!showAllBoxes);
   };
 
+  const renderLimitedBoxes = () => {
+    const visibleBoxes = showAllBoxes ? boxesData : boxesData.slice(0, 1);
+
+    return visibleBoxes.map((theme, index) => (
+      <React.Fragment key={index}>
+        {renderBoxThemes(theme)}
+      </React.Fragment>
+    ));
+  };
+
   const handleLogout = async () => {
     try {
       await FIREBASE_AUTH.signOut();
@@ -255,16 +265,11 @@ const MyAccount = () => {
             {/* Centered content */}
             <View style={styles.centerContent}>
             <Text style={styles.secondaryHeader}>Idag</Text>
-            {boxesData.map((theme, index) => (
-          <React.Fragment key={index}>
-            {renderBoxThemes(theme)}
-          </React.Fragment>
-        ))}
+            {renderLimitedBoxes()}
+            <Text style={styles.seeAll} onPress={handleToggleBoxes}>
+              {showAllBoxes ? 'Dölj' : 'Se alla och ändra'}
+            </Text>
           </View>
-
-          <Text style={styles.seeAll} onPress={handleToggleBoxes}>
-            {showAllBoxes ? 'Se alla och ändra' : 'Dölj'}
-          </Text>
           </View>
 
           <View style={styles.favorites}>
