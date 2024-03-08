@@ -23,7 +23,7 @@ const Theme_Menopause = () => {
           </ImageBackground>
         </View>
         <View style={styles.headerContainer}>
-            <Text style={styles.header}>Klimakterie</Text>
+            <Text style={styles.header}>Klimakteriet</Text>
             <Text style={styles.text}>Text kommer...</Text>
             <Text style={styles.text}>Text kommer...</Text>
         </View>

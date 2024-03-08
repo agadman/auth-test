@@ -6,28 +6,28 @@ const StomachHealth = ({ selectedTheme }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
-      header: 'Anxiety',
-      text: 'Content specific to Anxiety...',
+      header: 'Oro och ångest',
+      text: 'Text om oro och ångest kommer...',
     },
     Theme_Fertility: {
       header: 'Fertility',
-      text: 'Content specific to Fertility...',
+      text: 'Text om fertilitet kommer...',
     },
     Theme_Menopause: {
-      header: 'Menopause',
-      text: 'Content specific to Menopause...',
+      header: 'Klimakteriet',
+      text: 'Text om klimakteriet kommer...',
     },
     Theme_PMS: {
       header: 'PMS',
-      text: 'Content specific to PMS...',
+      text: 'Text om PMS kommer...',
     },
     Theme_SkinHair: {
-      header: 'Skin & Hair',
-      text: 'Content specific to Skin & Hair...',
+      header: 'Hud och hår',
+      text: 'Text om hud och hår kommer...',
     },
     Theme_Sleep: {
       header: 'Sömn',
-      text: 'Content specific to Sleep...',
+      text: 'Text om Sömn kommer...',
     },
     Theme_StomachBowel: {
       progressbarTitle: 'Mage & tarm',
@@ -37,7 +37,7 @@ const StomachHealth = ({ selectedTheme }) => {
     },
     Theme_Stress: {
       header: 'Stress',
-      text: 'Content specific to Stress...',
+      text: 'Text om stress kommer...',
     },
     Theme_Mjälte: {
       progressbarTitle: 'Mitt hälsopaket',

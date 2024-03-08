@@ -107,7 +107,7 @@ const DietAndRecipes = ({ selectedTheme }) => {
               </Text>
             )}
             {box === 'box5' && (
-              <View style={{ backgroundColor: 'white', paddingBottom: 20 }}>
+              <View style={{ paddingBottom: 20 }}>
                 <RadioButton.Group
                 onValueChange={(newValue) => {
                   // Handle the radio button value change here if needed
@@ -233,13 +233,27 @@ const DietAndRecipes = ({ selectedTheme }) => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => toggleBox('box5')}>
-        <View style={styles.whiteBox}>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#FDF8F6',
+          width: '100%', 
+          marginTop: 10,
+          paddingTop: 10,
+          paddingBottom: 10,
+          paddingLeft: 20,
+          paddingRight: 20,
+          borderTopRightRadius: 10,
+          borderTopLeftRadius: 10,
+          borderBottomLeftRadius: expandedBoxes['box5'] ? 0 : 10,
+          borderBottomRightRadius: expandedBoxes['box5'] ? 0 : 10,
+        }}>
           <Text style={styles.secondHeader}>
             Lägg till i min rutin
           </Text>
           {renderArrowIcon('box5')}
         </View>
-        <View style={{ backgroundColor: 'white', paddingRight: 10, paddingLeft: 20 }}>
+        <View style={{ backgroundColor: '#FDF8F6', paddingRight: 10, paddingLeft: 20, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginBottom: 50, }}>
           {renderContent('box5', contentByTheme[selectedTheme]?.box5)}
         </View> 
       </TouchableOpacity>
@@ -279,18 +293,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  whiteBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    width: '100%', 
-    marginTop: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-
-  },
   arrowIcon: {
     marginLeft: 5, 
     fontSize: 24,
@@ -303,5 +305,4 @@ const styles = StyleSheet.create({
   }
   
 });
-
 export default DietAndRecipes;
