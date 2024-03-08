@@ -6,26 +6,32 @@ const StomachHealth = ({ selectedTheme }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
+      progressbarTitle: 'Oro och ångest',
       header: 'Oro och ångest',
       text: 'Text om oro och ångest kommer...',
     },
     Theme_Fertility: {
-      header: 'Fertility',
+      progressbarTitle: 'Fertilitet',
+      header: 'Fertilitet',
       text: 'Text om fertilitet kommer...',
     },
     Theme_Menopause: {
+      progressbarTitle: 'Klimakteriet',
       header: 'Klimakteriet',
       text: 'Text om klimakteriet kommer...',
     },
     Theme_PMS: {
+      progressbarTitle: 'PMS',
       header: 'PMS',
       text: 'Text om PMS kommer...',
     },
     Theme_SkinHair: {
+      progressbarTitle: 'Hud och hår',
       header: 'Hud och hår',
       text: 'Text om hud och hår kommer...',
     },
     Theme_Sleep: {
+      progressbarTitle: 'Sömn',
       header: 'Sömn',
       text: 'Text om Sömn kommer...',
     },
@@ -36,6 +42,7 @@ const StomachHealth = ({ selectedTheme }) => {
       secondText: 'Mycket handlar om bra rutiner och tid för lugn och ro. Här får du tips om vad du kan göra inom kost, kosttillskott, mental hälsa och fysisk hälsa.',
     },
     Theme_Stress: {
+      progressbarTitle: 'Stress',
       header: 'Stress',
       text: 'Text om stress kommer...',
     },
