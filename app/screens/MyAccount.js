@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { CheckBox } from 'react-native-elements';
 import MyPackage from './MyPackage';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const imageSource = require('../../assets/icons/logo_white.png');
 
@@ -81,58 +82,64 @@ const MyAccount = () => {
       </View>
     );
   };
-  const renderArrowIcon = (box) => {
+  const renderArrowIcon = (box, color) => {
     return expandedBoxes[box] ? (
-      <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
+      <Icon name="keyboard-arrow-up" style={[styles.arrowIcon, { color }]} />
     ) : (
-      <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
+      <Icon name="keyboard-arrow-down" style={[styles.arrowIcon, { color }]} />
     );
-  };
-  
+  };  
 
-  const CheckBoxComponent = ({ box, onCheckboxPress }) => (
+  const CheckBoxComponent = ({ box, onCheckboxPress, isFavorite }) => (
     <CheckBox
       checked={checkboxState[box]}
       containerStyle={styles.checkboxContainer}
       textStyle={styles.checkboxText}
       checkedColor={COLORS.white}
       onPress={onCheckboxPress}
-      right // Move the checkbox to the right side
+      right
       iconRight
-      checkedIcon={<Icon name="radio-button-checked" size={24} color={COLORS.white} />} // Use a checked circle icon
-      uncheckedIcon={<Icon name="radio-button-unchecked" size={24} color={COLORS.white} />} // Use an unchecked circle icon
+      checkedIcon={isFavorite ? <FontAwesome name="heart" size={24} color="#E0ADA2" solid /> : <Icon name="radio-button-checked" size={24} color={COLORS.white} />}
+      uncheckedIcon={isFavorite ? <FontAwesome name="heart" size={24} color="#E0ADA2" regular /> : <Icon name="radio-button-unchecked" size={24} color={COLORS.white} />}
     />
   );
 
-  const HeaderAndArrowComponent = ({ header, headerStyle, onPress, box }) => (
+  const HeaderAndArrowComponent = ({ header, headerStyle, onPress, box, themeType }) => (
     <TouchableOpacity onPress={() => onPress(box)}>
       <View style={styles.row}>
-        <Text style={[styles.box1HeaderStyle, headerStyle]}>{header}</Text>
-        {renderArrowIcon(box)}
+        <View style={styles.headerContainer}>
+          <Text style={[styles.box1HeaderStyle, headerStyle]}>{header}</Text>
+        </View>
+        <View style={styles.arrowContainer}>
+          {renderArrowIcon(box, themeType === 'fav' ? 'black' : 'white')}
+        </View>
       </View>
     </TouchableOpacity>
   );
   
-
+  
   const renderBoxThemes = (theme) => {
     const boxThemes = Object.keys(theme)
       .filter((box) => box.endsWith('Header') && box.startsWith('box'))
-      .map((box) => {
+      .map((box, index) => {
         const fullText = theme[box.substring(0, box.length - 6)];
+        const uniqueKey = `box_${index}`; // Use a unique key for each box
         return (
-          <View style={styles.boxFirst} key={box}>
+          <View style={styles.boxRoutine} key={uniqueKey}>
             <View style={styles.row}>
               <CheckBoxComponent
-                box={box}
-                onCheckboxPress={() => toggleCheckbox(box)}
+                box={uniqueKey} // Use the unique key for checkbox state
+                onCheckboxPress={() => toggleCheckbox(uniqueKey)}
               />
               <HeaderAndArrowComponent
                 header={theme[box]}
-                headerStyle={styles.box1HeaderStyle}
-                onPress={() => toggleBox(box)}
+                headerStyle={styles.boxRoutineHeaderStyle}
+                onPress={() => toggleBox(uniqueKey)}
+                box={uniqueKey}
+                themeType="box"
               />
             </View>
-            {renderContent(box, styles.box1HeaderStyle, fullText)}
+            {renderContent(uniqueKey, styles.boxRoutineHeaderStyle, fullText)}
           </View>
         );
       });
@@ -147,22 +154,26 @@ const MyAccount = () => {
   const renderFavThemes = (theme) => {
     const favThemes = Object.keys(theme)
       .filter((box) => box.endsWith('Header') && box.startsWith('fav'))
-      .map((box) => {
+      .map((box, index) => {
         const fullText = theme[box.substring(0, box.length - 6)];
+        const uniqueKey = `fav_${index}`; // Use a unique key for each favorite box
         return (
-          <View style={styles.boxFirst} key={box}>
+          <View style={styles.boxFav} key={uniqueKey}>
             <View style={styles.row}>
               <CheckBoxComponent
-                box={box}
-                onCheckboxPress={() => toggleCheckbox(box)}
+                box={uniqueKey} // Use the unique key for checkbox state
+                onCheckboxPress={() => toggleCheckbox(uniqueKey)}
+                isFavorite={true}
               />
               <HeaderAndArrowComponent
                 header={theme[box]}
-                headerStyle={styles.box1HeaderStyle}
-                onPress={() => toggleBox(box)}
+                headerStyle={styles.boxFavHeaderStyle}
+                onPress={() => toggleBox(uniqueKey)}
+                box={uniqueKey}
+                themeType="fav"
               />
             </View>
-            {renderContent(box, styles.box1HeaderStyle, fullText)}
+            {renderContent(uniqueKey, styles.boxFavHeaderStyle, fullText)}
           </View>
         );
       });
@@ -174,7 +185,7 @@ const MyAccount = () => {
     );
   };
   
-  const toggleBox = async (box) => {
+  const toggleBox = (box) => {
     setExpandedBoxes((prevState) => ({
       ...prevState,
       [box]: !prevState[box],
@@ -348,173 +359,166 @@ const MyAccount = () => {
 export default MyAccount;
 
 const styles = StyleSheet.create({
-  checkboxContainer: {
-    backgroundColor: 'transparent', // Set the background color to transparent
-    borderWidth: 0, // Remove border
-    padding: 0, // Remove padding
-    marginLeft: 0, // Remove left margin
-    marginRight: 10, // Remove right margin
-    padding: 10,
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 100,
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    backgroundColor: COLORS.background,
+},
+  header: {
+    fontSize: 30,
+    fontWeight: 700,
+    marginBottom: 50,
   },
+  secondaryHeader: {
+    textTransform: 'uppercase',
+    marginBottom: 20,
+},
+  seeAll: {
+    textAlign: 'right',
+    fontSize: 10,
+},
+  firstBox: {
+    overflow: 'hidden',
+    borderRadius: 10,
+    backgroundColor: COLORS.white,
+    padding: 20,
+    marginBottom: 50,
+},
+  daysContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 30
+},
+  dayText: {
+    fontSize: 14,
+    textAlign: 'center',    
+    lineHeight: 25,
+    width: 30,
+    height: 30,
+    borderRadius: 15, 
+    borderWidth: 2,
+    borderColor: COLORS.primary, 
+    overflow: 'hidden',
+    margin: 5,
+    backgroundColor: '#F1ECEA',
+},
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '90%',
+}, 
+  checkboxContainer: {
+    backgroundColor: 'transparent', 
+    borderWidth: 0, 
+    padding: 0, 
+    marginLeft: 0, 
+    marginRight: 10, 
+    padding: 10,
+},
   checkboxText: {
     color: COLORS.white,
     fontSize: 18,
-  },
-    container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        paddingTop: 100,
-        backgroundColor: COLORS.background,
-    },
-    firstBox: {
-        overflow: 'hidden',
-        borderRadius: 10,
-        backgroundColor: COLORS.white,
-        padding: 20,
-        marginBottom: 30,
-      },
-      centerContent: {
-        justifyContent: 'flex-end',
-      },
-    header: {
-        fontSize: 30,
-        fontWeight: 700,
-        paddingBottom: 30
-    },
-    secondaryHeader: {
-        textTransform: 'uppercase',
-        marginBottom: 20,
-    },
-  
-    daysContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginBottom: 30
-      },
-      dayText: {
-        fontSize: 14,
-        textAlign: 'center',    
-        lineHeight: 25,
-        width: 30,
-        height: 30,
-        borderRadius: 15, // half of width and height to make it a circle
-        borderWidth: 2,
-        borderColor: COLORS.primary, // replace 'yourBackgroundColor' with the desired color
-        overflow: 'hidden',
-        margin: 5,
-        backgroundColor: '#F1ECEA',
-    },
-      box: {
-        backgroundColor: COLORS.white,
-        borderRadius: 8,
-        marginBottom: 10,
-        paddingTop: 15,
-        paddingBottom: 15,
-        paddingLeft: 10,
-        paddingRight: 10,
-         },
-         boxFirst: {
-            backgroundColor: "#CDBCAA",
-            borderRadius: 8,
-            marginBottom: 10,
-            paddingTop: 15,
-            paddingBottom: 15,
-            paddingLeft: 10,
-            paddingRight: 10,
-             },
+},
+  centerContent: {
+    justifyContent: 'flex-end',
+}, 
+  boxRoutine: {
+    backgroundColor: "#CDBCAA",
+    borderRadius: 8,
+    marginBottom: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+},
+  boxRoutineHeaderStyle: {
+    color: "#fff",
+},
+  boxFav: {
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    marginBottom: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+}, 
+  favorites: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 50,
+}, 
 
-         box1HeaderStyle: {
-            color: "#fff",
-         },
-      icon: {
-        marginRight: 20,
-      },
-      heartIcon: {
-        fontSize: 24,
-        color: COLORS.white,
-      },
-      boxIcon: {
-        fontSize: 24,
-        color: "#D09082",
-      },
+arrowContainer: {
+  marginLeft: 'auto',
+},
 
-      row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-      },
-      arrowIcon: {
-        marginLeft: 5,
-        fontSize: 24,
-      },
-
-      AllAboutBoxContainer: {
-        backgroundColor: '#D09082',
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 30,
-        padding: 15,
-      },
-      AllAboutBoxContent: {
-        flexDirection: 'row',
-        alignItems: 'center',
-      },
-      boxImage: {
-        width: 100,
-        height: 100,
-        borderRadius: 25,
-        marginRight: 15,
-      },
-      AllAboutBoxText: {
-        fontSize: 16,
-        color: COLORS.white,
-      },
-      arrowIcon: {
-        marginLeft: 'auto',
-        color: COLORS.white,
-      },
-      arrowIconWhiteBackground: {
-        marginLeft: 'auto',
-      },
-      logoImage: {
-        width: 100,
-        height: 100,
-        marginRight: 30,
-      },
-      buttonContainer: {
-        marginTop: 20,
-        marginBottom: 20,
-      },
-      seeAll: {
-        textAlign: 'right',
-        fontSize: 10,
-      },
-      favorites: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      },
-      // Add styles for CheckBox
-    checkboxContainer: {
-      backgroundColor: 'transparent', // Set the background color to transparent
-      borderWidth: 0, // Remove border
-      padding: 0, // Remove padding
-      marginLeft: 0, // Remove left margin
-      marginRight: 10, // Remove right margin
-      padding: 10,
-      },
-  checkboxText: {
-      color: COLORS.white,
-      fontSize: 18,
-  },
-
+  AllAboutBoxContainer: {
+    backgroundColor: '#D09082',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 50,
+    padding: 15,
+    width: '100%',
+},
+  AllAboutBoxContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    maxWidth: '100%', 
+},
+  logoImage: {
+    width: 100,
+    height: 100,
+    marginRight: 30,
+},
+  AllAboutBoxText: {
+    fontSize: 16,
+    color: COLORS.white,
+}, 
+  box: {
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    marginBottom: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+},
+  icon: {
+    marginRight: 20,
+},
+  heartIcon: {
+    fontSize: 24,
+    color: COLORS.white,
+},
+  boxIcon: {
+    fontSize: 24,
+    color: "#D09082",
+},
+  arrowIcon: {
+    fontSize: 24,
+    marginLeft: 'auto',
+    color: COLORS.white,
+},
+  arrowIconWhiteBackground: {
+    marginLeft: 'auto',
+},
+  buttonContainer: {
+    marginTop: 30,
+    marginBottom: 30,
+},
 });
