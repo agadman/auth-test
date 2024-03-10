@@ -44,10 +44,10 @@ const DietAndRecipesTwo = ({ selectedTheme, userId }) => {
       },
       Theme_StomachBowel: {
         progressbarTitle: 'Mage & tarm',
-        fav1Header: 'Congeegröt',
-        fav1: 'Överväg att göra congee (gröt) en gång i veckan. Detta är en risgröt som är uppvärmande och lugnande för tarmarna. Detta är ett recept. Du kan hitta hundratals online.\n\n',
+        fav1Header: 'Congeegröt (risgröt)',
+        fav1: 'Överväg att göra congee (gröt) en gång i veckan. Detta är en risgröt som är uppvärmande och lugnande för tarmarna. Detta är ett recept. Du kan hitta hundratals online.\n\n1 kopp kortkornigt vitt ris (eller vilket ris som helst som fungerar för dig)\n7-10 koppar vatten/benbuljong/grönsaksbuljong\nSalt efter smak i slutet\nSteg 1: Tvätta riset i ett durkslag\nSteg 2: Lägg ris och vatten i en stor kastrull (2 delar vatten, 1 del ris)\nSteg 3: Koka upp och låt sedan sjuda i 1,5 timme, rör om ofta\nSteg 4: Lägg till önskade ingredienser och salt i slutet\nSteg 5: Njut!\nAnpassa efter ditt tycke!\nLägg till protein: kyckling, fläsk, nötkött, ägg etc..\nLägg till grönsaker: kål, morötter, selleri, pumpa, butternut squash etc...\nLägg till garnering: ingefära, salladslök eller rättika, sesamfrön etc...',
         fav2Header: 'Buljong',
-        fav2: 'Det är inte bara VAD du äter som är viktigt. Även HUR du äter påverkar din hälsa. Ta dig tid att äta, sitt i en lugn miljö utan skärmar, och tugga mycket, så mycket att maten nästan blir flytande i munnen.\n\nOm du märker att magen påverkas olika beroende på vad du stoppar i dig så kan du skriva ned en matdagbok och hur du känner dig efter att du har ätit. Gör du detta under en månad kan du få ut mer information än du tror.',   
+        fav2: 'Ingredienser:\n\n1 kycklingskrov eller ben från ungefär 1 kg kyklingklubbor eller liknande (du kan använda andra ben också)\n1,5 liter vatten\n1-2 msk vinäger\n1 msk salt\n1 gul lök\n3 morot\n2 stjälkar Selleri\n\nSjud cirka 5-8 timmar en ledig dag, du kan späda med mera vatten och salta extra efter smak. Sila av grönsaker och ben. Buljongen håller minst 1 vecka i kylen.',   
       },
       Theme_Stress: {
         box1Header: '',
@@ -168,14 +168,16 @@ const DietAndRecipesTwo = ({ selectedTheme, userId }) => {
             <Icon name="favorite" style={styles.heartIcon} />
           </Text>
         </TouchableOpacity>
+        <View style={styles.headerAndArrow}>
         <Text style={styles.secondHeader}>
           {contentByTheme[selectedTheme]?.[`${fav}Header`] || ''}
         </Text>
         <TouchableOpacity onPress={() => toggleBox(fav, false)}>
-          <View style={styles.row}>
+
             {renderArrowIcon(fav)}
-          </View>
+        
         </TouchableOpacity>
+        </View>
       </View>
 
       {/* Check if content exists before rendering */}
@@ -211,7 +213,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 8,
     marginBottom: 20,
-    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   icon: {
     marginRight: 10,
@@ -227,18 +232,22 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   content: {
-    marginTop: 10,
+    marginTop: 0,
   },
   text: {
     marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
   },
+  headerAndArrow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1, 
+  },
   arrowIcon: {
-    marginLeft: 5,
     fontSize: 24,
   },
 });

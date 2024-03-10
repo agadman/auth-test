@@ -3,6 +3,24 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { CheckBox } from 'react-native-elements';
+
+const MyCheckBox = ({ label, checked, onChange }) => {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <CheckBox 
+        checked={checked} 
+        onPress={onChange} 
+        checkedIcon="check-circle"  
+        uncheckedIcon="circle-o"     
+        containerStyle={styles.checkBox}
+        textStyle={styles.checkBoxText}
+        checkedColor="#709078"    // Set the color for the checkmark
+        />
+      <Text style={{ color: 'black', marginLeft: 8 }}>{label}</Text>
+    </View>
+  );
+};
 
 const DietAndRecipes = ({ selectedTheme }) => {
   // Define content based on the selectedTheme
@@ -27,16 +45,16 @@ const DietAndRecipes = ({ selectedTheme }) => {
     },
     Theme_StomachBowel: {
       progressbarTitle: 'Mage & tarm',
-      addFirstRoutine: 'Drick vatten innan frukost',
-      addSecondRoutine: 'Ät inte efter 18.30',
-      addThirdRoutine: 'Skriv matdagbok',
-      addFourthRoutine: 'Ät 1-2 matskedar frön varje dag',
-      addFifthRoutine: 'Inkludera grönsaker i alla måltider',
       box1: 'Börja din dag med ett glas rumstempererat vatten med saften av en halv citron. Ta en nypa keltiskt havssalt och lägg det på tungan, drick 1 eller 2 glas vatten och vänta 15 minuter innan du äter frukost. Se till att alltid äta frukost och försök att äta vid ungefär samma tid varje dag för att skapa en rutin för din kropp. Det bästa är att inte hoppa över måltider och att äta alla måltider inom en 10-timmarsperiod och inte äta efter 18.30.', 
       box2: 'Det är inte bara VAD du äter som är viktigt. Även HUR du äter påverkar din hälsa. Ta dig tid att äta, sitt i en lugn miljö utan skärmar, och tugga mycket, så mycket att maten nästan blir flytande i munnen.\n\nOm du märker att magen påverkas olika beroende på vad du stoppar i dig så kan du skriva ned en matdagbok och hur du känner dig efter att du har ätit. Gör du detta under en månad kan du få ut mer information än du tror.',   
       box3: 'En stor påverkan på magen är ju såklart vad du stoppar i dig. En aspekt är att få i sig tillräckligt med fiber. Den enklaste vägen är att äta 1-2 matskedar frön som linfrö, pumpakärnor och svarta sesamfrön, varje dag. Det bästa är att äta fröna malda. Även mörka bladgrönsaker innehåller mycket fibrer. Koka dom väl och krydda. Bönor och linser ger också fibertillskott men kan också orsaka matsmältningsbesvär så börja med små mängder och öka långsamt, blötlägg dom och byt vatten i minst 3 timmar innan du tillagar dom.\n\nSe till att du äter olika färger och typer av frukt och grönsaker. Prova små mängder som är välkokta först, undvik råa grönsaker helt. Sötpotatis, pumpa och squash är laddade med mineraler och utmärkta för tarmmikrobiomet. Ingefära, mangold, kokt grönkål och rödbetor är också bra livsmedel att ta med i din kost och gärna med ett glutenfritt spannmål till som ris.\n\nDet är även bra att inkludera surkål eller fermenterade grönsaker som innehåller pro- och prebiotika i din kost.', 
       box4: 'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre:\n\nvitt socker\nmjölkprodukter\nalkohol\nkoffein\ngluten\nsoja', 
       box5: 'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre:',
+      addFirstRoutine: 'Drick vatten innan frukost',
+      addSecondRoutine: 'Ät inte efter 18.30',
+      addThirdRoutine: 'Skriv matdagbok',
+      addFourthRoutine: 'Ät 1-2 matskedar frön varje dag',
+      addFifthRoutine: 'Inkludera grönsaker i alla måltider',
     },
     Theme_Stress: {
       box1: 'Content specific to Stress...',
@@ -66,6 +84,21 @@ const DietAndRecipes = ({ selectedTheme }) => {
   });
 
   const [box5Text, setBox5Text] = useState('');
+
+  const [showMore, setShowMore] = useState({
+    box1: false,
+    box2: false,
+    box3: false,
+    box4: false,
+    box5: false,
+  });
+
+  const toggleShowMore = (box) => {
+    setShowMore((prevShowMore) => ({
+      ...prevShowMore,
+      [box]: !prevShowMore[box],
+    }));
+  };
 
   const toggleBox = (box) => {
     setExpandedBoxes((prevState) => ({
@@ -97,9 +130,10 @@ const DietAndRecipes = ({ selectedTheme }) => {
   
     const shouldApplyPadding = box !== 'box5'; // Exclude padding for box5
 
+
     return (
       <View>
-        {expandedBoxes[box] && (
+         {expandedBoxes[box] && (
           <View style={{ paddingLeft: shouldApplyPadding ? 20 : 0, paddingRight: shouldApplyPadding ? 20 : 0 }}>
             {fullText && (
               <Text style={styles.listItem}>
@@ -108,67 +142,17 @@ const DietAndRecipes = ({ selectedTheme }) => {
             )}
             {box === 'box5' && (
               <View style={{ paddingBottom: 20 }}>
-                <RadioButton.Group
-                onValueChange={(newValue) => {
-                  // Handle the radio button value change here if needed
-                }}
-              >
-              <Button style={styles.radioBtn}
-                    icon={
-                      box5Options.option1
-                        ? 'radiobox-marked'
-                        : 'radiobox-blank'
-                    }
-                    onPress={() => handleOptionPress('option1')}
-                  >
-                      {content.addFirstRoutine && <Text style={{ color: 'black' }}>{content.addFirstRoutine}</Text>}
-                  </Button>
-                  <Button style={styles.radioBtn}
-                    icon={
-                      box5Options.option2
-                        ? 'radiobox-marked'
-                        : 'radiobox-blank'
-                    }
-                    onPress={() => handleOptionPress('option2')}
-                  >
-                      {content.addSecondRoutine && <Text style={{ color: 'black' }}>{content.addSecondRoutine}</Text>}
-                  </Button>
-                  <Button style={styles.radioBtn}
-                    icon={
-                      box5Options.option3
-                        ? 'radiobox-marked'
-                        : 'radiobox-blank'
-                    }
-                    onPress={() => handleOptionPress('option3')}
-                  >
-                    {content.addThirdRoutine && <Text style={{ color: 'black' }}>{content.addThirdRoutine}</Text>}
-                  </Button>
-                  <Button style={styles.radioBtn}
-                    icon={
-                      box5Options.option4
-                        ? 'radiobox-marked'
-                        : 'radiobox-blank'
-                    }
-                    onPress={() => handleOptionPress('option4')}
-                  >
-                     {content.addFourthRoutine && <Text style={{ color: 'black' }}>{content.addFourthRoutine}</Text>}
-                  </Button>
-                  <Button style={styles.radioBtn}
-                    icon={
-                      box5Options.option5
-                        ? 'radiobox-marked'
-                        : 'radiobox-blank'
-                    }
-                    onPress={() => handleOptionPress('option5')}
-                  >
-                    {content.addFifthRoutine && <Text style={{ color: 'black' }}>{content.addFifthRoutine}</Text>}
-                  </Button>
-              </RadioButton.Group> 
-              </ View>     
+                {/* Use MyCheckBox component for checkboxes with text */}
+                <MyCheckBox label={content.addFirstRoutine} checked={box5Options.option1} onChange={() => handleOptionPress('option1')} />
+                <MyCheckBox label={content.addSecondRoutine} checked={box5Options.option2} onChange={() => handleOptionPress('option2')} />
+                <MyCheckBox label={content.addThirdRoutine} checked={box5Options.option3} onChange={() => handleOptionPress('option3')} />
+                <MyCheckBox label={content.addFourthRoutine} checked={box5Options.option4} onChange={() => handleOptionPress('option4')} />
+                <MyCheckBox label={content.addFifthRoutine} checked={box5Options.option5} onChange={() => handleOptionPress('option5')} />
+              </View>
             )}
           </View>
         )}
-      </View>
+          </View>
     );
   };
 
@@ -302,7 +286,22 @@ const styles = StyleSheet.create({
   },
   radioBtn: {
     alignSelf: 'flex-start',
-  }
+  },
+  checkBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderRadius: 30,  // Set the border radius to make it round
+    overflow: 'hidden',  // Hide the checkmark overflow            
+  },
+  checkBox: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    padding: 0,
+  },
+  checkBoxText: {
+    marginLeft: 0,
+  },
   
 });
 export default DietAndRecipes;
