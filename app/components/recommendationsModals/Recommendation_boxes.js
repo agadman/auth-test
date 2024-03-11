@@ -86,7 +86,7 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
       case 'Allt du behöver veta':
         return <StomachHealth selectedTheme={selectedBox} />;
       case 'Kost & recept':
-        return <DietAndRecipes selectedTheme={selectedBox} />;
+        return <DietAndRecipes selectedTheme={selectedBox} userId={userId} />;
       case 'Recept': 
         return <DietAndRecipesTwo selectedTheme={selectedBox} userId={userId} />;
       case 'Kosttillskott':
@@ -94,7 +94,7 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
       case 'Mental hälsa':
         return <MentalHealth selectedTheme={selectedBox} userId={userId} />;
       case 'Fysisk hälsa':
-        return <PhysicalHealth selectedTheme={selectedBox} />;
+        return <PhysicalHealth selectedTheme={selectedBox} userId={userId} />;
       default:
         return null;
     }

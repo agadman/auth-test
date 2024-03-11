@@ -1,7 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 
-const PhysicalHealth = ({ selectedTheme }) => {
+const PhysicalHealth = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
@@ -24,16 +26,20 @@ const PhysicalHealth = ({ selectedTheme }) => {
     },
     Theme_StomachBowel: {
       progressbarTitle: 'Mage & tarm',
-      text: 'Träning handlar inte bara om att få starka muskler eller att påverka din vikt, utan har också bra fördelar för matsmältningen som vi inte alltid tänker på.',
-      secondText: 'Fysisk aktivitet ger en signal till vår kropp att den ska hålla sig aktiv på mer än ett sätt. Precis som våra hjärtan pumpar snabbare och våra lungor arbetar hårdare under träning, reagerar vårt matsmältningssystem också positivt på ökad aktivitet.',
+      text: 'Träning handlar inte bara om att få starka muskler eller att påverka din vikt, utan har också bra fördelar för matsmältningen som vi inte alltid tänker på.\n\nFysisk aktivitet ger en signal till vår kropp att den ska hålla sig aktiv på mer än ett sätt. Precis som våra hjärtan pumpar snabbare och våra lungor arbetar hårdare under träning, reagerar vårt matsmältningssystem också positivt på ökad aktivitet.\n\nFysisk träning kan okcså öka antalet gynnsamma mikrobiella arter, berika mångfalden av mikroflora och förbättra utvecklingen av samlevande bakterier. Alla dessa effekter är fördelaktiga och förbättrar den övergripande hälsostatusen. Det kan också öka cirkulationen till matsmältningsorganen och förbättra ämnesomsättningen.',
+      box1Header: 'Magpass',
+      box1: 'Aerobisk träning\nAll aerobisk träning ökar blodflödet till tarmarna och förbättrar matsmältningen genom att, tarmrörelserna, ökar. Bra val är löpning, cykling och simning. Även styrketräning för magen där det intra- abdominala trycket ökar förbättrar tarmrörelserna, sit-ups, plankan och sneda crunches med vikt stimulerar tarmrörelsena och motverkar förstoppning. ',
+      box2Header: 'Yogapass för matsmältning',
+      box2: 'Meditativ träning\nAll meditativ aktivitet som till exempel yoga dämpar det sympatiska stressystemet. Stress hindrar blodflöde till tarmarna och utsöndring av matsmältningsenzymer.',  
+      box3Header: 'Qi Gong Mage',
+      box3: 'Qi Gong\nTesta Qi gong-övningen av 8 brokader, som är specifikt anpassad för elementet jord (matsmältning).',   
     },
     Theme_Stress: {
       text: 'Content specific to Stress...',
     },
     Theme_Mjälte: {
       progressbarTitle: 'Mitt hälsopaket',
-      text: 'TCM rekommenderar regelbunden rörelse och motion för att upprätthålla tillräcklig Qi (energi) rörelse och flöde. Passande rörelse och motion kommer därför att föra Qi, främja nedbrytningen av mat, tarmrörelser och hormonproduktion. Genom regelbunden träning ökar det vitala flödet av Qi-energi, samtidigt som det minskar fuktighet inom kroppen. Fuktighet kan skada mjälteenergin och ses som övervikt, vilket kan påverka humöret genom att få individer att känna sig tröga, dimmiga i huvudet och till och med deprimerade.',
-      secondText: 'Yin spelar en stor roll för mängden blod och andra vitala vätskor som finns i kroppen. Kraftig motion tömmer denna vitala energikälla och påverkar därför negativt fysisk och mental hälsa. Det är också viktigt att inte överanstränga kroppen med motion.',
+      text: 'TCM rekommenderar regelbunden rörelse och motion för att upprätthålla tillräcklig Qi (energi) rörelse och flöde. Passande rörelse och motion kommer därför att föra Qi, främja nedbrytningen av mat, tarmrörelser och hormonproduktion. Genom regelbunden träning ökar det vitala flödet av Qi-energi, samtidigt som det minskar fuktighet inom kroppen. Fuktighet kan skada mjälteenergin och ses som övervikt, vilket kan påverka humöret genom att få individer att känna sig tröga, dimmiga i huvudet och till och med deprimerade.\n\nYin spelar en stor roll för mängden blod och andra vitala vätskor som finns i kroppen. Kraftig motion tömmer denna vitala energikälla och påverkar därför negativt fysisk och mental hälsa. Det är också viktigt att inte överanstränga kroppen med motion.',
     },
     // Add more themes as needed
   };
@@ -41,15 +47,118 @@ const PhysicalHealth = ({ selectedTheme }) => {
   // Get content based on the selectedTheme
   const content = contentByTheme[selectedTheme] || {};
 
+  const [expandedBoxes, setExpandedBoxes] = useState({
+    box1: false,
+    box2: false,
+    box3: false,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userDocRef = doc(getFirestore(), 'users', userId);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          setExpandedBoxes(userData.expandedBoxes || {});
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  const toggleBox = async (box, isCheckbox) => {
+    const headerKey = `${box}Header`;
+
+    if (isCheckbox) {
+      try {
+        const userDocRef = doc(getFirestore(), 'users', userId, 'themes', selectedTheme);
+        await setDoc(
+          userDocRef,
+          {
+            [box]: contentByTheme[selectedTheme][box], // Save the content
+            [headerKey]: contentByTheme[selectedTheme][headerKey], // Save the header
+          },
+          { merge: true } // Add the merge option to update specific fields without overwriting the entire document
+        );
+
+        console.log(`Content and header for ${box} saved to Firestore`);
+      } catch (error) {
+        console.error('Error setting content and header:', error);
+      }
+    } else {
+      setExpandedBoxes((prevState) => ({
+        ...prevState,
+        [box]: !prevState[box],
+      }));
+    }
+  };
+
+  const renderCheckboxIcon = (box) => {
+    return (
+      <Icon
+        name={expandedBoxes[box] ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
+        style={styles.checkboxIcon}
+      />
+    );
+  };
+  const renderContent = (box, fullText) => {
+    return (
+      <View style={styles.content}>
+        {expandedBoxes[box] && <Text style={styles.text}>{fullText}</Text>}
+      </View>
+    );
+  };
+
+  const renderArrowIcon = (box) => {
+    return expandedBoxes[box] ? (
+      <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
+    ) : (
+      <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
+    );
+  };
+
   return (
       <View style={styles.wrapper}>
         {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <Text style={styles.header}>Fysisk hälsa</Text>
-      {content.text && <Text style={styles.text}>{content.text}</Text>}
-      {content.secondText && <Text style={styles.text}>{content.secondText}</Text>}
-      <View style={styles.secondaryHeaderContainer}>
-          <Text style={styles.secondaryHeader}>Övningar</Text>
-        </View>  
+      {content.text && <Text style={styles.introText}>{content.text}</Text>}
+        {['box1', 'box2', 'box3'].map((box) => (
+  // Check if the box is defined in contentByTheme[selectedTheme]
+  contentByTheme[selectedTheme]?.[box] && (
+    <View key={box} style={styles.box}>
+      
+        <View style={styles.row}>
+          <TouchableOpacity onPress={() => toggleBox(box, true)}>
+            <Text style={styles.icon}>
+              <Icon name="favorite" style={styles.heartIcon} />
+            </Text>
+          </TouchableOpacity>
+        <TouchableOpacity onPress={() => toggleBox(box, false)}>
+          <View style={styles.headerArrow}>
+          <Text style={styles.secondHeader}>
+            {contentByTheme[selectedTheme]?.[`${box}Header`] || ''}
+          </Text>
+          <View style={styles.arrowContainer}>
+            {renderArrowIcon(box)}
+          </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      {/* Check if content exists before rendering */}
+      {contentByTheme[selectedTheme]?.[box] && (
+        <View style={styles.content}>
+          {expandedBoxes[box] && <Text style={styles.text}>{contentByTheme[selectedTheme][box]}</Text>}
+        </View>
+      )}
+    </View>
+  )
+))}  
     </View>
     );
   };
@@ -57,26 +166,60 @@ export default PhysicalHealth;
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
     backgroundColor: '#DBE4E7',
-    paddingLeft: 20,
     paddingRight: 20,
+    paddingLeft: 20,
+    borderRadius: 10,
   },
   header: {
     fontSize: 24,
     marginTop: 20,
     marginBottom: 20,
   },
-  text: {
-    marginBottom: 20,
+  introText: {
+    marginBottom: 30,
   },
-  secondaryHeaderContainer: {
-    flexDirection: 'row',
-    width: '90%',
-    justifyContent: 'space-between',  // Add this line
+  box: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    marginBottom: 20,
+    padding: 10,
+  },
+  icon: {
+    marginRight: 10,
+  },
+  heartIcon: {
+    fontSize: 24,
+    color: 'lightgrey',
+  },
+  secondHeader: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  content: {
+    marginTop: 10,
+  },
+  text: {
     marginBottom: 10,
   },
-  secondaryHeader: {
-    textTransform: 'uppercase',
-},
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  headerArrow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '93%',
+
+  },
+  arrowContainer: {
+    marginLeft: 'auto',
+
+  },
+  arrowIcon: {
+    marginLeft: 5,
+    fontSize: 24,
+  },
 });

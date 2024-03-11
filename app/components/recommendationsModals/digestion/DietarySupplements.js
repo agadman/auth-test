@@ -2,6 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { CheckBox } from 'react-native-elements';
+
+const MyCheckBox = ({ label, checked, onChange }) => {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <CheckBox 
+        checked={checked} 
+        onPress={onChange} 
+        checkedIcon="check-circle"  
+        uncheckedIcon="circle-o"     
+        containerStyle={styles.checkBox}
+        textStyle={styles.checkBoxText}
+        checkedColor="#709078"    // Set the color for the checkmark
+        />
+      <Text style={{ color: 'black', marginLeft: 8 }}>{label}</Text>
+    </View>
+  );
+};
 
 const DietarySupplements = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
@@ -138,14 +156,15 @@ const DietarySupplements = ({ selectedTheme, userId }) => {
     <View key={box} style={styles.box}>
       
         <View style={styles.row}>
-          <TouchableOpacity onPress={() => toggleBox(box, true)}>
-            <Text style={styles.icon}>
-              <Icon name="favorite" style={styles.heartIcon} />
+          <View style={styles.checkboxAndHeaderContainer}>
+            <TouchableOpacity onPress={() => toggleBox(box, true)}>
+              <MyCheckBox  />
+            </TouchableOpacity>
+            <Text style={styles.secondHeader}>
+              {contentByTheme[selectedTheme]?.[`${box}Header`] || ''}
             </Text>
-          </TouchableOpacity>
-          <Text style={styles.secondHeader}>
-            {contentByTheme[selectedTheme]?.[`${box}Header`] || ''}
-          </Text>
+          </View>
+          
         <TouchableOpacity onPress={() => toggleBox(box, false)}>
           <View style={styles.row}>
             {renderArrowIcon(box)}
@@ -198,7 +217,7 @@ const styles = StyleSheet.create({
   secondHeader: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
+ 
     marginTop: 10,
   },
   content: {
@@ -209,11 +228,28 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  checkboxAndHeaderContainer: {
+    flexDirection: 'row',
   },
   arrowIcon: {
-    marginLeft: 5,
     fontSize: 24,
+  },
+  checkBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderRadius: 30,  // Set the border radius to make it round
+    overflow: 'hidden',  // Hide the checkmark overflow            
+  },
+  checkBox: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    padding: 0,
+  },
+  checkBoxText: {
+    marginLeft: 0,
   },
 });
