@@ -97,13 +97,19 @@ const StomachHealth = ({ selectedTheme }) => {
         </View>
         )}
 
-  const renderArrowIcon = (box) => {
-    return expandedBoxes[box] ? (
-      <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
-  ) : (
-    <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
-  );
-  };
+        const renderArrowIcon = (box) => {
+          // Check if there is content for the specified box
+          const hasContent = !!contentByTheme[selectedTheme]?.[box];
+        
+          return hasContent ? (
+            expandedBoxes[box] ? (
+              <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
+            ) : (
+              <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
+            )
+          ) : null;
+        };
+        
 
   return (
     <View style={styles.wrapper}>
