@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { CheckBox } from 'react-native-elements';
+
 
 const PhysicalHealth = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
@@ -52,40 +54,48 @@ const PhysicalHealth = ({ selectedTheme, userId }) => {
     box2: false,
     box3: false,
   });
+  const [checkedBoxes, setCheckedBoxes] = useState({
+    box1: false,
+    box2: false,
+    box3: false,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userDocRef = doc(getFirestore(), 'users', userId);
+        const userDocRef = doc(getFirestore(), 'users', userId, 'themes', selectedTheme);
         const userDocSnapshot = await getDoc(userDocRef);
-
+  
         if (userDocSnapshot.exists()) {
           const userData = userDocSnapshot.data();
           setExpandedBoxes(userData.expandedBoxes || {});
+          setCheckedBoxes(userData.checkedBoxes || {});
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
-  }, [userId]);
+  }, [userId, selectedTheme]);  
 
   const toggleBox = async (box, isCheckbox) => {
     const headerKey = `${box}Header`;
-
+  
     if (isCheckbox) {
       try {
         const userDocRef = doc(getFirestore(), 'users', userId, 'themes', selectedTheme);
-        await setDoc(
-          userDocRef,
-          {
-            [box]: contentByTheme[selectedTheme][box], // Save the content
-            [headerKey]: contentByTheme[selectedTheme][headerKey], // Save the header
-          },
-          { merge: true } // Add the merge option to update specific fields without overwriting the entire document
-        );
-
+        await updateDoc(userDocRef, {
+          [box]: contentByTheme[selectedTheme][box], // Save the content
+          [headerKey]: contentByTheme[selectedTheme][headerKey], // Save the header
+        });
+  
+        // Toggle the checkbox state in local state
+        setCheckedBoxes((prevState) => ({
+          ...prevState,
+          [box]: !prevState[box],
+        }));
+  
         console.log(`Content and header for ${box} saved to Firestore`);
       } catch (error) {
         console.error('Error setting content and header:', error);
@@ -97,68 +107,68 @@ const PhysicalHealth = ({ selectedTheme, userId }) => {
       }));
     }
   };
+  
 
   const renderCheckboxIcon = (box) => {
     return (
-      <Icon
-        name={expandedBoxes[box] ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
-        style={styles.checkboxIcon}
+      <CheckBox
+        checked={checkedBoxes[box]}
+        onPress={() => toggleBox(box, true)}
+        checkedIcon="check-circle"
+        uncheckedIcon="circle-o"
+        containerStyle={styles.checkboxContainer}
+        textStyle={styles.checkboxText}
+        checkedColor="#709078" // Set the color for the checkmark
       />
     );
   };
+
+  const renderArrowIcon = (box) => {
+    return (
+      <TouchableOpacity onPress={() => toggleBox(box, false)}>
+        <View style={styles.headerArrow}>
+          <Text style={styles.secondHeader}>
+            {contentByTheme[selectedTheme]?.[`${box}Header`] || ''}
+          </Text>
+          <View style={styles.arrowContainer}>
+            {expandedBoxes[box] ? (
+              <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
+            ) : (
+              <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
+            )}
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+  
   const renderContent = (box, fullText) => {
     return (
-      <View style={styles.content}>
+      <View>
         {expandedBoxes[box] && <Text style={styles.text}>{fullText}</Text>}
       </View>
     );
   };
 
-  const renderArrowIcon = (box) => {
-    return expandedBoxes[box] ? (
-      <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
-    ) : (
-      <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
-    );
-  };
-
   return (
-      <View style={styles.wrapper}>
-        {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
+    <View style={styles.wrapper}>
+      {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <Text style={styles.header}>Fysisk hälsa</Text>
       {content.text && <Text style={styles.introText}>{content.text}</Text>}
-        {['box1', 'box2', 'box3'].map((box) => (
-  // Check if the box is defined in contentByTheme[selectedTheme]
-  contentByTheme[selectedTheme]?.[box] && (
-    <View key={box} style={styles.box}>
-      
-        <View style={styles.row}>
-          <TouchableOpacity onPress={() => toggleBox(box, true)}>
-            <Text style={styles.icon}>
-              <Icon name="favorite" style={styles.heartIcon} />
-            </Text>
-          </TouchableOpacity>
-        <TouchableOpacity onPress={() => toggleBox(box, false)}>
-          <View style={styles.headerArrow}>
-          <Text style={styles.secondHeader}>
-            {contentByTheme[selectedTheme]?.[`${box}Header`] || ''}
-          </Text>
-          <View style={styles.arrowContainer}>
-            {renderArrowIcon(box)}
-          </View>
-          </View>
-        </TouchableOpacity>
-      </View>
+      {['box1', 'box2', 'box3'].map((box) => (
+        // Check if the box is defined in contentByTheme[selectedTheme]
+        contentByTheme[selectedTheme]?.[box] && (
+          <View key={box} style={styles.box}>
+            <View style={styles.row}>
+              {renderCheckboxIcon(box)}
+              {renderArrowIcon(box)}
+            </View>
 
-      {/* Check if content exists before rendering */}
-      {contentByTheme[selectedTheme]?.[box] && (
-        <View style={styles.content}>
-          {expandedBoxes[box] && <Text style={styles.text}>{contentByTheme[selectedTheme][box]}</Text>}
-        </View>
-      )}
-    </View>
-  )
-))}  
+            {/* Check if content exists before rendering */}
+            {contentByTheme[selectedTheme]?.[box] && renderContent(box, contentByTheme[selectedTheme][box])}
+          </View>
+        )
+      ))}
     </View>
     );
   };
@@ -185,41 +195,37 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
   },
-  icon: {
-    marginRight: 10,
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  heartIcon: {
-    fontSize: 24,
-    color: 'lightgrey',
+  checkboxContainer: {
+    marginRight: 10,
+    padding: 0,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+  },
+  checkboxText: {
+    color: 'black',
+    marginLeft: 8,
   },
   secondHeader: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  content: {
-    marginTop: 10,
   },
   text: {
     marginBottom: 10,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   headerArrow: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '93%',
-
   },
   arrowContainer: {
     marginLeft: 'auto',
-
   },
   arrowIcon: {
     marginLeft: 5,
     fontSize: 24,
-  },
+  }, 
 });
