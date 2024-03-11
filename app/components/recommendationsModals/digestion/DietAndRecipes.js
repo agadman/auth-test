@@ -1,28 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { RadioButton } from 'react-native-paper';
-import { Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CheckBox } from 'react-native-elements';
+import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
-const MyCheckBox = ({ label, checked, onChange }) => {
-  return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <CheckBox 
-        checked={checked} 
-        onPress={onChange} 
-        checkedIcon="check-circle"  
-        uncheckedIcon="circle-o"     
-        containerStyle={styles.checkBox}
-        textStyle={styles.checkBoxText}
-        checkedColor="#709078"    // Set the color for the checkmark
-        />
-      <Text style={{ color: 'black', marginLeft: 8 }}>{label}</Text>
-    </View>
-  );
-};
-
-const DietAndRecipes = ({ selectedTheme }) => {
+const DietAndRecipes = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
     Theme_Anxiety: {
@@ -130,6 +112,35 @@ const DietAndRecipes = ({ selectedTheme }) => {
   
     const shouldApplyPadding = box !== 'box5'; // Exclude padding for box5
 
+    const MyCheckBox = ({ label, checked, onChange, selectedTheme, userId }) => {
+      const handleCheckBoxPress = async () => {
+        try {
+          const userDocRef = doc(getFirestore(), 'users', userId, 'themes', selectedTheme);
+          await updateDoc(userDocRef, {
+            [label]: !checked, // Save the state of the checkbox
+          });
+          onChange(); // Update the local state after Firestore update
+        } catch (error) {
+          console.error('Error updating checkbox state:', error);
+        }
+      };
+    
+      return (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <CheckBox
+            checked={checked}
+            onPress={handleCheckBoxPress}
+            checkedIcon="check-circle"
+            uncheckedIcon="circle-o"
+            containerStyle={{ padding: 0, backgroundColor: 'transparent', borderWidth: 0 }}
+            textStyle={{ color: 'black', marginLeft: 8 }}
+            checkedColor="#709078"
+          />
+          <Text style={{ color: 'black', marginLeft: 8 }}>{label}</Text>
+        </View>
+      );
+    };
+
 
     return (
       <View>
@@ -143,11 +154,42 @@ const DietAndRecipes = ({ selectedTheme }) => {
             {box === 'box5' && (
               <View style={{ paddingBottom: 20 }}>
                 {/* Use MyCheckBox component for checkboxes with text */}
-                <MyCheckBox label={content.addFirstRoutine} checked={box5Options.option1} onChange={() => handleOptionPress('option1')} />
-                <MyCheckBox label={content.addSecondRoutine} checked={box5Options.option2} onChange={() => handleOptionPress('option2')} />
-                <MyCheckBox label={content.addThirdRoutine} checked={box5Options.option3} onChange={() => handleOptionPress('option3')} />
-                <MyCheckBox label={content.addFourthRoutine} checked={box5Options.option4} onChange={() => handleOptionPress('option4')} />
-                <MyCheckBox label={content.addFifthRoutine} checked={box5Options.option5} onChange={() => handleOptionPress('option5')} />
+                <MyCheckBox
+  label={content.addFirstRoutine}
+  checked={box5Options.option1}
+  onChange={() => handleOptionPress('option1')}
+  selectedTheme={selectedTheme}
+  userId={userId}  // Add this line
+/>
+<MyCheckBox
+  label={content.addSecondRoutine}
+  checked={box5Options.option2}
+  onChange={() => handleOptionPress('option2')}
+  selectedTheme={selectedTheme}
+  userId={userId}  // Add this line
+/>
+<MyCheckBox
+  label={content.addThirdRoutine}
+  checked={box5Options.option3}
+  onChange={() => handleOptionPress('option3')}
+  selectedTheme={selectedTheme}
+  userId={userId}  // Add this line
+/>
+<MyCheckBox
+  label={content.addFourthRoutine}
+  checked={box5Options.option4}
+  onChange={() => handleOptionPress('option4')}
+  selectedTheme={selectedTheme}
+  userId={userId}  // Add this line
+/>
+<MyCheckBox
+  label={content.addFifthRoutine}
+  checked={box5Options.option5}
+  onChange={() => handleOptionPress('option5')}
+  selectedTheme={selectedTheme}
+  userId={userId}  // Add this line
+/>
+
               </View>
             )}
           </View>
