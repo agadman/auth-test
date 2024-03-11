@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 import { CheckBox } from 'react-native-elements';
 
-
 const PhysicalHealth = ({ selectedTheme, userId }) => {
   // Define content based on the selectedTheme
   const contentByTheme = {
@@ -108,7 +107,6 @@ const PhysicalHealth = ({ selectedTheme, userId }) => {
     }
   };
   
-
   const renderCheckboxIcon = (box) => {
     return (
       <CheckBox
