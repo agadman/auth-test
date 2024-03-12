@@ -67,6 +67,16 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
     setActiveModalIndex(nextIndex);
   };
 
+  const handlePreviousModal = () => {
+    const currentIndex = updatedBoxData.findIndex((box) => box.title === activeBox);
+    const previousIndex = (currentIndex - 1 + updatedBoxData.length) % updatedBoxData.length;
+
+    setActiveBox(updatedBoxData[previousIndex].title);
+    setModalVisible(true);
+    setActiveModalIndex(previousIndex);
+  };
+
+
   const getNextModalTitle = () => {
     const currentIndex = updatedBoxData.findIndex((box) => box.title === activeBox);
     const nextIndex = (currentIndex + 1) % updatedBoxData.length;
@@ -178,6 +188,7 @@ const Recommendation_boxes = ({ boxData, selectedBox, onSelectBox }) => {
         onClose={() => setModalVisible(false)}
         boxType={activeBox}
         onNext={nextModal}
+        onPrevious={handlePreviousModal}
         getNextModalTitle={getNextModalTitle}  // Pass the function as a prop
         modalContent={getModalContent()}
         totalComponents={updatedBoxData.length}

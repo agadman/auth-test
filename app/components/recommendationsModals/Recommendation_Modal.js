@@ -1,21 +1,28 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Recommendation_Modal = ({
   isVisible,
   onClose,
   onNext,
+  onPrevious,
   modalContent,
   activeModalIndex,
   backgroundColor,
   boxData,
   progressBarData,
   getNextModalTitle,
+  getPreviousModalTitle,
 }) => {
   const switchToNextModal = () => {
     onClose(); // Close the current modal
     onNext(); // Switch to the next modal
+  };
+  const switchToPreviousModal = () => {
+    onClose(); // Close the current modal
+    onPrevious(); // Switch to the previous modal
   };
 
   const renderProgressBar = () => {
@@ -54,9 +61,19 @@ const Recommendation_Modal = ({
           </ScrollView>
 
           <View style={[styles.stickyBottom, { backgroundColor }]}>
-            <TouchableOpacity onPress={switchToNextModal}>
-              <Text style={styles.nextModalTitle}>Nästa: {getNextModalTitle()}</Text>
-            </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <TouchableOpacity onPress={switchToPreviousModal}>
+            <Icon name="keyboard-arrow-left" size={30} color="#000" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={switchToNextModal}>
+            <Text style={styles.nextModalTitle}>Nästa: {getNextModalTitle()}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={switchToNextModal}>
+            <Icon name="keyboard-arrow-right" size={30} color="#000" />
+          </TouchableOpacity>
+        </View>
           </View>
         </View>
       </SafeAreaView>
@@ -72,14 +89,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   stickyBottom: {
-    padding: 30,
-    alignItems: 'center',
+    paddingTop: 40,
+    paddingBottom: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
     borderTopWidth: 2,
     borderTopColor: '#BDBDBD',
   },
   nextModalTitle: {
     textTransform: 'uppercase',
-    marginBottom: 10,
   },
   closeX: {
     fontWeight: 'bold',
