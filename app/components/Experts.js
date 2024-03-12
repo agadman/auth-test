@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const Experts = () => {
   const expertsData = [
@@ -11,10 +11,13 @@ const Experts = () => {
   ];
 
   const navigation = useNavigation();
+  const route = useRoute();
 
-  const handleExpertPress = (expertId) => {
-    navigation.navigate('ExpertDetails', { expertId });
-  };
+const handleExpertPress = (expertId) => {
+  const currentScreen = route.name; // Get the name of the current screen using useRoute
+  navigation.navigate('ExpertDetails', { expertId, previousScreen: currentScreen });
+};
+
 
   const initialVisibleExperts = 2.5;
   const expertItemWidth = 140; // Adjust as needed

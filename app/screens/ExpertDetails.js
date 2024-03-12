@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet, Text, Image, Pressable, Dimensions, Alert } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { COLORS } from '../components/Colors';
 import ArticleBox from '../components/ArticleBox';
 import ExerciseBox from '../components/ExerciseBox';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const ExpertDetails = () => {
   const route = useRoute();
   const { expertId } = route.params;
+  const navigation = useNavigation();
+
+const handleGoBack = () => {
+  const previousScreen = route.params?.previousScreen || 'Home'; // Default to 'Home' if the previous screen is not available
+  navigation.navigate(previousScreen);
+};
+
 
   const windowWidth = Dimensions.get('window').width;
   const boxWidth = (windowWidth - 60) / 2; // Define boxWidth locally
 
   const [showAllBoxes, setShowAllBoxes] = useState(false);
   const [showAllArticleBoxes, setShowAllArticleBoxes] = useState(false);
+
 
   // Assuming that expertsData is available in ExpertDetails (you may need to pass it from the parent component)
   const expertsData = [
@@ -64,10 +73,17 @@ const ExpertDetails = () => {
 
   return (
     <ScrollView vertical>
-      <View style={styles.container}>
-        <View style={styles.introductoryBox}>
-          <Text style={styles.header}>Våra experter</Text>
+      <View style={styles.container}>   
+          <View style={styles.introductoryBox}>
+          <View style={styles.arrowContainer}>
+              <Pressable onPress={handleGoBack}>
+                <Icon name="arrow-back" size={30} color={COLORS.primary} />
+              </Pressable>
+            </View>
+            <Text style={styles.header}>Våra experter</Text>
+            <View style={styles.arrowContainer}></View> 
         </View>
+       
         {selectedExpert && (
           <View style={styles.expertDetails}>
             <Image source={selectedExpert.image} style={styles.expertImage} />
@@ -152,15 +168,22 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   introductoryBox: {
+    width: '90%',
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 30,
-    paddingLeft: 20,
+  },
+  arrowContainer: {
+    width: 30, // Set a fixed width for the arrow container
+    alignItems: 'flex-start', // Align arrow to the start (left)
   },
   header: {
+    flex: 1, // Let the header take up the remaining space
     fontSize: 30,
     fontWeight: '700',
+    textAlign: 'center',
+    flex: 1,
   },
   expertDetails: {
     alignItems: 'center',

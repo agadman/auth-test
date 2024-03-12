@@ -27,9 +27,13 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
     },
     Theme_StomachBowel: {
       progressbarTitle: 'Mage & tarm',
+      box1Header: 'Bra rutiner ',
       box1: 'Börja din dag med ett glas rumstempererat vatten med saften av en halv citron. Ta en nypa keltiskt havssalt och lägg det på tungan, drick 1 eller 2 glas vatten och vänta 15 minuter innan du äter frukost. Se till att alltid äta frukost och försök att äta vid ungefär samma tid varje dag för att skapa en rutin för din kropp. Det bästa är att inte hoppa över måltider och att äta alla måltider inom en 10-timmarsperiod och inte äta efter 18.30.', 
+      box2Header: 'Matdagbok',
       box2: 'Det är inte bara VAD du äter som är viktigt. Även HUR du äter påverkar din hälsa. Ta dig tid att äta, sitt i en lugn miljö utan skärmar, och tugga mycket, så mycket att maten nästan blir flytande i munnen.\n\nOm du märker att magen påverkas olika beroende på vad du stoppar i dig så kan du skriva ned en matdagbok och hur du känner dig efter att du har ätit. Gör du detta under en månad kan du få ut mer information än du tror.',   
+      box3Header: 'Fibrer och grönsaker',
       box3: 'En stor påverkan på magen är ju såklart vad du stoppar i dig. En aspekt är att få i sig tillräckligt med fiber. Den enklaste vägen är att äta 1-2 matskedar frön som linfrö, pumpakärnor och svarta sesamfrön, varje dag. Det bästa är att äta fröna malda. Även mörka bladgrönsaker innehåller mycket fibrer. Koka dom väl och krydda. Bönor och linser ger också fibertillskott men kan också orsaka matsmältningsbesvär så börja med små mängder och öka långsamt, blötlägg dom och byt vatten i minst 3 timmar innan du tillagar dom.\n\nSe till att du äter olika färger och typer av frukt och grönsaker. Prova små mängder som är välkokta först, undvik råa grönsaker helt. Sötpotatis, pumpa och squash är laddade med mineraler och utmärkta för tarmmikrobiomet. Ingefära, mangold, kokt grönkål och rödbetor är också bra livsmedel att ta med i din kost och gärna med ett glutenfritt spannmål till som ris.\n\nDet är även bra att inkludera surkål eller fermenterade grönsaker som innehåller pro- och prebiotika i din kost.', 
+      box4Header: 'Mat att utesluta',
       box4: 'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre:\n\nvitt socker\nmjölkprodukter\nalkohol\nkoffein\ngluten\nsoja', 
       box5: 'Du kan också testa att eliminera vissa livsmedel under en 8 veckors period för att se om du mår bättre:',
       addFirstRoutine: 'Drick vatten innan frukost',
@@ -50,6 +54,10 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
       text2: 'Stäng av datorn och telefonen, försök att hitta en lugn miljö att äta i. När du sätter dig ner för att äta, titta på maten, känn på maten och ta dig tid att äta. Tugga också maten ordentligt, tills den är nästan flytande i munnen. Ät alltid ditt protein före kolhydraterna på tallriken.',
       secondaryHeader3: 'Vad ska jag äta?',
       text3: 'Mjälten gillar INTE "fuktiga" eller "kalla" livsmedel. Att minska dessa och hålla dom till ett minimum är en bra grundregel för att lindra en trött mjälte.\nTa också en matsked rå, ofiltrerad äppelcidervinäger i ett glas rumstempererat vatten innan din måltid. Detta kan hjälpa till att reglera upptaget av glukos, särskilt när du äter kolhydrater.\nOm du känner att vad du äter påverkar dig mycket så håll gärna en matdagbok för att kunna förstå mer hur olika livsmedel påverkar din matsmältning och hur du mår överlag. Att göra detta under endast 1 månad kommer troligen ge dig mer insikter än du tror.\nHär får du tips på kost och livsmedel som är bra och som du ska undvika för att stärka mjältens energi. Tipsen står i prioordning.',
+      box5: 'Test',
+      addFirstRoutine: 'Ta en matsked rå, ofiltrerad äppelcidervinäger i ett glas rumstempererat vatten innan din måltid',
+      addSecondRoutine: 'Ät alla tre måltider vid samma tid under en 10-timmarsperiod.',
+      addThirdRoutine: 'För matdagbok varje dag',
     },
     // Add more themes as needed
   };
@@ -155,40 +163,40 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
               <View style={{ paddingBottom: 20 }}>
                 {/* Use MyCheckBox component for checkboxes with text */}
                 <MyCheckBox
-  label={content.addFirstRoutine}
-  checked={box5Options.option1}
-  onChange={() => handleOptionPress('option1')}
-  selectedTheme={selectedTheme}
-  userId={userId}  // Add this line
-/>
-<MyCheckBox
-  label={content.addSecondRoutine}
-  checked={box5Options.option2}
-  onChange={() => handleOptionPress('option2')}
-  selectedTheme={selectedTheme}
-  userId={userId}  // Add this line
-/>
-<MyCheckBox
-  label={content.addThirdRoutine}
-  checked={box5Options.option3}
-  onChange={() => handleOptionPress('option3')}
-  selectedTheme={selectedTheme}
-  userId={userId}  // Add this line
-/>
-<MyCheckBox
-  label={content.addFourthRoutine}
-  checked={box5Options.option4}
-  onChange={() => handleOptionPress('option4')}
-  selectedTheme={selectedTheme}
-  userId={userId}  // Add this line
-/>
-<MyCheckBox
-  label={content.addFifthRoutine}
-  checked={box5Options.option5}
-  onChange={() => handleOptionPress('option5')}
-  selectedTheme={selectedTheme}
-  userId={userId}  // Add this line
-/>
+                  label={content.addFirstRoutine}
+                  checked={box5Options.option1}
+                  onChange={() => handleOptionPress('option1')}
+                  selectedTheme={selectedTheme}
+                  userId={userId}  // Add this line
+                />
+                <MyCheckBox
+                  label={content.addSecondRoutine}
+                  checked={box5Options.option2}
+                  onChange={() => handleOptionPress('option2')}
+                  selectedTheme={selectedTheme}
+                  userId={userId}  // Add this line
+                />
+                <MyCheckBox
+                  label={content.addThirdRoutine}
+                  checked={box5Options.option3}
+                  onChange={() => handleOptionPress('option3')}
+                  selectedTheme={selectedTheme}
+                  userId={userId}  // Add this line
+                />
+                <MyCheckBox
+                  label={content.addFourthRoutine}
+                  checked={box5Options.option4}
+                  onChange={() => handleOptionPress('option4')}
+                  selectedTheme={selectedTheme}
+                  userId={userId}  // Add this line
+                />
+                <MyCheckBox
+                  label={content.addFifthRoutine}
+                  checked={box5Options.option5}
+                  onChange={() => handleOptionPress('option5')}
+                  selectedTheme={selectedTheme}
+                  userId={userId}  // Add this line
+                />
 
               </View>
             )}
@@ -198,13 +206,18 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
     );
   };
 
-  const renderArrowIcon = (box) => {
-    return expandedBoxes[box] ? (
-      <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
-  ) : (
-    <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
-  );
-  };
+   const renderArrowIcon = (box) => {
+          // Check if there is content for the specified box
+          const hasContent = !!contentByTheme[selectedTheme]?.[box];
+        
+          return hasContent ? (
+            expandedBoxes[box] ? (
+              <Icon name="keyboard-arrow-up" style={styles.arrowIcon} />
+            ) : (
+              <Icon name="keyboard-arrow-down" style={styles.arrowIcon} />
+            )
+          ) : null;
+        };
 
   return (
     <View style={styles.wrapper}>
@@ -220,9 +233,7 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
 
       <TouchableOpacity onPress={() => toggleBox('box1')}>
         <View style={styles.row}>
-          <Text style={styles.secondHeader}>
-            Bra rutiner 
-          </Text>
+          {content.box1Header && <Text style={styles.secondHeader}>{content.box1Header}</Text>}
           {renderArrowIcon('box1')}
         </View>
         {renderContent('box1', contentByTheme[selectedTheme]?.box1)} 
@@ -230,9 +241,7 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
 
       <TouchableOpacity onPress={() => toggleBox('box2')}>
         <View style={styles.row}>
-          <Text style={styles.secondHeader}>
-            Matdagbok 
-          </Text>
+          {content.box2Header && <Text style={styles.secondHeader}>{content.box2Header}</Text>} 
           {renderArrowIcon('box2')}
         </View>
         {renderContent('box2', contentByTheme[selectedTheme]?.box2)} 
@@ -240,9 +249,7 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
 
       <TouchableOpacity onPress={() => toggleBox('box3')}>
         <View style={styles.row}>
-          <Text style={styles.secondHeader}>
-            Fibrer och grönsaker 
-          </Text>
+          {content.box3Header && <Text style={styles.secondHeader}>{content.box3Header}</Text>}
           {renderArrowIcon('box3')}
         </View>
         {renderContent('box3', contentByTheme[selectedTheme]?.box3)} 
@@ -250,9 +257,7 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
 
       <TouchableOpacity onPress={() => toggleBox('box4')}>
         <View style={styles.row}>
-          <Text style={styles.secondHeader}>
-            Mat att utesluta 
-          </Text>
+          {content.box4Header && <Text style={styles.secondHeader}>{content.box4Header}</Text>}
           {renderArrowIcon('box4')}
         </View>
         {renderContent('box4', contentByTheme[selectedTheme]?.box4)} 
