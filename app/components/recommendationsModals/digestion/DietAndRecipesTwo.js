@@ -44,6 +44,7 @@ const DietAndRecipesTwo = ({ selectedTheme, userId }) => {
       },
       Theme_StomachBowel: {
         progressbarTitle: 'Mage & tarm',
+        introText: 'Här har vi samlat några recept som är bra för din mage och tarm. Om du vill spara ett recept kan du hjärtmarkera det och hitta det i din receptsamling i din profil.',
         fav1Header: 'Congeegröt (risgröt)',
         fav1: 'Överväg att göra congee (gröt) en gång i veckan. Detta är en risgröt som är uppvärmande och lugnande för tarmarna. Detta är ett recept. Du kan hitta hundratals online.\n\n1 kopp kortkornigt vitt ris (eller vilket ris som helst som fungerar för dig)\n7-10 koppar vatten/benbuljong/grönsaksbuljong\nSalt efter smak i slutet\nSteg 1: Tvätta riset i ett durkslag\nSteg 2: Lägg ris och vatten i en stor kastrull (2 delar vatten, 1 del ris)\nSteg 3: Koka upp och låt sedan sjuda i 1,5 timme, rör om ofta\nSteg 4: Lägg till önskade ingredienser och salt i slutet\nSteg 5: Njut!\nAnpassa efter ditt tycke!\nLägg till protein: kyckling, fläsk, nötkött, ägg etc..\nLägg till grönsaker: kål, morötter, selleri, pumpa, butternut squash etc...\nLägg till garnering: ingefära, salladslök eller rättika, sesamfrön etc...',
         fav2Header: 'Buljong',
@@ -56,10 +57,14 @@ const DietAndRecipesTwo = ({ selectedTheme, userId }) => {
         box2: '',
       },
       Theme_Mjälte: {
-        box1Header: '',
         progressbarTitle: 'Mitt hälsopaket',
-        box2Header: '',
-        box2: '',
+        introText: 'Här har vi samlat några recept som är bra för din mjälte. Om du vill spara ett recept kan du hjärtmarkera det och hitta det i din receptsamling i din profil.',
+        fav1Header: 'Kokta päron',
+        fav1: '8 koppar vatten (filtrerat eller källvatten)\n1/2 kopp hackade mandlar\n4 stora päron (asiatiska är bäst, men vilken sort som helst fungerar), skurna i bitar. Ekologiska om möjligt.\n4 bitar mandarinskal (Chen Pi)\n2 till 3 matskedar honung\nca 5 gojibär\n1/2 tum ingefära, skuren i bitar\nEn nypa kanel och/eller kardemumma\n\nSå här gör du:\nKoka upp vattnet i en stor kastrull.\nTillsätt mandlarna, ingefäran, päronen och mandarinskalet.\nLåt blandningen koka ner till två koppar. Rör i honungen. Tillsätt gojibär.\nStrö över kanel och/eller kardemumma efter smak.\nDrick varmt en eller två gånger om dagen i ungefär en vecka.\n\nTips!\nÄndra ingredienserna efter din smak. Kärnan i receptet är päronen, mandlarna och honungen',
+        fav2Header: 'Linssoppa med pumpa',
+        fav2: 'Ingredienser:\n\n4 koppar butternut squash, skalad och tärnad\n1 medium söt lök, skalad och hackad\n2 matskedar olivolja\n1 matsked ghee eller smör\n1 matsked färska salviablad, hackade\n1 tsk riven ingefära\nSalt och peppar efter smak\n\nGör så här:\n\n1. Förvärm ugnen till 400°F.\n2. Placera butternut squash på en bakplåt klädd med bakplåtspapper. Ringla över olivolja, strö över hackad salvia, salt och peppar. Rosta i ugnen i 30-35 minuter eller tills den är mjuk, rör om då och då tills den är gyllenbrun.\n3. Under tiden, i en stor kastrull, värm olivolja och 1 matsked ghee över medelvärme.\n4. Tillsätt hackad lök och stek i 3-4 minuter.\n5. Tillsätt 4-5 koppar vatten i kastrullen. När vattnet kokar, tillsätt den rostade butternutsquashen och resterande ghee eller smör.\n6. Rör i de röda linserna och den rivna ingefäran. Koka tills linserna är mjuka, cirka 15-20 minuter.\n7. Krydda med salt och peppar efter smak.\n8. Servera varm',
+        fav3Header: 'Örtte',
+        fav3: 'Ett helt skal av en ekologisk mandarinapelsin\nEn tesked riven färsk ingefära\n\nKoka i 2 koppar vatten, låt dra i 5-10 minuter, sila. Lägg till honung efter tycke och smak.',
       },
       // Add more themes as needed
     };
@@ -90,7 +95,7 @@ const DietAndRecipesTwo = ({ selectedTheme, userId }) => {
   }, [userId]);
 
   const toggleBox = async (fav, isHeartIcon) => {
-    const favIndex = ['fav1', 'fav2'].indexOf(fav);
+    const favIndex = ['fav1', 'fav2', 'fav3'].indexOf(fav);
     const contentKey = `fav${favIndex + 1}`;
     const headerKey = `fav${favIndex + 1}Header`;
   
@@ -153,12 +158,10 @@ const DietAndRecipesTwo = ({ selectedTheme, userId }) => {
        {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <View style={styles.introText}>
         <Text style={styles.header}>Recept</Text>
-        <Text>
-          Här har vi samlat några recept som är bra för din mage och tarm. Om du vill spara ett recept kan du hjärtmarkera det och hitta det i din receptsamling i din profil.
-        </Text>
+        {content.introText && <Text>{content.introText}</Text>}
       </View>
 
-      {['fav1', 'fav2'].map((fav) => (
+      {['fav1', 'fav2', 'fav3'].map((fav) => (
   // Check if the fav is defined in contentByTheme[selectedTheme]
   contentByTheme[selectedTheme]?.[fav] && (
     <View key={fav} style={styles.box}>

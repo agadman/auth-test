@@ -40,7 +40,17 @@ const PhysicalHealth = ({ selectedTheme, userId }) => {
     },
     Theme_Mjälte: {
       progressbarTitle: 'Mitt hälsopaket',
-      text: 'TCM rekommenderar regelbunden rörelse och motion för att upprätthålla tillräcklig Qi (energi) rörelse och flöde. Passande rörelse och motion kommer därför att föra Qi, främja nedbrytningen av mat, tarmrörelser och hormonproduktion. Genom regelbunden träning ökar det vitala flödet av Qi-energi, samtidigt som det minskar fuktighet inom kroppen. Fuktighet kan skada mjälteenergin och ses som övervikt, vilket kan påverka humöret genom att få individer att känna sig tröga, dimmiga i huvudet och till och med deprimerade.\n\nYin spelar en stor roll för mängden blod och andra vitala vätskor som finns i kroppen. Kraftig motion tömmer denna vitala energikälla och påverkar därför negativt fysisk och mental hälsa. Det är också viktigt att inte överanstränga kroppen med motion.',
+      text: 'TCM rekommenderar regelbunden rörelse och motion för att upprätthålla tillräcklig Qi (energi) rörelse och flöde. Passande rörelse och motion kommer därför att föra Qi, främja nedbrytningen av mat, tarmrörelser och hormonproduktion. Genom regelbunden träning ökar det vitala flödet av Qi-energi, samtidigt som det minskar fuktighet inom kroppen. Fuktighet kan skada mjälteenergin och ses som övervikt, vilket kan påverka humöret genom att få individer att känna sig tröga, dimmiga i huvudet och till och med deprimerade.\n\nYin spelar en stor roll för mängden blod och andra vitala vätskor som finns i kroppen. Kraftig motion tömmer denna vitala energikälla och påverkar därför negativt fysisk och mental hälsa. Det är också viktigt att inte överanstränga kroppen med motion.\n\nMjälten behöver enligt TCM övningar som ger lugn, avslappning och medvetenhet. Att överanstränga kroppen kan i stället skapa stress och belasta mjälten. Fokusera därför på övningar som främjar djupandning för att stödja matsmältningen och underlätta näringsupptaget.',
+      box1Header: 'Qi Gong Mjälte',
+      box1: 'Gör gärna Qi Gong för mjältens energi morgon och kväll om du har möjlighet.',
+      box2Header: 'Qi Gong Mjälte, mage & Qi',
+      box2: 'Vad ska det vara för text här?',
+      box3Header: 'Yoga för mjälten',
+      box3: 'Vad ska det vara för text här?',
+      box4Header: 'Knektövning',
+      box4: 'Vad ska det vara för text här?',
+      box5Header: 'Akupressur för mjältens energi',
+      box5: 'Vad ska det vara för text här?',
     },
     // Add more themes as needed
   };
@@ -52,11 +62,15 @@ const PhysicalHealth = ({ selectedTheme, userId }) => {
     box1: false,
     box2: false,
     box3: false,
+    box4: false,
+    box5: false,
   });
   const [checkedBoxes, setCheckedBoxes] = useState({
     box1: false,
     box2: false,
     box3: false,
+    box4: false,
+    box5: false,
   });
 
   useEffect(() => {
@@ -153,7 +167,7 @@ const PhysicalHealth = ({ selectedTheme, userId }) => {
       {content.progressbarTitle && <Text>{content.progressbarTitle}</Text>}
       <Text style={styles.header}>Fysisk hälsa</Text>
       {content.text && <Text style={styles.introText}>{content.text}</Text>}
-      {['box1', 'box2', 'box3'].map((box) => (
+      {['box1', 'box2', 'box3', 'box4', 'box5'].map((box) => (
         // Check if the box is defined in contentByTheme[selectedTheme]
         contentByTheme[selectedTheme]?.[box] && (
           <View key={box} style={styles.box}>

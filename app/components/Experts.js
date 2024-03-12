@@ -16,16 +16,21 @@ const Experts = () => {
     navigation.navigate('ExpertDetails', { expertId });
   };
 
-  // Adjust the number of experts to be initially visible
   const initialVisibleExperts = 2.5;
-  const expertItemWidth = 120; // Adjust as needed
+  const expertItemWidth = 140; // Adjust as needed
+  const marginRight = 20;
 
   return (
     <View style={styles.wrapper}>
+      <Text style={styles.expertsHeader}>Våra Experter</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={[styles.expertsContainer, { width: initialVisibleExperts * expertItemWidth + (initialVisibleExperts - 1) * 20 }]}>
+        <View style={styles.expertsContainer}>
           {expertsData.map((expert) => (
-            <Pressable key={expert.id} style={styles.expertItem} onPress={() => handleExpertPress(expert.id)}>
+            <Pressable
+              key={expert.id}
+              style={[styles.expertItem, { width: expertItemWidth, marginRight }]}
+              onPress={() => handleExpertPress(expert.id)}
+            >
               <Image source={expert.image} style={styles.expertImage} />
               <Text style={styles.expertName}>{expert.name}</Text>
               <Text style={styles.title}>{expert.title}</Text>
@@ -39,28 +44,30 @@ const Experts = () => {
 
 
 const styles = StyleSheet.create({
-    wrapper: {
-        marginBottom: 60,
-    }, 
-    expertsContainer: {
-        flexDirection: 'row',
-        maxWidth: 120,
-      },
-      expertItem: {
-        marginRight: 20,
-      },
-      expertImage: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-      },
-      expertName: {
-        marginTop: 10,
-        fontSize: 16,
-      },
-      title: {
-      
-      }
+  wrapper: {
+    marginLeft: '5%',
+    marginBottom: 60,
+    marginTop: 30,
+  },
+  expertsContainer: {
+    flexDirection: 'row',
+  },
+  expertItem: {
+    marginRight: 20,
+  },
+  expertImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+  },
+  expertName: {
+    marginTop: 10,
+    fontSize: 16,
+  },
+  expertsHeader: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
 });
 
 export default Experts;
