@@ -72,7 +72,6 @@ const Home = () => {
       <View style={styles.container}>
         <View style={styles.introductoryBox}>
           <Text style={styles.header}>Hej {userName}</Text>
-          <Text style={styles.userId}>Användar-ID: {userId}</Text>
           <Text style={styles.introductoryText}>Välkommen till Oomah. Vi hjälper dig att få en helhetsbild av din hälsa och ger dig tips på hur du kan må bättre. </Text>
           <Text style={styles.introductoryText}>Här får du tillgång till experter, tips och produkter inom kost, träning, hormonhälsa, stress, sömn, mage och kvinnohälsa. Vi vill hjälpa dig att hitta den underliggande orsaken till din hälsa, istället för att bara behandla symptomen. Målet är att återställa balans och ge dig verktyg för att må så bra som möjligt.</Text>
         </View>
