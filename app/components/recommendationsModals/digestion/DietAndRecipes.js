@@ -276,7 +276,7 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
           justifyContent: 'space-between',
           backgroundColor: '#FDF8F6',
           width: '100%', 
-          marginTop: 10,
+          marginTop: 30,
           paddingTop: 10,
           paddingBottom: 10,
           paddingLeft: 20,
@@ -311,7 +311,6 @@ const styles = StyleSheet.create({
   },
   secondHeader: {
     fontSize: 16,
-    fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 10,
     flexDirection: 'row', 
