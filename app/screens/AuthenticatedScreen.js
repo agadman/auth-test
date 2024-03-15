@@ -46,7 +46,7 @@ const tabIcons = {
 };
 
 const TabNavigator = () => {
-  const [selectedTab, setSelectedTab] = useState('Home');
+  const [selectedTab, setSelectedTab] = useState('Översikt');
 
   const handleTabPress = (tabName) => {
     setSelectedTab(tabName);
