@@ -115,6 +115,7 @@ const AuthenticatedScreen = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Main"component={TabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="ExpertDetails" component={ExpertDetails} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
