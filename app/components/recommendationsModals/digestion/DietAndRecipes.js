@@ -115,9 +115,12 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
 
   const renderContent = (box, fullText) => {
     if (!fullText) {
-      return null;
+      return null
     }
-  
+    const isExpanded = expandedBoxes[box];
+  const truncatedText = fullText.slice(0, 100) + (fullText.length > 100 ? '...' : '');
+
+
     const shouldApplyPadding = box !== 'box5'; // Exclude padding for box5
 
     const MyCheckBox = ({ label, checked, onChange, selectedTheme, userId }) => {
@@ -152,58 +155,62 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
 
     return (
       <View>
-         {expandedBoxes[box] && (
-          <View style={{ paddingLeft: shouldApplyPadding ? 20 : 0, paddingRight: shouldApplyPadding ? 20 : 0 }}>
-            {fullText && (
-              <Text style={styles.listItem}>
-                 {fullText.endsWith(".") || fullText.endsWith(":") ? fullText : fullText + "."}
-              </Text>
-            )}
+        {isExpanded ? (
+          <View>
+            <Text style={styles.listItem}>{fullText}</Text>
             {box === 'box5' && (
               <View style={{ paddingBottom: 20 }}>
-                {/* Use MyCheckBox component for checkboxes with text */}
                 <MyCheckBox
                   label={content.addFirstRoutine}
                   checked={box5Options.option1}
                   onChange={() => handleOptionPress('option1')}
                   selectedTheme={selectedTheme}
-                  userId={userId}  // Add this line
+                  userId={userId}
                 />
                 <MyCheckBox
                   label={content.addSecondRoutine}
                   checked={box5Options.option2}
                   onChange={() => handleOptionPress('option2')}
                   selectedTheme={selectedTheme}
-                  userId={userId}  // Add this line
+                  userId={userId}
                 />
                 <MyCheckBox
                   label={content.addThirdRoutine}
                   checked={box5Options.option3}
                   onChange={() => handleOptionPress('option3')}
                   selectedTheme={selectedTheme}
-                  userId={userId}  // Add this line
+                  userId={userId}
                 />
                 <MyCheckBox
                   label={content.addFourthRoutine}
                   checked={box5Options.option4}
                   onChange={() => handleOptionPress('option4')}
                   selectedTheme={selectedTheme}
-                  userId={userId}  // Add this line
+                  userId={userId}
                 />
                 <MyCheckBox
                   label={content.addFifthRoutine}
                   checked={box5Options.option5}
                   onChange={() => handleOptionPress('option5')}
                   selectedTheme={selectedTheme}
-                  userId={userId}  // Add this line
+                  userId={userId}
                 />
-
               </View>
             )}
           </View>
-        )}
+        ) : (
+          <View>
+            <Text style={styles.listItem}>{truncatedText}</Text>
+            {fullText.length > 100 && (
+              <TouchableOpacity onPress={() => toggleBox(box)}>
+                {/* You can add a button here if you want */}
+              </TouchableOpacity>
+            )}
           </View>
+        )}
+      </View>
     );
+    
   };
 
    const renderArrowIcon = (box) => {
@@ -276,8 +283,7 @@ const DietAndRecipes = ({ selectedTheme, userId }) => {
           paddingRight: 20,
           borderTopRightRadius: 10,
           borderTopLeftRadius: 10,
-          borderBottomLeftRadius: expandedBoxes['box5'] ? 0 : 10,
-          borderBottomRightRadius: expandedBoxes['box5'] ? 0 : 10,
+
         }}>
           <Text style={styles.secondHeader}>
             Lägg till i min rutin
@@ -314,15 +320,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   listItem: {
-   marginBottom: 30,
+   marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
   },
   arrowIcon: {
     marginLeft: 5, 
@@ -338,8 +343,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    borderRadius: 30,  // Set the border radius to make it round
-    overflow: 'hidden',  // Hide the checkmark overflow            
+    borderRadius: 30, 
+    overflow: 'hidden',           
   },
   checkBox: {
     backgroundColor: 'transparent',
@@ -349,6 +354,5 @@ const styles = StyleSheet.create({
   checkBoxText: {
     marginLeft: 0,
   },
-  
 });
 export default DietAndRecipes;
